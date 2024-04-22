@@ -41,12 +41,14 @@ public class MemberControllerImpl implements MemberController{
 	@Override
 	public ResponseEntity<String> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
+		member loginmember = memberService.login(loginform);
 		
-		HttpSession session = httpServletRequest.getSession();
-		if (memberService.login(loginform) == null) {
+		if (loginmember == null) {
 			return new ResponseEntity<>("로그인 실패", HttpStatus.NOT_FOUND);
 		}
-		 
+		
+		HttpSession session = httpServletRequest.getSession();
+		session.setAttribute("loginMember", loginmember);
 		
 		return new ResponseEntity<>("로그인 성공",HttpStatus.OK);
 	}
