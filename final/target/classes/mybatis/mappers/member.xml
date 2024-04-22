@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+	<resultMap id="member" type="member">
+        <result property="user_email" column="user_email" />
+        <result property="user_name" column="user_name" />
+        <result property="password" column="password" />
+        <result property="nickname" column="nickname" />
+        <result property="name" column="name" />
+        <result property="fourms" column="fourms" />
+        <result property="dateOfBirth" column="dateOfBirth" />
+        
+	</resultMap> 
+	<!-- <select id="selectAllMemberList" resultMap="memResult">
+      <![CDATA[
+         select * from USERS order by joinDate desc	 	
+      ]]>
+	</select>
+	로그인
+	<select id="loginById"  resultType="resmember" parameterType="LoginForm" >
+	<![CDATA[
+		select * from USER
+		where USERACCOUNT=#{useraccount}		
+	]]>
+  </select> -->
+    
+    <!-- 회원가입 -->
+  <insert id="insertMember"  parameterType="member"> 
+		<![CDATA[
+		 insert into "user"
+		 ("user_id", "dateOfBirth", "nickname", "password", "user_email", "create_date", "name")
+		 values
+		 (AAA.NEXTVAL, #{dateOfBirth}, #{nickname} , #{password}, #{user_email}, SYSDATE, #{name} )
+		]]>      
+	</insert>
+	
+   
+  <!--  <update id="updateMember"  parameterType="member">
+     <![CDATA[
+	     update USER
+	     set PASSWORD=#{password}, email=#{email}
+	     where
+	     USERACCOUNT=#{useraccount}
+      ]]>      
+   </update> 
+     
+   <delete id="deleteMember"  parameterType="String">
+	<![CDATA[
+	   delete from  USER
+	   where
+	   USERACCOUNT=#{useraccount}
+	]]>      
+  </delete>
+  
+  <select id="validate"  resultType="member"   parameterType="String" >
+	<![CDATA[
+		select * from USER
+		where USERACCOUNT=#{useraccount}		
+	]]>
+  </select> -->
+  
+</mapper>
