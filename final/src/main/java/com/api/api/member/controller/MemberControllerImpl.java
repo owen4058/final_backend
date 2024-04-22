@@ -1,5 +1,7 @@
 package com.api.api.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,6 +46,14 @@ public class MemberControllerImpl implements MemberController{
 		 
 		
 		return new ResponseEntity<>("로그인 성공",HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/admin/Manage_member" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	@Override
+	public ResponseEntity<List<member>> memberlist(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws Exception {
+		 
+		return new ResponseEntity<>(memberService.memberlist(),HttpStatus.OK);
 	}
 
 }

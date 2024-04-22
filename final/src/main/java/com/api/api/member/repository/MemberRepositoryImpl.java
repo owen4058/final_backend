@@ -1,5 +1,6 @@
 package com.api.api.member.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,7 +24,10 @@ public class MemberRepositoryImpl implements MemberRepository{
 
 	@Override
 	public Optional<member> login(LoginForm loginForm) throws DataAccessException {
-		System.out.println(loginForm.getPassword());
 		return Optional.ofNullable(sqlSession.selectOne("mapper.member.loginById",loginForm));
+	}
+	@Override
+	public List<member> memberlist() throws DataAccessException {
+		return sqlSession.selectList("mapper.member.MemberList");
 	}
 }

@@ -1,5 +1,7 @@
 package com.api.api.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,5 +14,7 @@ import com.api.api.member.member;
 public interface MemberController {
 	public ResponseEntity<String> save(@RequestBody member member, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)throws Exception;
 	public ResponseEntity<String> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)throws Exception;
+	public ResponseEntity<List<member>> memberlist(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+			throws Exception;
 }
  
