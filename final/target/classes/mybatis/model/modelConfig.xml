@@ -3,7 +3,7 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.spring.myapp.member.ResMember"  alias="resmember"/>
+		<typeAlias type="com.api.api.member.member"  alias="member"/>
 		
 		
 	</typeAliases>

@@ -1,5 +1,9 @@
 package com.api.api.member.service;
 
-public interface MemberService {
+import org.springframework.dao.DataAccessException;
 
+import com.api.api.member.member;
+
+public interface MemberService {
+	public int addmember(member member)throws DataAccessException;
 }
