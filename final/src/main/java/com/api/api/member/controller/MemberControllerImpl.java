@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,8 @@ public class MemberControllerImpl implements MemberController{
 	@Override
 	public ResponseEntity<String> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
+		
+		HttpSession session = httpServletRequest.getSession();
 		if (memberService.login(loginform) == null) {
 			return new ResponseEntity<>("로그인 실패", HttpStatus.NOT_FOUND);
 		}
