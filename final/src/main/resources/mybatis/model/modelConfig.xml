@@ -4,6 +4,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.api.api.member.member"  alias="member"/>
+		<typeAlias type="com.api.api.member.LoginForm"  alias="loginform"/>
 		
 		
 	</typeAliases>

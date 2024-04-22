@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.api.api.member.LoginForm;
 import com.api.api.member.member;
 import com.api.api.member.repository.MemberRepository;
 
@@ -16,6 +17,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int addmember(member member) throws DataAccessException {
 		return memberRepository.insertmember(member);
+	}
+
+	@Override
+	public member login(LoginForm loginForm) throws DataAccessException {
+		return memberRepository.login(loginForm).filter(m->m.getPassword().equals(loginForm.getPassword())).orElse(null);
 	}
 
 }

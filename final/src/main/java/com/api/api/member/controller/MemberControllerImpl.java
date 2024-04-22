@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.api.api.member.LoginForm;
 import com.api.api.member.member;
 import com.api.api.member.service.MemberService;
 
@@ -31,6 +32,18 @@ public class MemberControllerImpl implements MemberController{
 		}
 		
 		return new ResponseEntity<>("회원가입 성공",HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/login" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	@Override
+	public ResponseEntity<String> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws Exception {
+		if (memberService.login(loginform) == null) {
+			return new ResponseEntity<>("로그인 실패", HttpStatus.NOT_FOUND);
+		}
+		 
+		
+		return new ResponseEntity<>("로그인 성공",HttpStatus.OK);
 	}
 
 }
