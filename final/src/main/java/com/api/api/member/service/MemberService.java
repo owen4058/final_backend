@@ -11,5 +11,6 @@ public interface MemberService {
 	public int addmember(member member)throws DataAccessException;
 	public member login(LoginForm loginForm)throws DataAccessException;
 	public List<member> memberlist() throws DataAccessException;
+	public List<member> memberdelate(int user_id) throws DataAccessException;
 	
 }

@@ -44,7 +44,7 @@
 	<![CDATA[
 	delete from  "user"
 	where 
-	"user_email" = #{user_email}
+	"user_id" = #{user_id}
 	]]>      
   </delete>
    

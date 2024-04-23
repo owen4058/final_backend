@@ -16,5 +16,7 @@ public interface MemberController {
 	public ResponseEntity<Integer> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)throws Exception;
 	public ResponseEntity<List<member>> memberlist(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
 			throws Exception;
+	public ResponseEntity<String> memberdleate(int user_id, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws Exception;
 }
  

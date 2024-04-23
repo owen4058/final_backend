@@ -11,5 +11,6 @@ import com.api.api.member.member;
 public interface MemberRepository {
 	public int insertmember(member member) throws DataAccessException;
 	public Optional<member> login(LoginForm loginForm) throws DataAccessException;
-	public List<member> memberlist() throws DataAccessException;	
+	public List<member> memberlist() throws DataAccessException;
+	public List<member> memberdelate(int user_id) throws DataAccessException;	
 }

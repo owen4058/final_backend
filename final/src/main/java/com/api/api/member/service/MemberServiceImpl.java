@@ -29,5 +29,9 @@ public class MemberServiceImpl implements MemberService {
 	public List<member> memberlist() throws DataAccessException {
 		return memberRepository.memberlist();
 	}
+	@Override
+	public List<member> memberdelate(int user_id) throws DataAccessException {
+		return memberRepository.memberdelate(user_id);
+	}
 
 }

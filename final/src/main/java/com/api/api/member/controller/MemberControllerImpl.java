@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.api.api.member.LoginForm;
 import com.api.api.member.member;
@@ -59,6 +60,15 @@ public class MemberControllerImpl implements MemberController{
 			HttpServletResponse httpServletResponse) throws Exception {
 		 
 		return new ResponseEntity<>(memberService.memberlist(),HttpStatus.OK);
+	}
+	@RequestMapping(value = "/admin/Manage_member" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
+	@Override
+	public ResponseEntity<String> memberdleate(@RequestParam int user_id, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws Exception {
+		memberService.memberdelate(user_id);
+		
+		 
+		return new ResponseEntity<>("삭제 성공",HttpStatus.OK);
 	}
 
 }
