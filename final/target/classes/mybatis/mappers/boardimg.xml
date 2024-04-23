@@ -19,8 +19,4 @@
 		SELECT * FROM "img" where "board_id" = #{board_id}
 	]]>
   </select> 
-  
-
-
-  
 </mapper>

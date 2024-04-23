@@ -24,5 +24,5 @@ public class BoardForm{
 	int hits; // 조회수
 	int like_count; // 좋아요수
 	Date create_date; // 생성날짜
-	List<BoardImg> Img; // 게시글 이미지
+	List<BoardImg> img; // 게시글 이미지
 }
