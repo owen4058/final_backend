@@ -12,6 +12,7 @@
         <result property="forum_id" column="forum_id" />
         <result property="nickname" column="nickname" />
         <result property="user_id" column="user_id" />
+        <result property="pro_path" column="pro_path" />
         <result property="title" column="title" />
         <result property="content" column="content" />
         <result property="hits" column="hits" />
