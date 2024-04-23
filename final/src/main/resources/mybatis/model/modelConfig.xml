@@ -7,5 +7,6 @@
 		<typeAlias type="com.api.api.member.LoginForm"  alias="loginform"/>
 		<typeAlias type="com.api.api.board.BoardForm"  alias="boardform"/>
 		<typeAlias type="com.api.api.board.BoardImg"  alias="boardimg"/>
+		<typeAlias type="com.api.api.board.Hashtag"  alias="hashtag"/>
 	</typeAliases>
 </configuration>

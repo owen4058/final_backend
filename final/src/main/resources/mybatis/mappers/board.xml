@@ -19,11 +19,15 @@
         <result property="like_count" column="like_count" />
         <result property="createdate" column="createdate" />
          <collection  property="img" ofType="boardimg" javaType="List">
-         <result property="tran_date" column="tran_date"/>
 			<result property="img_id" column="img_id"/>
 			<result property="board_id" column="board_id"/>
 			<result property="img_name" column="img_name"/>
 			<result property="img_path" column="img_path"/>
+		</collection>
+		<collection  property="tag" ofType="hashtag" javaType="List">
+			<result property="hastag_id" column="hastag_id"/>
+			<result property="board_id" column="board_id"/>
+			<result property="hashtag_name" column="hashtag_name"/>
 		</collection>
 	</resultMap> 
 
@@ -34,21 +38,23 @@
 			c.*,
 			d."pro_path",
 			d."nickname",
-			e.* 
+			e.*,
+			f.* 
 		FROM 
 			(
-					SELECT 
-					ROWNUM AS RNUM, 
-					A.* 
-					FROM 
-					(
-						SELECT 
-						* 
-						FROM "board"  
-						where "forum_id" = 1 
-						ORDER BY "board_id" DESC
-					) A 
-					WHERE ROWNUM <= #{page} * 5
+			SELECT 
+				ROWNUM AS RNUM, 
+				A.* 
+			FROM 
+				(
+				SELECT 
+					* 
+				FROM 
+					"board"  
+					where "forum_id" = 1 
+					ORDER BY "board_id" DESC
+				) A 
+				WHERE ROWNUM <= #{page} * 5
 			) c 
 			LEFT OUTER JOIN 
 			"user" d 
@@ -58,33 +64,41 @@
 			"img" e
 			ON 
         	c."board_id" = e."board_id"
+        	LEFT OUTER JOIN
+        	"hashtag" f
+        	ON 
+        	c."board_id" = f."board_id"
         WHERE RNUM > (#{page}-1) * 5
 	]]>
   </select> 
 	
-	<select id="homelist22"  resultType="boardform" parameterType="int" >
+	<select id="boardlist"  resultType="boardform" parameterType="int" >
 	<![CDATA[
-		SELECT c.*,d."pro_path", d."nickname" FROM (
-		SELECT ROWNUM AS RNUM, A.* FROM (
-		SELECT * FROM "board" where "forum_id" = 1 ORDER BY "board_id" DESC
-		) A WHERE ROWNUM <= #{page} * 5
-		) c LEFT OUTER JOIN "user" d 
-        ON c."user_id" = d."user_id"
+		SELECT 
+			c.*,
+			d."pro_path", 
+			d."nickname" 
+		FROM 
+			(
+			SELECT 
+				ROWNUM AS RNUM, 
+				A.* 
+			FROM 
+				(
+				SELECT 
+					* 
+				FROM 
+					"board" 
+					where "forum_id" = 1 ORDER BY "board_id" DESC
+				) A 
+				WHERE ROWNUM <= #{page} * 5
+			) 
+			c LEFT OUTER JOIN "user" d 
+        	ON c."user_id" = d."user_id"
         WHERE RNUM > (#{page}-1) * 5
 	]]>
   </select> 
   
-  <select id="boardlist"  resultType="boardform" parameterType="int" >
-	<![CDATA[
-		SELECT c.*,d."pro_path", d."nickname" FROM (
-		SELECT ROWNUM AS RNUM, A.* FROM (
-		SELECT * FROM "board" ORDER BY "board_id" DESC
-		) A WHERE ROWNUM <= #{page} * 5
-		) c LEFT OUTER JOIN "user" d 
-        ON c."user_id" = d."user_id"
-        WHERE RNUM > (#{page}-1) * 5
-	]]>
-  </select> 
    
 
   

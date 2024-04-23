@@ -25,4 +25,5 @@ public class BoardForm{
 	int like_count; // 좋아요수
 	Date create_date; // 생성날짜
 	List<BoardImg> img; // 게시글 이미지
+	List<Hashtag> tag; // 해쉬태그
 }
