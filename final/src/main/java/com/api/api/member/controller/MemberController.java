@@ -13,7 +13,7 @@ import com.api.api.member.member;
 
 public interface MemberController {
 	public ResponseEntity<String> save(@RequestBody member member, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)throws Exception;
-	public ResponseEntity<String> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)throws Exception;
+	public ResponseEntity<Integer> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)throws Exception;
 	public ResponseEntity<List<member>> memberlist(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
 			throws Exception;
 }

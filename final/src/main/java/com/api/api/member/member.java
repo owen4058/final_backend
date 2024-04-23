@@ -14,9 +14,13 @@ import lombok.Setter;
 @Setter
 
 public class member {
+	int user_id;
 	String user_email; 
 	String password ;
 	String nickname;
 	String name;
+	String pro_path;
 	Date dateOfBirth;// 프로필 사진은 마이페이지
+	Date createdate;
+	
 }

@@ -39,18 +39,18 @@ public class MemberControllerImpl implements MemberController{
 
 	@RequestMapping(value = "/login" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	@Override
-	public ResponseEntity<String> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest,
+	public ResponseEntity<Integer> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
 		member loginmember = memberService.login(loginform);
 		
 		if (loginmember == null) {
-			return new ResponseEntity<>("로그인 실패", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
 		}
 		
 		HttpSession session = httpServletRequest.getSession();
 		session.setAttribute("loginMember", loginmember);
 		
-		return new ResponseEntity<>("로그인 성공",HttpStatus.OK);
+		return new ResponseEntity<>(loginmember.getUser_id(),HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/admin/Manage_member" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)

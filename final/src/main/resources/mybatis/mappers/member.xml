@@ -5,13 +5,15 @@
 
 <mapper namespace="mapper.member">
 	<resultMap id="member" type="member">
+	
+        <result property="user_id" column="user_id" />
         <result property="user_email" column="user_email" />
-        <result property="user_name" column="user_name" />
         <result property="password" column="password" />
         <result property="nickname" column="nickname" />
         <result property="name" column="name" />
-        <result property="fourms" column="fourms" />
+        <result property="pro_path" column="pro_path" />
         <result property="dateOfBirth" column="dateOfBirth" />
+        <result property="createdate" column="createdate" />
         
 	</resultMap> 
 	
@@ -38,6 +40,13 @@
 		]]>      
 	</insert>
 	
+	<delete id="deleteMember"  parameterType="String">
+	<![CDATA[
+	delete from  "user"
+	where 
+	"user_email" = #{user_email}
+	]]>      
+  </delete>
    
   <!--  <update id="updateMember"  parameterType="member">
      <![CDATA[
@@ -48,13 +57,7 @@
       ]]>      
    </update> 
      
-   <delete id="deleteMember"  parameterType="String">
-	<![CDATA[
-	   delete from  USER
-	   where
-	   USERACCOUNT=#{useraccount}
-	]]>      
-  </delete>
+   
   
   <select id="validate"  resultType="member"   parameterType="String" >
 	<![CDATA[
