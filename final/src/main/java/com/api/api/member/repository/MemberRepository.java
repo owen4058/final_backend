@@ -6,11 +6,11 @@ import java.util.Optional;
 import org.springframework.dao.DataAccessException;
 
 import com.api.api.member.LoginForm;
-import com.api.api.member.member;
+import com.api.api.member.Member;
 
 public interface MemberRepository {
-	public int insertmember(member member) throws DataAccessException;
-	public Optional<member> login(LoginForm loginForm) throws DataAccessException;
-	public List<member> memberlist() throws DataAccessException;
-	public List<member> memberdelate(int user_id) throws DataAccessException;	
+	public int insertmember(Member member) throws DataAccessException;
+	public Optional<Member> login(LoginForm loginForm) throws DataAccessException;
+	public List<Member> memberlist() throws DataAccessException;
+	public List<Member> memberdelate(int user_id) throws DataAccessException;	
 }

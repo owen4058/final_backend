@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.api.api.member.LoginForm;
-import com.api.api.member.member;
+import com.api.api.member.Member;
 import com.api.api.member.service.MemberService;
 
 @Controller("memberController")
@@ -28,7 +28,7 @@ public class MemberControllerImpl implements MemberController{
 
 	@RequestMapping(value = "/assign" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	@Override
-	public ResponseEntity<String> save(@RequestBody member member, HttpServletRequest httpServletRequest,
+	public ResponseEntity<String> save(@RequestBody Member member, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
 		int vo = memberService.addmember(member);
 		if (vo!=1) {
@@ -37,12 +37,16 @@ public class MemberControllerImpl implements MemberController{
 		
 		return new ResponseEntity<>("회원가입 성공",HttpStatus.OK);
 	}
-
+	
+	
+/*
+ * 로그인기능 jwt로 수정할것	
+ */
 	@RequestMapping(value = "/login" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	@Override
 	public ResponseEntity<Integer> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
-		member loginmember = memberService.login(loginform);
+		Member loginmember = memberService.login(loginform);
 		
 		if (loginmember == null) {
 			return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
@@ -56,7 +60,7 @@ public class MemberControllerImpl implements MemberController{
 	
 	@RequestMapping(value = "/admin/Manage_member" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	@Override
-	public ResponseEntity<List<member>> memberlist(HttpServletRequest httpServletRequest,
+	public ResponseEntity<List<Member>> memberlist(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
 		 
 		return new ResponseEntity<>(memberService.memberlist(),HttpStatus.OK);

@@ -1,4 +1,4 @@
-package com.api.api.member;
+package com.api.api.board;
 
 import java.util.Date;
 
@@ -7,11 +7,13 @@ import org.springframework.stereotype.Component;
 import lombok.Getter;
 import lombok.Setter;
 
-@Component("loginForm")
+@Component("boardImg")
 @Getter
 @Setter
 
-public class LoginForm {
-	String user_email; 
-	String login_password ;
+public class BoardImg {
+	int img_id;
+	int board_id;
+	String img_name;
+	String img_path;
 }

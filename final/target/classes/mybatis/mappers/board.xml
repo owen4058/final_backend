@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+	<resultMap id="boardform" type="boardform">
+	
+      
+        <result property="board_id" column="board_id" />
+        <result property="section_id" column="section_id" />
+        <result property="forum_id" column="forum_id" />
+        <result property="nickname" column="nickname" />
+        <result property="user_id" column="user_id" />
+        <result property="title" column="title" />
+        <result property="content" column="content" />
+        <result property="hits" column="hits" />
+        <result property="like_count" column="like_count" />
+        <result property="createdate" column="createdate" />
+	</resultMap> 
+
+	<select id="homelist"  resultType="boardform" parameterType="int" >
+	<![CDATA[
+		SELECT c.*,d."pro_path", d."nickname" FROM (
+		SELECT ROWNUM AS RNUM, A.* FROM (
+		SELECT * FROM "board" where "forum_id" = 1 ORDER BY "board_id" DESC
+		) A WHERE ROWNUM <= #{page} * 5
+		) c LEFT OUTER JOIN "user" d 
+        ON c."user_id" = d."user_id"
+        WHERE RNUM > (#{page}-1) * 5
+	]]>
+  </select> 
+  
+  <select id="boardlist"  resultType="boardform" parameterType="int" >
+	<![CDATA[
+		SELECT c.*,d."pro_path", d."nickname" FROM (
+		SELECT ROWNUM AS RNUM, A.* FROM (
+		SELECT * FROM "board" ORDER BY "board_id" DESC
+		) A WHERE ROWNUM <= #{page} * 5
+		) c LEFT OUTER JOIN "user" d 
+        ON c."user_id" = d."user_id"
+        WHERE RNUM > (#{page}-1) * 5
+	]]>
+  </select> 
+   
+
+  
+</mapper>

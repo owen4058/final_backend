@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class member {
+public class Member {
 	int user_id; // 아이디
 	String user_email;  // 아이디로 사용하는 이메일
 	String password ; // 비번

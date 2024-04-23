@@ -3,9 +3,9 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.api.api.member.member"  alias="member"/>
+		<typeAlias type="com.api.api.member.Member"  alias="member"/>
 		<typeAlias type="com.api.api.member.LoginForm"  alias="loginform"/>
-		
-		
+		<typeAlias type="com.api.api.board.BoardForm"  alias="boardform"/>
+		<typeAlias type="com.api.api.board.BoardImg"  alias="boardimg"/>
 	</typeAliases>
 </configuration>

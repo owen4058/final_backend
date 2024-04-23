@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.api.api.member.LoginForm;
-import com.api.api.member.member;
+import com.api.api.member.Member;
 
 public interface MemberService {
-	public int addmember(member member)throws DataAccessException;
-	public member login(LoginForm loginForm)throws DataAccessException;
-	public List<member> memberlist() throws DataAccessException;
-	public List<member> memberdelate(int user_id) throws DataAccessException;
+	public int addmember(Member member)throws DataAccessException;
+	public Member login(LoginForm loginForm)throws DataAccessException;
+	public List<Member> memberlist() throws DataAccessException;
+	public List<Member> memberdelate(int user_id) throws DataAccessException;
 	
 }
