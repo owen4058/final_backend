@@ -6,11 +6,13 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Component("boardForm")
 @Getter
 @Setter
+@NoArgsConstructor
 
 public class BoardForm{
 	int board_id; // 게시물 아이디

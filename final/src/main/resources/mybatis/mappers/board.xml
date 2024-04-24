@@ -16,7 +16,7 @@
         <result property="hits" column="hits" />
         <result property="like_count" column="like_count" />
         <result property="comment_count" column="comment_count" />
-        <result property="createdate" column="createdate" />
+        <result property="create_date" column="create_date" />
          <collection  property="img" ofType="boardimg" javaType="List">
 			<result property="img_id" column="img_id"/>
 			<result property="board_id" column="board_id"/>
@@ -49,7 +49,7 @@
         	<result property="hits" column="hits" />
         	<result property="like_count" column="like_count" />
         	<result property="comment_count" column="comment_count" />
-        	<result property="createdate" column="createdate" />
+        	<result property="create_date" column="create_date" />
          	<collection  property="img" ofType="boardimg" javaType="List">
 				<result property="img_id" column="img_id"/>
 				<result property="board_id" column="board_id"/>
@@ -112,7 +112,9 @@
 			d.pro_path,
 			d.nickname,
 			e.*,
-			f.* 
+			f.*,
+			g.*,
+			h.* 
 		FROM 
 			(
 			SELECT 
@@ -124,9 +126,9 @@
 					* 
 				FROM 
 					board  
-					where forum_id =  1
+					where forum_id =  #{forum_id}
 					AND
-					section_id =  #{forum_id}					
+					section_id =  #{section_id}					
 					ORDER BY board_id DESC
 				) A 
 				WHERE ROWNUM <= #{page} * 5
