@@ -23,7 +23,7 @@ public class BoardForm{
 	String content; // 본문
 	int hits; // 조회수
 	int like_count; // 좋아요수
-	int comment_count; // 좋아요수
+	int comment_count; // 댓글수
 	Date create_date; // 생성날짜
 	List<BoardImg> img; // 게시글 이미지
 	List<Hashtag> tag; // 해쉬태그

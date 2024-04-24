@@ -1,6 +1,8 @@
 package com.api.api.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,10 +26,31 @@ public class BoardControllerImpl implements BoardController{
 	
 	@Override
 	@RequestMapping(value = "/home" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
-	public ResponseEntity<List<BoardForm>> boardlist(@RequestParam(defaultValue = "1") Integer page, HttpServletRequest httpServletRequest,
+	public ResponseEntity<List<BoardForm>> homelist(
+			@RequestParam(defaultValue = "1") Integer page, 
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
 
 		List<BoardForm> vo = boardService.homelist(page);
+		
+		return new ResponseEntity<List<BoardForm>>(vo, HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/board" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	public ResponseEntity<List<BoardForm>> boardlist(
+			@RequestParam(defaultValue = "1") Integer page, 
+			@RequestParam Integer forum_id, 
+			@RequestParam Integer section_id, 
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws Exception {
+		
+		Map<String, Object> mapvo = new HashMap<String, Object>();
+		mapvo.put("page",page);
+		mapvo.put("forum_id",forum_id);
+		mapvo.put("section_id",section_id);
+
+		List<BoardForm> vo = boardService.boardlist(mapvo);
 		
 		return new ResponseEntity<List<BoardForm>>(vo, HttpStatus.OK);
 	}
