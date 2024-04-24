@@ -155,48 +155,4 @@
 	]]>
   </select> 
   
-  <!-- <select id="boardlist"  resultMap="forumform" parameterType="Map" >
-	<![CDATA[
-		SELECT 
-			c.*,
-			d."pro_path",
-			d."nickname",
-			e.*,
-			f.* 
-		FROM 
-			(
-			SELECT 
-				ROWNUM AS RNUM, 
-				A.* 
-			FROM 
-				(
-				SELECT 
-					* 
-				FROM 
-					"board"  
-					where "forum_id" =  #{forum_id}
-					AND
-					"section_id" =  #{section_id}					
-					ORDER BY "board_id" DESC
-				) A 
-				WHERE ROWNUM <= #{page} * 5
-			) c 
-			LEFT OUTER JOIN 
-			"user" d 
-			ON 
-			c."user_id" = d."user_id"
-			LEFT OUTER JOIN 
-			"img" e
-			ON 
-        	c."board_id" = e."board_id"
-        	LEFT OUTER JOIN
-        	"hashtag" f
-        	ON 
-        	c."board_id" = f."board_id"
-        WHERE RNUM > (#{page}-1) * 5
-	]]>
-  </select>  -->
-   
-
-  
 </mapper>
