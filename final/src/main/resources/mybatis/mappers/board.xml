@@ -17,6 +17,7 @@
         <result property="content" column="content" />
         <result property="hits" column="hits" />
         <result property="like_count" column="like_count" />
+        <result property="comment_count" column="comment_count" />
         <result property="createdate" column="createdate" />
          <collection  property="img" ofType="boardimg" javaType="List">
 			<result property="img_id" column="img_id"/>
@@ -76,8 +77,10 @@
 	<![CDATA[
 		SELECT 
 			c.*,
-			d."pro_path", 
-			d."nickname" 
+			d."pro_path",
+			d."nickname",
+			e.*,
+			f.* 
 		FROM 
 			(
 			SELECT 
@@ -88,13 +91,24 @@
 				SELECT 
 					* 
 				FROM 
-					"board" 
-					where "forum_id" = 1 ORDER BY "board_id" DESC
+					"board"  
+					where "forum_id" =  #{forum_id}
+					ORDER BY "board_id" DESC
 				) A 
 				WHERE ROWNUM <= #{page} * 5
-			) 
-			c LEFT OUTER JOIN "user" d 
-        	ON c."user_id" = d."user_id"
+			) c 
+			LEFT OUTER JOIN 
+			"user" d 
+			ON 
+			c."user_id" = d."user_id"
+			LEFT OUTER JOIN 
+			"img" e
+			ON 
+        	c."board_id" = e."board_id"
+        	LEFT OUTER JOIN
+        	"hashtag" f
+        	ON 
+        	c."board_id" = f."board_id"
         WHERE RNUM > (#{page}-1) * 5
 	]]>
   </select> 
