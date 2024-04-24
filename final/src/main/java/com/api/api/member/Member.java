@@ -14,13 +14,13 @@ import lombok.Setter;
 @Setter
 
 public class Member {
-	int user_id; // ¾ÆÀÌµð
-	String user_email;  // ¾ÆÀÌµð·Î »ç¿ëÇÏ´Â ÀÌ¸ÞÀÏ
-	String password ; // ºñ¹ø
-	String nickname; // ¤¸¤¡¤¤
-	String name; // À¯Àú º»¸í
-	String pro_path; // ÇÁ·ÎÇÊ °æ·Î
-	Date dateOfBirth;// ÇÁ·ÎÇÊ »çÁøÀº ¸¶ÀÌÆäÀÌÁö
-	Date createdate; // »ý¼º³¯Â¥
+	int user_id; // ï¿½ï¿½ï¿½Ìµï¿½
+	String user_email;  // ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½
+	String password ; // ï¿½ï¿½ï¿½
+	String nickname; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	String name; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	String pro_path; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	Date dateOfBirth;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	Date createdate; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥
 	
 }
