@@ -1,6 +1,7 @@
 package com.api.api.board.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.api.api.board.BoardForm;
 import com.api.api.board.BoardImg;
@@ -8,6 +9,6 @@ import com.api.api.board.BoardImg;
 public interface BoardRepository {
 	public List<BoardForm> homelist(int page);
 
-	public List<BoardImg> boardimg();
+	public List<BoardForm> boardlist(Map<String, Object> mapvo);
 
 }

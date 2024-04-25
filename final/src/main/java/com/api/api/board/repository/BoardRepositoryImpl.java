@@ -1,6 +1,9 @@
 package com.api.api.board.repository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +23,7 @@ public class BoardRepositoryImpl implements BoardRepository{
 		return sqlSession.selectList("mapper.board.homelist", page);
 	}
 	@Override
-	public List<BoardImg> boardimg() {
-		return sqlSession.selectList("mapper.boardimg.boardimg");
+	public List<BoardForm> boardlist(Map<String, Object> mapvo) {
+		return sqlSession.selectList("mapper.board.boardlist", mapvo);
 	}
 }
