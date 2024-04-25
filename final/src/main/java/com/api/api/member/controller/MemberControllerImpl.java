@@ -60,10 +60,10 @@ public class MemberControllerImpl implements MemberController{
 	
 	@RequestMapping(value = "/admin/Manage_member" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	@Override
-	public ResponseEntity<List<Member>> memberlist(HttpServletRequest httpServletRequest,
+	public ResponseEntity<List<Member>> memberlist(@RequestParam(defaultValue = "1") int page, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
 		 
-		return new ResponseEntity<>(memberService.memberlist(),HttpStatus.OK);
+		return new ResponseEntity<>(memberService.memberlist(page),HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/admin/Manage_member" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)

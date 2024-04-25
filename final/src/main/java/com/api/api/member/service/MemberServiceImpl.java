@@ -26,8 +26,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.login(loginForm).filter(m->m.getPassword().equals(loginForm.getLogin_password())).orElse(null);
 	}
 	@Override
-	public List<Member> memberlist() throws DataAccessException {
-		return memberRepository.memberlist();
+	public List<Member> memberlist(int page) throws DataAccessException {
+		return memberRepository.memberlist(page);
 	}
 	@Override
 	public int memberdelate(int user_id) throws DataAccessException {

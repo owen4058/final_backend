@@ -27,8 +27,8 @@ public class MemberRepositoryImpl implements MemberRepository{
 		return Optional.ofNullable(sqlSession.selectOne("mapper.member.loginById",loginForm));
 	}
 	@Override
-	public List<Member> memberlist() throws DataAccessException {
-		return sqlSession.selectList("mapper.member.MemberList");
+	public List<Member> memberlist(int page) throws DataAccessException {
+		return sqlSession.selectList("mapper.member.MemberList",page);
 	}
 	@Override
 	public int memberdelate(int user_id) throws DataAccessException {

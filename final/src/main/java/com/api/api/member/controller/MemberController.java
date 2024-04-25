@@ -14,7 +14,7 @@ import com.api.api.member.Member;
 public interface MemberController {
 	public ResponseEntity<String> save(@RequestBody Member member, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)throws Exception;
 	public ResponseEntity<Integer> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)throws Exception;
-	public ResponseEntity<List<Member>> memberlist(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+	public ResponseEntity<List<Member>> memberlist(int page, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
 			throws Exception;
 	public ResponseEntity<String> memberdleate(int user_id, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception;
