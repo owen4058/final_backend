@@ -19,13 +19,13 @@
 	
 	<select id="MemberList" resultMap="member">
       <![CDATA[
-         select * from user order by create_date desc	 	
+         select * from users order by create_date desc	 	
       ]]>
 	</select>
 	
 	<select id="loginById"  resultType="member" parameterType="loginform" >
 	<![CDATA[
-		select * from user
+		select * from users
 		where user_email = #{user_email}		
 	]]>
   </select> 
@@ -33,7 +33,7 @@
     <!-- 회원가입 -->
   <insert id="insertMember"  parameterType="member"> 
 		<![CDATA[
-		 insert into user
+		 insert into users
 		 (user_id, dateOfBirth, nickname, password, user_email, create_date, name)
 		 values
 		 (AAA.NEXTVAL, #{dateOfBirth}, #{nickname} , #{password}, #{user_email}, SYSDATE, #{name} )
@@ -42,7 +42,7 @@
 	
 	<delete id="deleteMember"  parameterType="String">
 	<![CDATA[
-	delete from  user
+	delete from  users
 	where 
 	"user_id" = #{user_id}
 	]]>      
