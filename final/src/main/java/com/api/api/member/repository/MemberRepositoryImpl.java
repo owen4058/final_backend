@@ -31,7 +31,7 @@ public class MemberRepositoryImpl implements MemberRepository{
 		return sqlSession.selectList("mapper.member.MemberList");
 	}
 	@Override
-	public List<Member> memberdelate(int user_id) throws DataAccessException {
-		return sqlSession.selectList("mapper.member.deleteMember",user_id);
+	public int memberdelate(int user_id) throws DataAccessException {
+		return sqlSession.update("mapper.member.deleteMember",user_id);
 	}
 }

@@ -70,9 +70,11 @@ public class MemberControllerImpl implements MemberController{
 	@Override
 	public ResponseEntity<String> memberdleate(@RequestParam int user_id, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
-		memberService.memberdelate(user_id);
+		;
 		
-		 
+		 if (memberService.memberdelate(user_id) == 0) {
+			 return new ResponseEntity<>("삭제 실패",HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<>("삭제 성공",HttpStatus.OK);
 	}
 

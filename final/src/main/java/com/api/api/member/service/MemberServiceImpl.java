@@ -30,7 +30,7 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.memberlist();
 	}
 	@Override
-	public List<Member> memberdelate(int user_id) throws DataAccessException {
+	public int memberdelate(int user_id) throws DataAccessException {
 		return memberRepository.memberdelate(user_id);
 	}
 

@@ -19,7 +19,7 @@
 	
 	<select id="MemberList" resultMap="member">
       <![CDATA[
-         select * from users order by create_date desc	 	
+         select * from users where active_state = 1  order by create_date desc	 	
       ]]>
 	</select>
 	
@@ -40,13 +40,15 @@
 		]]>      
 	</insert>
 	
-	<delete id="deleteMember"  parameterType="String">
+	<update id="deleteMember"  parameterType="String">
 	<![CDATA[
-	delete from  users 
-	where 
-	user_id = #{user_id}
+	
+	UPDATE users
+	SET active_state = 0
+	WHERE user_id = #{user_id}
+
 	]]>      
-  </delete>
+  </update>
    
   <!--  <update id="updateMember"  parameterType="member">
      <![CDATA[
