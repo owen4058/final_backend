@@ -168,9 +168,21 @@
 			<artifactId>OracleDriver</artifactId>
 			<version>12.1.0.2.0</version>
 			<scope>system</scope>
+<<<<<<< HEAD
 			<systemPath>/Users/owen/Codes/backend/final_backend/final/src/main/webapp/WEB-INF/lib/ojdbc6.jar</systemPath>
+=======
+			
+			<systemPath>/C:\Users\admin\git\final_backend\final\src\main\webapp\WEB-INF\lib\ojdbc6.jar</systemPath>
+>>>>>>> branch 'master' of https://github.com/owen4058/final_backend.git
 
 		</dependency>
+		<!--orai18n-->
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>orai18n</artifactId>
+			<version>19.3.0.0</version>
+		</dependency>
+
 
 		<!-- 타일즈 관련 라이브러리 -->
 		<dependency>
