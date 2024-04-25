@@ -42,7 +42,7 @@
 	
 	<delete id="deleteMember"  parameterType="String">
 	<![CDATA[
-	delete from  users
+	delete from  users 
 	where 
 	user_id = #{user_id}
 	]]>      
