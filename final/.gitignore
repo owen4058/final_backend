@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 *.properties
 .DS_Store
 *.log
@@ -133,4 +135,5 @@ Temporary Items
 *.icloud
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,eclipse,java
+>>>>>>> branch 'master' of https://github.com/owen4058/final_backend.git
 /target/
