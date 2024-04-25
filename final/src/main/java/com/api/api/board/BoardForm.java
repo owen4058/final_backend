@@ -6,23 +6,27 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Component("boardForm")
 @Getter
 @Setter
+@NoArgsConstructor
 
 public class BoardForm{
-	int board_id; // ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
-	int section_id; // ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½Ìµï¿½
-	int forum_id; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
-	int user_id; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+	int board_id; // °Ô½Ã¹° ¾ÆÀÌµð
+	int section_id; // ¼½¼Ç¾ÆÀÌµð
+	int forum_id; // Æ÷·³ ¾ÆÀÌµð
+	int user_id; // À¯Àú ¾ÆÀÌµð
 	String pro_path; 
-	String nickname; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½
-	String title; // ï¿½ï¿½ï¿½ï¿½
-	String content; // ï¿½ï¿½ï¿½ï¿½
-	int hits; // ï¿½ï¿½È¸ï¿½ï¿½
-	int like_count; // ï¿½ï¿½ï¿½Æ¿ï¿½ï¿½
-	Date create_date; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥
-	List<BoardImg> Img; // ï¿½Ô½Ã±ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+	String nickname; // À¯Àú ´Ð³×ÀÓ
+	String title; // Á¦¸ñ
+	String content; // º»¹®
+	int hits; // Á¶È¸¼ö
+	int like_count; // ÁÁ¾Æ¿ä¼ö
+	int comment_count; // ´ñ±Û¼ö
+	Date create_date; // »ý¼º³¯Â¥
+	List<BoardImg> img; // °Ô½Ã±Û ÀÌ¹ÌÁö
+	List<Hashtag> tag; // ÇØ½¬ÅÂ±×
 }

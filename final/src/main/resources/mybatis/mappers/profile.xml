@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+  <mapper namespace="mapper.profile">
+  	<resultMap id="profileMap" type="com.api.api.profile.Profile">
+        <result property="user_id" column="user_id" />
+        <result property="nickname" column="nickname" />
+        <result property="pro_path" column="pro_path" />
+        <result property="following_count" column="following_count" />
+        <result property="follower_count" column="follower_count" />
+        <result property="board_count" column="board_count" />
+        <result property="comment_count" column="comment_count" />
+        <result property="likes_count" column="likes_count" />
+    </resultMap>
+    
+    <select id="getProfile" resultType="com.api.api.profile.Profile" parameterType="int">
+	    SELECT user_id, nickname, pro_path, following_count, follower_count, board_count, comment_count, likes_count
+	    FROM profile_table
+	    WHERE user_id = #{user_id}
+	</select>
+	
+	<update id="updateProfile" parameterType="com.api.api.profile.Profile">
+	    UPDATE profile_table
+	    SET 
+	        nickname = #{nickname},
+	        pro_path = #{pro_path},
+	        following_count = #{following_count},
+	        follower_count = #{follower_count},
+	        board_count = #{board_count},
+	        comment_count = #{comment_count},
+	        likes_count = #{likes_count}
+	    WHERE user_id = #{user_id}
+	</update>
+	
+	
+    
+  
+  </mapper>
+  
+   
