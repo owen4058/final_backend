@@ -9,5 +9,7 @@
 		<typeAlias type="com.api.api.board.BoardImg"  alias="boardimg"/>
 		<typeAlias type="com.api.api.board.Hashtag"  alias="hashtag"/>
 		<typeAlias type="com.api.api.profile.Profile"  alias="profile"/>
+		 <typeAlias type="com.api.api.board.SectionForm"  alias="sectionform"/>
+        <typeAlias type="com.api.api.board.ForumForm"  alias="forumform"/>
 	</typeAliases>
 </configuration>
