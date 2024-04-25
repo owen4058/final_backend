@@ -29,6 +29,7 @@
 			<result property="hashtag_name" column="hashtag_name"/>
 		</collection>
 	</resultMap>
+	
 	<resultMap id="forumform" type="forumform">
         <result property="forum_id" column="forum_id" />
         <result property="logo_path" column="logo_path" />
@@ -63,7 +64,6 @@
 			</collection>
 		</collection>
 	</resultMap>  
-
 
 	<select id="homelist"  resultMap="boardform" parameterType="int" >
 	<![CDATA[
