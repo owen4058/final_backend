@@ -169,7 +169,6 @@
 			<version>12.1.0.2.0</version>
 			<scope>system</scope>
 			<systemPath>C:\Users\a0106\git\final_backend\final\src\main\webapp\WEB-INF\lib\ojdbc6.jar</systemPath>
-
 		</dependency>
 		<!--orai18n-->
 		<dependency>
