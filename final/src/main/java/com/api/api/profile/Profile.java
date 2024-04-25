@@ -18,6 +18,6 @@ public class Profile {
 	int board_count;
 	int comment_count;
 	int likes_count;
-	
+	 
 
 }
