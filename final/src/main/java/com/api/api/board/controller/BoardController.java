@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import com.api.api.board.BoardForm;
 
 public interface BoardController {
-	public ResponseEntity<List<BoardForm>> boardlist(Integer page, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+	public ResponseEntity<List<BoardForm>> homelist(Integer page, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
 			throws Exception;
+
+	public ResponseEntity<List<BoardForm>> boardlist(Integer page, Integer forum_id, Integer section_id, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws Exception;
 }
