@@ -171,6 +171,13 @@
 			<systemPath>/Users/hayungyoo/eclipse_main_project/final_backend/final/src/main/webapp/WEB-INF/lib/ojdbc6.jar</systemPath>
 
 		</dependency>
+		<!--orai18n-->
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>orai18n</artifactId>
+			<version>19.3.0.0</version>
+		</dependency>
+
 
 		<!-- 타일즈 관련 라이브러리 -->
 		<dependency>
