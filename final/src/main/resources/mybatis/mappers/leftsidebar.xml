@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.leftsidebar">
+	<resultMap id="favoriteforum" type="favoriteforum">
+	
+        <result property="forum_id" column="forum_id" />
+        <result property="forum_name" column="forum_name" />    
+	</resultMap> 
+	
+	<select id="favoriteforumlist" resultMap="favoriteforum" parameterType="Map">
+      <![CDATA[
+      SELECT 
+      		c.*,
+			b.forum_name
+      
+      FROM 
+			(
+			SELECT 
+				ROWNUM AS RNUM, 
+				A.*
+			FROM 
+				(
+				select 
+				* 
+				from 
+					USER_FORUMS 
+				where user_id = #{user_id} 
+				) A 
+				WHERE ROWNUM <= #{page} * 5
+			) c 
+			LEFT OUTER JOIN 
+			forums b
+			on c.forum_id = b.forum_id
+			WHERE RNUM > (#{page}-1) * 5	 	
+      ]]>
+	</select>
+  
+</mapper>

@@ -11,5 +11,6 @@
 		<typeAlias type="com.api.api.profile.Profile"  alias="profile"/>
 		 <typeAlias type="com.api.api.board.SectionForm"  alias="sectionform"/>
         <typeAlias type="com.api.api.board.ForumForm"  alias="forumform"/>
+        <typeAlias type="com.api.api.leftsidebar.FavoriteForum"  alias="favoriteforum"/>
 	</typeAliases>
 </configuration>
