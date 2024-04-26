@@ -19,6 +19,7 @@ public class ForumForm {
 	int forum_following_state;
 	String logo_path;
 	String forum_name;
+	String forum_info;
 	List<SectionForm> section;
 	
 }
