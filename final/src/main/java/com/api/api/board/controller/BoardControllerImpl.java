@@ -41,7 +41,8 @@ public class BoardControllerImpl implements BoardController{
 	public ResponseEntity<List<BoardForm>> boardlist(
 			@RequestParam(defaultValue = "1") Integer page, 
 			@RequestParam Integer forum_id, 
-			@RequestParam Integer section_id, 
+			@RequestParam Integer section_id,
+			@RequestParam Integer user_id,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
 		
@@ -49,6 +50,7 @@ public class BoardControllerImpl implements BoardController{
 		mapvo.put("page",page);
 		mapvo.put("forum_id",forum_id);
 		mapvo.put("section_id",section_id);
+		mapvo.put("user_id",user_id);
 
 		List<BoardForm> vo = boardService.boardlist(mapvo);
 		

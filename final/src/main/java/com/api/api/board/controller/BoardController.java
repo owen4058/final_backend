@@ -13,6 +13,6 @@ public interface BoardController {
 	public ResponseEntity<List<BoardForm>> homelist(Integer page, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
 			throws Exception;
 
-	public ResponseEntity<List<BoardForm>> boardlist(Integer page, Integer forum_id, Integer section_id, HttpServletRequest httpServletRequest,
+	public ResponseEntity<List<BoardForm>> boardlist(Integer page, Integer forum_id, Integer section_id, Integer user_id, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception;
 }
