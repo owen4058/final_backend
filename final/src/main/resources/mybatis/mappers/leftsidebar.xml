@@ -37,5 +37,26 @@
 			WHERE RNUM > (#{page}-1) * 5	 	
       ]]>
 	</select>
-  
+	
+  <insert id="favoriteforuminsert"  parameterType="userforumform"> 
+		<![CDATA[
+		 insert into USER_FORUMS
+		 (user_id, forum_id)
+		 values
+		 ( #{user_id}, #{forum_id})
+		]]>      
+	</insert>
+	
+	<delete id="favoriteforumdelate"  parameterType="userforumform"> 
+		<![CDATA[
+		 delete 
+		 from 
+		 	USER_FORUMS
+		 where 
+		 user_id = #{user_id}
+		 and 
+		 forum_id = #{forum_id}
+		]]>      
+	</delete>
+	
 </mapper>
