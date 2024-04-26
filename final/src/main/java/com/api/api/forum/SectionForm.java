@@ -1,4 +1,4 @@
-package com.api.api.board;
+package com.api.api.forum;
 
 import java.util.Date;
 import java.util.List;

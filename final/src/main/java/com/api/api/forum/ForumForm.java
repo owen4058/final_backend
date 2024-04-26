@@ -1,4 +1,4 @@
-package com.api.api.board;
+package com.api.api.forum;
 
 import java.util.Date;
 import java.util.List;
@@ -15,9 +15,10 @@ import lombok.Setter;
 
 public class ForumForm {
 	int forum_id;
+	int people;
+	int forum_following_state;
 	String logo_path;
 	String forum_name;
 	List<SectionForm> section;
-	List<BoardForm> board;
 	
 }
