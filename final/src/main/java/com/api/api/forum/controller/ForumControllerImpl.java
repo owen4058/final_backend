@@ -26,7 +26,7 @@ public class ForumControllerImpl implements ForumController{
 	private ForumService forumService;
 	
 	@Override
-	@RequestMapping(value = "/	" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	@RequestMapping(value = "/forum_information" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	public ResponseEntity<List<ForumForm>> forumlist(
 			@RequestParam Integer forum_id,
 			@RequestParam Integer user_id,

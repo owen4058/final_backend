@@ -141,6 +141,16 @@
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
         WHERE RNUM > (#{page}-1) * 5
 	]]>
-  </select> 
+  </select>
+  
+   <insert id="boardinsert"  parameterType="member"> 
+		<![CDATA[
+		 insert into users
+		 (user_id, dateOfBirth, nickname, password, user_email, create_date, name)
+		 values
+		 (AAA.NEXTVAL, #{dateOfBirth}, #{nickname} , #{password}, #{user_email}, SYSDATE, #{name} )
+		]]>      
+	</insert>
+   
   
 </mapper>
