@@ -4,7 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
   <mapper namespace="mapper.profile">
-  	<resultMap id="profileMap" type="com.api.api.profile.Profile">
+  	<resultMap id="profile" type="profile">
         <result property="user_id" column="user_id" />
         <result property="nickname" column="nickname" />
         <result property="pro_path" column="pro_path" />
@@ -15,14 +15,27 @@
         <result property="likes_count" column="likes_count" />
     </resultMap>
     
-    <select id="getProfile" resultType="com.api.api.profile.Profile" parameterType="int">
-	    SELECT user_id, nickname, pro_path, following_count, follower_count, board_count, comment_count, likes_count
-	    FROM profile_table
-	    WHERE user_id = #{user_id}
-	</select>
+    <select id="getProfile" resultMap="profile" parameterType="int">
+        <![CDATA[
+        SELECT
+            u.user_id,
+            u.nickname,
+            NVL(u.pro_path, '') AS pro_path,
+            (SELECT COUNT(*) FROM USER_FOLLOW WHERE opponent_id = u.user_id) AS follower_count,
+            (SELECT COUNT(*) FROM USER_FOLLOW WHERE user_id = u.user_id) AS following_count,
+            (SELECT COUNT(*) FROM board WHERE user_id = u.user_id) AS board_count,
+            (SELECT COUNT(*) FROM comments WHERE user_id = u.user_id) AS comment_count,
+            (SELECT COUNT(*) FROM COMMENT_LIKE WHERE user_id = u.user_id) AS likes_count
+		FROM
+		    users u
+		WHERE
+		    u.user_id = #{user_id}
+        ]]>
+    </select>
 	
-	<update id="updateProfile" parameterType="com.api.api.profile.Profile">
-	    UPDATE profile_table
+	<update id="updateProfile" parameterType="profile">
+       	<![CDATA[
+	    UPDATE profile
 	    SET 
 	        nickname = #{nickname},
 	        pro_path = #{pro_path},
@@ -32,7 +45,34 @@
 	        comment_count = #{comment_count},
 	        likes_count = #{likes_count}
 	    WHERE user_id = #{user_id}
+        ]]>
+	    
 	</update>
+	
+	<select id="myBoardList" resultType = "com.api.api.board.BoardForm">
+       	<![CDATA[
+		SELECT 
+            board_id,
+            section_id,
+            forum_id,
+            user_id,
+            pro_path,
+            nickname,
+            title,
+            content,
+            hits,
+            like_count,
+            comment_count,
+            create_date
+        FROM 
+            board
+        WHERE 
+            user_id = #{user_id}
+        ]]>
+	</select>
+		
+	
+	
 	
 	
     

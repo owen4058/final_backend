@@ -8,7 +8,7 @@ import com.api.api.board.BoardForm;
 import com.api.api.profile.Profile;
 
 public interface ProfileRepository {
-	public int getProfile(int user_id) throws DataAccessException;
-	public Profile updateProfile(Profile profile) throws DataAccessException;
-	public List<BoardForm> myBoardList(int user_id) throws DataAccessException;;
+	public Profile selectProfile(int user_id) throws DataAccessException;
+	public int updateProfile(Profile profile) throws DataAccessException;
+	public List<BoardForm> selectMyBoardList(int user_id) throws DataAccessException;
 }

@@ -13,9 +13,9 @@ import com.api.api.board.BoardForm;
 
 public interface ProfileController {
 //	public ResponseEntity<String> save();
-	public ResponseEntity<Profile> profileOne(@RequestBody int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
-	public ResponseEntity<Profile> memberUpdate(@RequestBody int user_id, Profile profile, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
-	public ResponseEntity<List<BoardForm>> boardlist(@RequestBody int user_id, Integer page, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+	public ResponseEntity<Profile> getProfile(@RequestBody int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
+	public ResponseEntity<Profile> updateProfile(@RequestBody int user_id, Profile profile, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
+	public ResponseEntity<List<BoardForm>> getMyBoardlist(@RequestBody int user_id, Integer page, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
 			throws Exception;
 
 }
