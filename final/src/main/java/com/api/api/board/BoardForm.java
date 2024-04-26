@@ -15,18 +15,20 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class BoardForm{
-	int board_id; // �Խù� ���̵� 
-	int section_id; // ���Ǿ��̵�
-	int forum_id; // ���� ���̵�
-	int user_id; // ���� ���̵�
+	int board_id; 
+	int section_id; 
+	int forum_id; 
+	int user_id; 
+	int board_like_state;
+	int board_save_state;
 	String pro_path; 
-	String nickname; // ���� �г���
-	String title; // ����
-	String content; // ����
-	int hits; // ��ȸ��
-	int like_count; // ���ƿ��
-	int comment_count; // ��ۼ�
-	Date create_date; // ������¥
-	List<BoardImg> img; // �Խñ� �̹���
-	List<Hashtag> tag; // �ؽ��±�
+	String nickname; 
+	String title; 
+	String content; 
+	int hits; 
+	int like_count; 
+	int comment_count; 
+	Date create_date; 
+	List<BoardImg> img; 
+	List<Hashtag> tag; 
 }

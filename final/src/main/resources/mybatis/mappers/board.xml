@@ -8,6 +8,8 @@
         <result property="board_id" column="board_id" />
         <result property="section_id" column="section_id" />
         <result property="forum_id" column="forum_id" />
+        <result property="board_like_state" column="board_like_state" />
+        <result property="board_save_state" column="board_save_state" />
         <result property="nickname" column="nickname" />
         <result property="user_id" column="user_id" />
         <result property="pro_path" column="pro_path" />
@@ -105,7 +107,15 @@
 			d.pro_path,
 			d.nickname,
 			e.*,
-			f.*
+			f.*,
+			CASE 
+               WHEN g.user_id  IS NOT NULL THEN 1
+               ELSE 0
+            END AS board_like_state,
+            CASE 
+               WHEN h.user_id  IS NOT NULL THEN 1
+               ELSE 0
+            END AS board_save_state
 		FROM 
 			(
 			SELECT 
@@ -127,6 +137,8 @@
 			LEFT OUTER JOIN	USERS d	ON	c.user_id = d.user_id
 			LEFT OUTER JOIN img e ON c.board_id = e.board_id
         	LEFT OUTER JOIN	hashtag f ON c.board_id = f.board_id
+        	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id =1
+            LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id =1
         WHERE RNUM > (#{page}-1) * 5
 	]]>
   </select> 
