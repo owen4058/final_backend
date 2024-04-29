@@ -143,14 +143,51 @@
 	]]>
   </select>
   
-   <insert id="boardinsert"  parameterType="member"> 
+   <insert id="boardinsert"  parameterType="BoardCreateForm"> 
+   		<selectKey keyProperty="board_id" resultType="int" order="BEFORE">
+        <![CDATA[
+        SELECT MAX(board_id) + 1 from board
+        ]]>
+    	</selectKey>
+  
 		<![CDATA[
-		 insert into users
-		 (user_id, dateOfBirth, nickname, password, user_email, create_date, name)
-		 values
-		 (AAA.NEXTVAL, #{dateOfBirth}, #{nickname} , #{password}, #{user_email}, SYSDATE, #{name} )
-		]]>      
+		 insert into board(
+		 board_id, 
+		 forum_id, 
+		 section_id, 
+		 user_id, 
+		 title, 
+		 content,
+		 CREATE_DATE
+		 )values(
+		 #{board_id}, 
+		 #{forum_id}, 
+		 #{section_id}, 
+		 #{user_id}, 
+		 #{title}, 
+		 #{content}, 
+		 SYSDATE
+		 )
+		]]>   
 	</insert>
-   
+	
+	 <update id="imginsert"  parameterType="List">
+		 insert into img(
+		 img_id, 
+		 board_id, 
+		 img_name, 
+		 img_path 
+		 )SELECT AAA.NEXTVAL, A.*
+	    FROM
+	    (
+	      <foreach collection="list" item="i" separator="UNION ALL">
+		  SELECT #{i.board_id} AS board_id
+			   , #{i.img_name} AS img_name
+			   , #{i.img_path} AS img_path
+		    FROM DUAL
+	      </foreach>
+	    ) A
+	</update>
+	
   
 </mapper>
