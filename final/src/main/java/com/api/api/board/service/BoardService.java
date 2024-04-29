@@ -8,6 +8,6 @@ import com.api.api.board.BoardForm;
 public interface BoardService {
 	public List<BoardForm> homelist(int page);
 
-	public List<BoardForm> boardlist(Map<String, Object> mapvo);
+	public List<BoardForm> boardlist(int user_id);
 
 }

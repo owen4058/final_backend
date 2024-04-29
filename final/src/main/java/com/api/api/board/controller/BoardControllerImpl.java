@@ -52,7 +52,7 @@ public class BoardControllerImpl implements BoardController{
 		mapvo.put("section_id",section_id);
 		mapvo.put("user_id",user_id);
 
-		List<BoardForm> vo = boardService.boardlist(mapvo);
+		List<BoardForm> vo = boardService.boardlist(user_id);
 		
 		return new ResponseEntity<List<BoardForm>>(vo, HttpStatus.OK);
 	}

@@ -40,9 +40,10 @@ public class ProfileRepositoryImpl implements ProfileRepository {
         }
     }
 	
-	public List<BoardForm> selectMyBoardList(int userId) throws DataAccessException {
+	@Override
+	public List<BoardForm> selectMyBoardList(int user_id) throws DataAccessException {
         try {
-            return sqlSession.selectList("mapper.profile..myBoardList", userId);
+            return sqlSession.selectList("mapper.profile.myBoardList", user_id);
         } catch (Exception e) {
             throw new DataAccessException("게시글 목록 조회 중 오류가 발생했습니다.", e) {};
         }

@@ -1,12 +1,14 @@
 package com.api.api.profile.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.api.api.board.BoardForm;
+import com.api.api.board.repository.BoardRepository;
 import com.api.api.profile.Profile;
 import com.api.api.profile.repository.ProfileRepository;
 
@@ -15,6 +17,8 @@ public class ProfileServiceImpl implements ProfileService {
 	
 	@Autowired
 	private ProfileRepository profileRepository;
+	@Autowired
+	private BoardRepository boardRepository;
 	
 	@Override
     public Profile getProfile(int user_id) throws DataAccessException {
@@ -35,6 +39,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public List<BoardForm> getMyBoardList(int user_id) throws DataAccessException {
+//    	return boardRepository.boardlist(null);
         return profileRepository.selectMyBoardList(user_id);
     }
 	

@@ -9,6 +9,6 @@ import com.api.api.board.BoardImg;
 public interface BoardRepository {
 	public List<BoardForm> homelist(int page);
 
-	public List<BoardForm> boardlist(Map<String, Object> mapvo);
+	public List<BoardForm> boardlist(int user_id);
 
 }

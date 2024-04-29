@@ -21,8 +21,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public List<BoardForm> boardlist(Map<String, Object> mapvo) {
-		return boardRepository.boardlist(mapvo);
+	public List<BoardForm> boardlist(int user_id) {
+		return boardRepository.boardlist(user_id);
 	}
 
 }

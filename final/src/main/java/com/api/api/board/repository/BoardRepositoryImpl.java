@@ -23,7 +23,7 @@ public class BoardRepositoryImpl implements BoardRepository{
 		return sqlSession.selectList("mapper.board.homelist", page);
 	}
 	@Override
-	public List<BoardForm> boardlist(Map<String, Object> mapvo) {
-		return sqlSession.selectList("mapper.board.boardlist", mapvo);
+	public List<BoardForm> boardlist(int user_id) {
+		return sqlSession.selectList("mapper.board.boardlist", user_id);
 	}
 }
