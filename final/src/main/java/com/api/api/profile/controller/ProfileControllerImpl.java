@@ -49,8 +49,8 @@ public class ProfileControllerImpl implements ProfileController{
 	
 	@RequestMapping(value = "/profile/My_Board", produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	@Override
-	public ResponseEntity<List<BoardForm>> getMyBoardlist(@RequestParam int user_id, Integer page, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-		System.out.println("getBoardList controller");
+	public ResponseEntity<List<BoardForm>> getMyBoardlist(@RequestParam int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+		System.out.println("getMyBoardList controller");
 		List<BoardForm> boardList = profileService.getMyBoardList(user_id);
         if (boardList != null && !boardList.isEmpty()) {
             return ResponseEntity.ok(boardList);
