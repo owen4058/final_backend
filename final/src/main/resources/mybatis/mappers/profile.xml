@@ -68,60 +68,13 @@
 	    UPDATE profile
 	    SET 
 	        nickname = #{nickname},
+	        password = #{password},
 	        pro_path = #{pro_path},
-	        following_count = #{following_count},
-	        follower_count = #{follower_count},
-	        board_count = #{board_count},
-	        comment_count = #{comment_count},
-	        likes_count = #{likes_count}
 	    WHERE user_id = #{user_id}
         ]]>
 	    
 	</update>
-	<select id="myBoardList" resultMap = "boardform" parameterType= "int">
-       	<![CDATA[
-		SELECT 
-			c.*,
-			d.pro_path,
-			d.nickname,
-			e.*,
-			f.*,
-			CASE 
-               WHEN g.user_id  IS NOT NULL THEN 1
-               ELSE 0
-            END AS board_like_state,
-            CASE 
-               WHEN h.user_id  IS NOT NULL THEN 1
-               ELSE 0
-            END AS board_save_state
-		FROM 
-			(
-			SELECT 
-				ROWNUM AS RNUM, 
-				A.* 
-			FROM 
-				(
-				SELECT 
-					* 
-				FROM 
-					board  
-					where forum_id =  #{forum_id}
-					AND
-					section_id =  #{section_id}					
-					ORDER BY board_id DESC
-				) A 
-				WHERE ROWNUM <= #{page} * 5
-			) c 
-			LEFT OUTER JOIN	USERS d	ON	c.user_id = d.user_id
-			LEFT OUTER JOIN img e ON c.board_id = e.board_id
-        	LEFT OUTER JOIN	hashtag f ON c.board_id = f.board_id
-        	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
-            LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
-         WHERE c.user_id = #{user_id}
-        ]]>
-	</select>
-		
-	    
+	
   
   </mapper>
   

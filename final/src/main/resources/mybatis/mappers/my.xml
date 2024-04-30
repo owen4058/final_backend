@@ -3,7 +3,7 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="board">
+<mapper namespace="mapper.my">
 	<resultMap id="profile" type="profile">
         <result property="user_id" column="user_id" />
         <result property="nickname" column="nickname" />
@@ -42,8 +42,51 @@
 			<result property="hashtag_name" column="hashtag_name"/>
 		</collection>
 	</resultMap>
+	
+	<select id="myBoardList" resultMap = "boardform" parameterType= "int">
+       	<![CDATA[
+		SELECT 
+			c.*,
+			d.pro_path,
+			d.nickname,
+			e.*,
+			f.*,
+			CASE 
+               WHEN g.user_id  IS NOT NULL THEN 1
+               ELSE 0
+            END AS board_like_state,
+            CASE 
+               WHEN h.user_id  IS NOT NULL THEN 1
+               ELSE 0
+            END AS board_save_state
+		FROM 
+			(
+			SELECT 
+				ROWNUM AS RNUM, 
+				A.* 
+			FROM 
+				(
+				SELECT 
+					* 
+				FROM 
+					board  
+					where forum_id =  #{forum_id}
+					AND
+					section_id =  #{section_id}					
+					ORDER BY board_id DESC
+				) A 
+				WHERE ROWNUM <= #{page} * 5
+			) c 
+			LEFT OUTER JOIN	USERS d	ON	c.user_id = d.user_id
+			LEFT OUTER JOIN img e ON c.board_id = e.board_id
+        	LEFT OUTER JOIN	hashtag f ON c.board_id = f.board_id
+        	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
+            LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
+         WHERE c.user_id = #{user_id}
+        ]]>
+	</select>
 
-  <select id="myCommentsBoardList" resultMap="boardform" parameterType="int">
+  <select id="myCommentBoardList" resultMap="boardform" parameterType="int">
 	  <![CDATA[  
 	    SELECT
 	      c.*,  
@@ -70,7 +113,7 @@
 	         WHERE user_id = #{user_id}
 	         ORDER BY board_id DESC
 	       ) A
-	       WHERE ROWNUM <= #{page} * #{pageSize}
+	       WHERE ROWNUM <= #{page} * 5
 	     ) c   
 	    LEFT OUTER JOIN USERS d ON c.user_id = d.user_id
 	    LEFT OUTER JOIN img e ON c.board_id = e.board_id 
@@ -81,6 +124,101 @@
 	      ON c.board_id = h.board_id AND h.user_id = #{user_id}
 	  ]]>
 
-</select>
+	</select>
+	<select id="myLikedBoardList" resultMap="boardform" parameterType="int">
+		<![CDATA[ 
+			SELECT 
+			    c.*, 
+			    d.pro_path, 
+			    d.nickname, 
+			    e.*, 
+			    f.*, 
+			    CASE 
+			        WHEN g.user_id IS NOT NULL THEN 1 
+			        ELSE 0 
+			    END AS board_like_state, 
+			    CASE 
+			        WHEN h.user_id IS NOT NULL THEN 1 
+			        ELSE 0 
+			    END AS board_save_state 
+			FROM (
+			    SELECT 
+			        ROWNUM AS RNUM, 
+			        A.* 
+			    FROM (
+			        SELECT 
+			            board.* 
+			        FROM 
+			            board
+			            JOIN board_like ON board.board_id = board_like.board_id
+			        WHERE 
+			            board_like.user_id = #{user_id}
+			            AND board.forum_id = #{forum_id}
+			            AND board.section_id = #{section_id}                    
+			        ORDER BY 
+			            board.board_id DESC
+			    ) A 
+			    WHERE ROWNUM <= #{page} * 5
+			) c 
+			LEFT OUTER JOIN USERS d ON c.user_id = d.user_id 
+			LEFT OUTER JOIN img e ON c.board_id = e.board_id 
+			LEFT OUTER JOIN hashtag f ON c.board_id = f.board_id 
+			LEFT OUTER JOIN board_like g ON c.board_id = g.board_id AND g.user_id = #{user_id} 
+			LEFT OUTER JOIN BOARD_SAVE h ON c.board_id = h.board_id AND h.user_id = #{user_id}
+			WHERE c.RNUM > (#{page}-1) * 5;
+		]]>
+	</select>
+	<select id="mySavedBoardList" resultMap="boardform" parameterType="int">
+	<![CDATA[ 
+		SELECT
+		    c.*, 
+		    d.pro_path, 
+		    d.nickname, 
+		    e.*, 
+		    f.*, 
+		    CASE WHEN g.user_id IS NOT NULL THEN 1 
+		        ELSE 0 
+		    END AS board_like_state,
+		    CASE WHEN h.user_id IS NOT NULL THEN 1 
+		        ELSE 0 
+		    END AS board_save_state
+		FROM
+		    (
+		    SELECT 
+		        ROWNUM AS RNUM,
+		        A.* 
+		    FROM 
+		        (
+		        SELECT 
+		            * 
+		        FROM 
+		            board
+		        WHERE 
+		            forum_id = #{forum_id}
+		            AND section_id = #{section_id}
+		        ORDER BY 
+		            board_id DESC
+		        ) A 
+		    WHERE 
+		        ROWNUM <= #{page} * 5
+		    ) c 
+		LEFT OUTER JOIN USERS d 
+		    ON c.user_id = d.user_id
+		LEFT OUTER JOIN img e 
+		    ON c.board_id = e.board_id
+		LEFT OUTER JOIN hashtag f 
+		    ON c.board_id = f.board_id
+		LEFT OUTER JOIN board_like g 
+		    ON c.board_id = g.board_id AND g.user_id = #{user_id}
+		LEFT OUTER JOIN board_save h 
+		    ON c.board_id = h.board_id AND h.user_id = #{user_id}
+		WHERE 
+		    EXISTS (
+		        SELECT 1 
+		        FROM board_save bs 
+		        WHERE bs.user_id = #{user_id} AND bs.board_id = c.board_id
+		    );
+	]]>
+	</select>
 
 </mapper>

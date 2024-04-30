@@ -37,11 +37,11 @@ public class ProfileServiceImpl implements ProfileService {
         }
     }
 
-    @Override
-    public List<BoardForm> getMyBoardList(int user_id) throws DataAccessException {
-//    	return boardRepository.boardlist(null);
-        return profileRepository.selectMyBoardList(user_id);
-    }
+//    @Override
+//    public List<BoardForm> getMyBoardList(int user_id) throws DataAccessException {
+////    	return boardRepository.boardlist(null);
+//        return profileRepository.selectMyBoardList(user_id);
+//    }
 	
 
 }
