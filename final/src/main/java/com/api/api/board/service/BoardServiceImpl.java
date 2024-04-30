@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.api.board.BoardCreateForm;
+import com.api.api.board.BoardDetailForm;
 import com.api.api.board.BoardForm;
 import com.api.api.board.BoardImg;
 import com.api.api.board.Hashtag;
@@ -48,6 +49,11 @@ public class BoardServiceImpl implements BoardService{
 		}
 		
 		return boardCreateForm;
+	}
+
+	@Override
+	public List<BoardDetailForm> boarddetail(Map<String, Object> boardinfo) {
+		return boardRepository.boarddetail(boardinfo);
 	}
 
 }

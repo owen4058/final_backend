@@ -5,16 +5,24 @@
 	<typeAliases>
 		<typeAlias type="com.api.api.member.Member"  alias="member"/>
 		<typeAlias type="com.api.api.member.LoginForm"  alias="loginform"/>
+		
 		<typeAlias type="com.api.api.board.BoardForm"  alias="boardform"/>
 		<typeAlias type="com.api.api.board.BoardImg"  alias="boardimg"/>
 		<typeAlias type="com.api.api.board.Hashtag"  alias="hashtag"/>
 		<typeAlias type="com.api.api.board.BoardCreateForm"  alias="BoardCreateForm"/>
+		<typeAlias type="com.api.api.board.BoardDetailForm"  alias="boarddetailform"/>
+		
 		<typeAlias type="com.api.api.profile.Profile"  alias="profile"/>
+		
 		<typeAlias type="com.api.api.forum.SectionForm"  alias="sectionform"/>
         <typeAlias type="com.api.api.forum.ForumForm"  alias="forumform"/>
+        
         <typeAlias type="com.api.api.leftsidebar.FavoriteForum"  alias="favoriteforum"/>
         <typeAlias type="com.api.api.leftsidebar.UserForumForm"  alias="userforumform"/>
+        
         <typeAlias type="com.api.api.admin.ForumAdmin"  alias="forumadmin"/>
+        
         <typeAlias type="com.api.api.comment.CommentForm"  alias="commentform"/>
+        
 	</typeAliases>
 </configuration>
