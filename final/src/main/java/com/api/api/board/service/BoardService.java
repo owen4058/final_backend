@@ -13,6 +13,5 @@ public interface BoardService {
 
 	public List<BoardForm> boardlist(Map<String, Object> mapvo);
 	
-	public int boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag);
-
+	public BoardCreateForm boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag);
 }

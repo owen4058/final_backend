@@ -69,15 +69,14 @@ public class BoardControllerImpl implements BoardController{
 	
 	@Override
 	@RequestMapping(value = "/board_detail" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity<String> boardcreate(
+	public ResponseEntity boardcreate(
 			@RequestPart(name = "board") BoardCreateForm board, 
-			@RequestPart(name = "hashtag") List<Hashtag> hashtag, 
+			@RequestPart(required = false, name = "hashtag") List<Hashtag> hashtag, 
 			@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
 		
 		String filepath = "c:\\board\\upload"+File.separator+board.getTitle();
-		
+		List<Hashtag> tag  = new ArrayList<>();
 		List<BoardImg>  boardImgs = new ArrayList<BoardImg>();
-		System.out.println("데이터 "+ files[0].getOriginalFilename());
 		try {
 			if (files != null) {
 				for (MultipartFile multipart : files) {
@@ -93,14 +92,15 @@ public class BoardControllerImpl implements BoardController{
 					}	
 				}	
 			}
+			if (hashtag != null) {
+				tag  = hashtag;
+			}
 			
-			System.out.println("시도");
-			boardService.boardcreate(board, boardImgs, hashtag);
-			return new ResponseEntity<String>("파일 등록에 성공했습니다.", HttpStatus.OK);
+			return new ResponseEntity(boardService.boardcreate(board, boardImgs, tag), HttpStatus.OK);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("파일 등록에 실패했습니다.", HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity("파일 등록에 실패했습니다.", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
 	

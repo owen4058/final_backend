@@ -29,9 +29,25 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag) {
-
-		return boardRepository.boardcreate(boardCreateForm, boardImgs, hashtag);
+	public BoardCreateForm boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag) {
+		boardRepository.boardcreate(boardCreateForm);
+		
+		if (!hashtag.isEmpty()) {
+			System.out.println("Ω√¿€");
+			for (int i=0; i<hashtag.size(); i++) {
+				hashtag.get(i).setBoard_id(boardCreateForm.getBoard_id());
+			}
+			boardRepository.tagcreate(hashtag);
+		}
+		
+		if (!boardImgs.isEmpty()) {
+			for (int i=0; i<boardImgs.size(); i++) {
+				boardImgs.get(i).setBoard_id(boardCreateForm.getBoard_id());
+			}
+			boardRepository.imgcreate(boardImgs);
+		}
+		
+		return boardCreateForm;
 	}
 
 }

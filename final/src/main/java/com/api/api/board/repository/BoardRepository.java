@@ -13,6 +13,10 @@ public interface BoardRepository {
 
 	public List<BoardForm> boardlist(Map<String, Object> mapvo);
 	
-	public int boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs,List<Hashtag> hashtag);
+	public int boardcreate(BoardCreateForm boardCreateForm);
+
+	public int tagcreate(List<Hashtag> hashtag);
+
+	public int imgcreate(List<BoardImg> boardImgs);
 
 }

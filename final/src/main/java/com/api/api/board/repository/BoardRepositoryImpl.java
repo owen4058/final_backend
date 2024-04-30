@@ -30,18 +30,15 @@ public class BoardRepositoryImpl implements BoardRepository{
 		return sqlSession.selectList("mapper.board.boardlist", mapvo);
 	}
 	@Override
-	public int boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag) {
-		sqlSession.insert("mapper.board.boardinsert",boardCreateForm);
-		
-		
-		for (int i=0; i<boardImgs.size(); i++) {
-			boardImgs.get(i).setBoard_id(boardCreateForm.getBoard_id());
-		}
-		for (int i=0; i<hashtag.size(); i++) {
-			hashtag.get(i).setBoard_id(boardCreateForm.getBoard_id());
-		}
-		sqlSession.insert("mapper.board.taginsert", hashtag);
-		
+	public int boardcreate(BoardCreateForm boardCreateForm) {
+		return sqlSession.insert("mapper.board.boardinsert",boardCreateForm);
+	}
+	@Override
+	public int tagcreate(List<Hashtag> hashtag) {
+		return sqlSession.insert("mapper.board.taginsert", hashtag);
+	}
+	@Override
+	public int imgcreate(List<BoardImg> boardImgs) {
 		return sqlSession.insert("mapper.board.imginsert",boardImgs);
 	}
 }
