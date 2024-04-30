@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.api.api.board.BoardCreateForm;
 import com.api.api.board.BoardForm;
 import com.api.api.board.BoardImg;
+import com.api.api.board.Hashtag;
 import com.api.api.board.service.BoardService;
 
 @Controller("boardController")
@@ -69,19 +70,19 @@ public class BoardControllerImpl implements BoardController{
 	@Override
 	@RequestMapping(value = "/board_detail" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	public ResponseEntity<String> boardcreate(
-			@RequestPart(name = "boardCreageForm") BoardCreateForm boardCreageForm, 
+			@RequestPart(name = "board") BoardCreateForm board, 
+			@RequestPart(name = "hashtag") List<Hashtag> hashtag, 
 			@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
 		
-		String filepath = "c:\\board\\upload"+File.separator+boardCreageForm.getTitle();
-		
+		String filepath = "c:\\board\\upload"+File.separator+board.getTitle();
 		
 		List<BoardImg>  boardImgs = new ArrayList<BoardImg>();
-		
+		System.out.println("데이터 "+ files[0].getOriginalFilename());
 		try {
 			if (files != null) {
 				for (MultipartFile multipart : files) {
 					if (!multipart.isEmpty()) {
-						System.out.println(multipart.getOriginalFilename());
+						System.out.println("데이터 "+ multipart.getOriginalFilename());
 						String filename = System.currentTimeMillis()+"_"+multipart.getOriginalFilename();
 						FileUtils.copyInputStreamToFile(multipart.getInputStream(), new File(filepath, filename));
 						BoardImg boardImg = new BoardImg();
@@ -93,8 +94,8 @@ public class BoardControllerImpl implements BoardController{
 				}	
 			}
 			
-			
-			boardService.boardcreate(boardCreageForm, boardImgs);
+			System.out.println("시도");
+			boardService.boardcreate(board, boardImgs, hashtag);
 			return new ResponseEntity<String>("파일 등록에 성공했습니다.", HttpStatus.OK);
 			
 		} catch (Exception e) {

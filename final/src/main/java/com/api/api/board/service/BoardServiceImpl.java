@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.api.api.board.BoardCreateForm;
 import com.api.api.board.BoardForm;
 import com.api.api.board.BoardImg;
+import com.api.api.board.Hashtag;
 import com.api.api.board.repository.BoardRepository;
 
 @Service("boardService")
@@ -28,9 +29,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs) {
+	public int boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag) {
 
-		return boardRepository.boardcreate(boardCreateForm, boardImgs);
+		return boardRepository.boardcreate(boardCreateForm, boardImgs, hashtag);
 	}
 
 }

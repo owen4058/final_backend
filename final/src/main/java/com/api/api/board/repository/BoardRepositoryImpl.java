@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.api.api.board.BoardCreateForm;
 import com.api.api.board.BoardForm;
 import com.api.api.board.BoardImg;
+import com.api.api.board.Hashtag;
 
 @Repository("boardRepository")
 public class BoardRepositoryImpl implements BoardRepository{
@@ -29,17 +30,18 @@ public class BoardRepositoryImpl implements BoardRepository{
 		return sqlSession.selectList("mapper.board.boardlist", mapvo);
 	}
 	@Override
-	public int boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs) {
+	public int boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag) {
 		sqlSession.insert("mapper.board.boardinsert",boardCreateForm);
 		
 		
 		for (int i=0; i<boardImgs.size(); i++) {
 			boardImgs.get(i).setBoard_id(boardCreateForm.getBoard_id());
-			System.out.println("¼º°ø "+boardImgs.get(i).getBoard_id());
-			System.out.println(boardImgs.get(i).getImg_name());
-			System.out.println(boardImgs.get(i).getImg_path());
 		}
+		for (int i=0; i<hashtag.size(); i++) {
+			hashtag.get(i).setBoard_id(boardCreateForm.getBoard_id());
+		}
+		sqlSession.insert("mapper.board.taginsert", hashtag);
 		
-		return sqlSession.update("mapper.board.imginsert",boardImgs);
+		return sqlSession.insert("mapper.board.imginsert",boardImgs);
 	}
 }

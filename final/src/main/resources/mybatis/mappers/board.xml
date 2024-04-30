@@ -171,12 +171,14 @@
 		]]>   
 	</insert>
 	
-	 <update id="imginsert"  parameterType="List">
+	 <insert id="imginsert"  parameterType="List">
 		 insert into img(
+		 
 		 img_id, 
 		 board_id, 
 		 img_name, 
 		 img_path 
+		 
 		 )SELECT AAA.NEXTVAL, A.*
 	    FROM
 	    (
@@ -185,9 +187,30 @@
 			   , #{i.img_name} AS img_name
 			   , #{i.img_path} AS img_path
 		    FROM DUAL
+		    
 	      </foreach>
 	    ) A
-	</update>
+		 
+	</insert>
+	
+	<insert id="taginsert"  parameterType="List">
+		 insert into hashtag(
+		 hastag_id,
+		 hashtag_name, 
+		 board_id
+		 
+		 )SELECT AAA.NEXTVAL, B.*
+	    FROM
+	    (
+	      <foreach collection="list" item="i" separator="UNION ALL">
+		  SELECT #{i.hashtag_name} AS hashtag_name
+			   , #{i.board_id} AS board_id
+		    FROM DUAL
+		    
+	      </foreach>
+	    ) B
+		 
+	</insert>
 	
   
 </mapper>
