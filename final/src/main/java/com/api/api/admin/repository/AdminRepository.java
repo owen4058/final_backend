@@ -12,6 +12,7 @@ import com.api.api.board.Hashtag;
 public interface AdminRepository {
 	public List<ForumAdmin> adminforumlist();
 	public int adminforumcreate(ForumAdmin forumAdmin);
+	public int adminforumdelete(int forum_id);
 
 
 

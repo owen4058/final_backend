@@ -31,9 +31,8 @@ public class SidebarControllerImpl implements SidebarController {
 	@RequestMapping(value = "/favorite_forum" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	public ResponseEntity<List<FavoriteForum>> forumlist(
 			@RequestParam(defaultValue = "1") Integer page, 
-			Integer user_id, 
-			HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+			Integer user_id
+			) throws Exception {
 		
 		Map<String,Object> data = new HashMap<String, Object>();
 		data.put("page", page);
@@ -44,17 +43,17 @@ public class SidebarControllerImpl implements SidebarController {
 	
 	@Override
 	@RequestMapping(value = "/favorite_forum" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity<List<FavoriteForum>> forumsave(@RequestBody UserForumForm userForumForm, 
-			HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
+	public ResponseEntity<List<FavoriteForum>> forumsave(
+			@RequestBody UserForumForm userForumForm
+			) throws Exception {
 		return new ResponseEntity<List<FavoriteForum>>(sidebarService.forumsave(userForumForm), HttpStatus.OK);
 	}
 
 	@Override
 	@RequestMapping(value = "/favorite_forum" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
-	public ResponseEntity<List<FavoriteForum>> forumdelete(@RequestBody UserForumForm userForumForm, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ResponseEntity<List<FavoriteForum>> forumdelete(
+			@RequestBody UserForumForm userForumForm
+			) throws Exception {
 		
 		return new ResponseEntity<List<FavoriteForum>>(sidebarService.forumdelete(userForumForm), HttpStatus.OK);
 	}

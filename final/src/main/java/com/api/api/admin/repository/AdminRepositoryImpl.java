@@ -30,5 +30,9 @@ public class AdminRepositoryImpl implements AdminRepository{
 	public int adminforumcreate(ForumAdmin forumAdmin) {
 		return sqlSession.insert("mapper.admin.form_admin_create", forumAdmin);
 	}
+	@Override
+	public int adminforumdelete(int forum_id) {
+		return sqlSession.delete("mapper.admin.form_admin_delete", forum_id);
+	}
 
 }

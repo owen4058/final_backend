@@ -1,4 +1,4 @@
-package com.api.api.admin.controller;
+package com.api.api.comment.controller;
 
 import java.util.List;
 
@@ -12,18 +12,13 @@ import com.api.api.admin.ForumAdmin;
 import com.api.api.board.BoardCreateForm;
 import com.api.api.board.BoardForm;
 import com.api.api.board.Hashtag;
+import com.api.api.comment.CommentForm;
 
-public interface AdminController {
+public interface CommentController {
 	
-	public ResponseEntity<List<ForumAdmin>> adminforumcreate(
-			ForumAdmin forumAdmin
-			, MultipartFile file
+	public ResponseEntity adminforumcreate(
+			CommentForm commentform
 			)
 			throws Exception;
-	
-	public ResponseEntity<List<ForumAdmin>> adminforumlist()
-			throws Exception;
-
-	public ResponseEntity<List<ForumAdmin>> adminforumdelete(Integer forum_id) throws Exception;
 
 }

@@ -55,6 +55,20 @@ public class AdminControllerImpl implements AdminController{
 		
 		return new ResponseEntity<List<ForumAdmin>>(adminservice.adminforumcreate(forum), HttpStatus.OK);
 	}
+
+	@Override
+	@RequestMapping(value = "/Manage_Forum" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	public ResponseEntity<List<ForumAdmin>> adminforumlist() throws Exception {
+		return new ResponseEntity<List<ForumAdmin>>(adminservice.adminforumlist(), HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/Manage_Forum" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
+	public ResponseEntity<List<ForumAdmin>> adminforumdelete(
+			@RequestParam Integer forum_id
+			) throws Exception {
+		return new ResponseEntity<List<ForumAdmin>>(adminservice.adminforumdelete(forum_id), HttpStatus.OK);
+	}
 	
 
 }

@@ -26,7 +26,15 @@
   </insert>
   <select id="form_admin_list"  resultType="forumadmin" parameterType="forumadmin" >
 	<![CDATA[
-	select * from forums
+	select * from forums order by forum_id
 	]]>
-  </select>  
+  </select>
+  
+  <delete id="form_admin_delete" parameterType="int" >
+	<![CDATA[
+	delete 
+	from forums
+	where forum_id = #{forum_id}
+	]]>
+  </delete>  
 </mapper>
