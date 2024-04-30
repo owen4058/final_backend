@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.comment">
 
-	<select id="commentlist"  resultType="commentform" parameterType="commentform" >
+	<select id="commentlist"  resultType="commentform">
 	<![CDATA[
 	select * from COMMENTS order by comment_id
 	]]>
@@ -14,6 +14,7 @@
 
 	
 	<insert id="commentinsert"  parameterType="commentform">
+	<![CDATA[
 	insert into COMMENTS
 	(
 	  comment_id
@@ -29,6 +30,7 @@
 	,#{content}
 	, SYSDATE
 	)
+	]]>
 	</insert>
 	
 	<insert id="pacommentinsert"  parameterType="commentform">
@@ -37,7 +39,8 @@
         SELECT MAX(comment_id) + 1 from COMMENTS
         ]]>
     	</selectKey>
-	insert into COMMENTS
+    	<![CDATA[
+	insert into comments
 	(
 	  comment_id
 	, pa_comment_id
@@ -54,18 +57,23 @@
 	,#{content}
 	, SYSDATE
 	)
+	]]>
 	</insert>
 	
-	<update id="pacommentcount"  parameterType="int">
-	UPDATE COMMENTS
-	SET recomment_count = recomment_count + 1
-	WHERE comment_id = #{comment_id}
+	<update id="pacommentcount"  parameterType="commentform">
+	<![CDATA[
+	UPDATE comments	
+	SET RECOMMENT_COUNT = RECOMMENT_COUNT + 1
+	WHERE comment_id = #{pa_comment_id}
+	]]>
 	</update>
 	
 	<update id="commentcount"  parameterType="int">
+	<![CDATA[
 	UPDATE board
 	SET comment_count = comment_count + 1
 	WHERE board_id = #{board_id}
+	]]>
 	</update>
 	
   

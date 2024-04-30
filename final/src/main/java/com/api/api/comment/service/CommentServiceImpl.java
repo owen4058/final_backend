@@ -25,6 +25,7 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public List<CommentForm> commentinsert(CommentForm commentform) {
 		commentRepository.commentinsert(commentform);
+		System.out.println("½Ãµµ3");
 		return commentRepository.commentlist();
 	}
 
@@ -35,7 +36,7 @@ public class CommentServiceImpl implements CommentService{
 
 	@Override
 	public List<CommentForm> pacommentinsert(CommentForm commentform) {
-		commentRepository.commentinsert(commentform);
+		commentRepository.pacommentinsert(commentform);
 		return commentRepository.commentlist();
 	}
 

@@ -16,9 +16,9 @@ import com.api.api.comment.CommentForm;
 
 public interface CommentController {
 	
-	public ResponseEntity adminforumcreate(
+	public ResponseEntity commentinsert(
 			CommentForm commentform
 			)
 			throws Exception;
-
+	public ResponseEntity commentlist() throws Exception;
 }
