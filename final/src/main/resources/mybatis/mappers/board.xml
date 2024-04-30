@@ -66,6 +66,8 @@
         	<result property="logo_path" column="logo_path" />
         	<result property="forum_name" column="forum_name" />
     	    <result property="forum_info" column="forum_info" />
+    	    <result property="people" column="people" />
+    	    <result property="forum_following_state" column="forum_following_state" />
      	   	<collection  property="section" ofType="sectionform" javaType="List">
 				<result property="section_id" column="section_id"/>
 				<result property="section_name" column="section_name"/>
@@ -84,6 +86,8 @@
         		<result property="like_count" column="like_count" />
         		<result property="comment_count" column="comment_count" />
         		<result property="create_date" column="create_date" />
+        		<result property="board_like_state" column="board_like_state" />
+        		<result property="board_save_state" column="board_save_state" />
          		<collection  property="img" ofType="boardimg" javaType="List">
 					<result property="img_id" column="img_id"/>
 					<result property="board_id" column="board_id"/>
@@ -111,7 +115,27 @@
 	</resultMap>    
 	<select id="board"  resultMap="boarddetailform" parameterType="Map" >
 	<![CDATA[
-		select a.*,b.*,c.*,d.*,e.*,f.*,g.* 
+		select 
+		a.*
+		,b.*
+		,c.*
+		,d.*
+		,e.*
+		,f.*
+		,g.*
+		,CASE 
+               WHEN h.user_id  IS NOT NULL THEN 1
+               ELSE 0
+            END AS board_like_state
+        ,CASE 
+               WHEN i.user_id  IS NOT NULL THEN 1
+               ELSE 0
+            END AS board_save_state
+        , (SELECT COUNT(*) FROM user_forums WHERE forum_id = a.forum_id) as people 
+        ,CASE 
+               WHEN (select user_id from user_forums where user_id = #{user_id} and forum_id = d.forum_id) IS NOT NULL THEN 1
+               ELSE 0
+            END AS forum_following_state
 		from board a
 		left outer join users b on a.user_id = b.user_id 
 		left outer join comments c on a.board_id = c.board_id
@@ -119,6 +143,8 @@
 		left outer join forum_section e on a.section_id = e.section_id
 		left outer join hashtag f on a.board_id = f.board_id
 		left outer join img g on a.board_id = g.board_id
+		LEFT OUTER JOIN	board_like h ON a.board_id = h.board_id and h.user_id = #{user_id}
+        LEFT OUTER JOIN	board_save i ON a.board_id = i.board_id and i.user_id = #{user_id}
 		where a.board_id = #{board_id} and a.user_id = #{user_id}
 		]]>
   </select>
