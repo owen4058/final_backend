@@ -166,7 +166,7 @@
 				SELECT 
 					* 
 				FROM 
-					board  
+					board
 					where forum_id = 1 
 					ORDER BY board_id DESC
 				) A 
