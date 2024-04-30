@@ -11,12 +11,18 @@ import com.api.api.leftsidebar.FavoriteForum;
 import com.api.api.leftsidebar.UserForumForm;
 
 public interface SidebarController {
-	public ResponseEntity<List<FavoriteForum>> forumlist(Integer page, Integer user_id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ResponseEntity<List<FavoriteForum>> forumlist(
+			Integer page
+			, Integer user_id
 
-	public ResponseEntity<List<FavoriteForum>> forumsave(UserForumForm userForumForm, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
+			) throws Exception;
+
+	public ResponseEntity<List<FavoriteForum>> forumsave(
+			UserForumForm userForumForm
+			) throws Exception;
 	
-	public ResponseEntity<List<FavoriteForum>> forumdelete(UserForumForm userForumForm, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
+	public ResponseEntity<List<FavoriteForum>> forumdelete(
+			UserForumForm userForumForm
+			) throws Exception;
 
 }

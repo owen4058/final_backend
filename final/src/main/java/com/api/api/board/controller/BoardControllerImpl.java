@@ -74,7 +74,7 @@ public class BoardControllerImpl implements BoardController{
 			@RequestPart(required = false, name = "hashtag") List<Hashtag> hashtag, 
 			@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
 		
-		String filepath = "c:\\board\\upload"+File.separator+board.getTitle();
+		String filepath = "c:\\imgs\\board\\upload"+File.separator+board.getTitle();
 		List<Hashtag> tag  = new ArrayList<>();
 		List<BoardImg>  boardImgs = new ArrayList<BoardImg>();
 		try {
@@ -102,6 +102,17 @@ public class BoardControllerImpl implements BoardController{
 			e.printStackTrace();
 			return new ResponseEntity("파일 등록에 실패했습니다.", HttpStatus.EXPECTATION_FAILED);
 		}
+	}
+
+	@Override
+	@RequestMapping(value = "/board_detail" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	public ResponseEntity boarddetail(
+			@RequestParam Integer board_id
+			, @RequestParam Integer user_id) throws Exception {
+		Map<String, Object> board_info = new HashMap<String, Object>();
+		board_info.put("board_id", board_id);
+		board_info.put("user_id", user_id);
+		return new ResponseEntity(boardService.boarddetail(board_info), HttpStatus.OK);
 	}
 	
 

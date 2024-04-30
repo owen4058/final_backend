@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.comment">
+	<resultMap id="commentform" type="commentform">
+        <result property="comment_id" column="comment_id" />
+        <result property="pa_comment_id" column="pa_comment_id" />
+        <result property="board_id" column="board_id"/>
+        <result property="user_id" column="user_id"/>
+        <result property="content" column="content"/>
+        <result property="nickname" column="nickname"/>
+        <result property="pro_path" column="pro_path"/>
+        <result property="comment_like" column="comment_like"/>
+        <result property="recomment_count" column="recomment_count"/>
+        <result property="create_date" column="create_date"/>
+ 	</resultMap>
+ 	
+	<select id="commentlist"  resultType="commentform" parameterType="commentform">
+	<![CDATA[
+	select a.* ,b.nickname ,b.pro_path
+	from COMMENTS a
+	left outer join
+	users b
+	on a.user_id = b.user_id
+	order by comment_id
+	]]>
+  </select> 
+  
+	<insert id="commentinsert"  parameterType="commentform">
+	<![CDATA[
+	insert into COMMENTS
+	(
+	  comment_id
+	, board_id
+	, user_id
+	, content	
+	, create_date	
+	) values
+	(
+	AAA.NEXTVAL
+	,#{board_id}
+	,#{user_id}
+	,#{content}
+	, SYSDATE
+	)
+	]]>
+	</insert>
+	
+	<insert id="pacommentinsert"  parameterType="commentform">
+	<selectKey keyProperty="comment_id" resultType="int" order="BEFORE">
+        <![CDATA[
+        SELECT MAX(comment_id) + 1 from COMMENTS
+        ]]>
+    	</selectKey>
+    	<![CDATA[
+	insert into comments
+	(
+	  comment_id
+	, pa_comment_id
+	, board_id
+	, user_id
+	, content	
+	, create_date	
+	) values
+	(
+	AAA.NEXTVAL
+	,#{pa_comment_id}
+	,#{board_id}
+	,#{user_id}
+	,#{content}
+	, SYSDATE
+	)
+	]]>
+	</insert>
+	
+	<update id="pacommentcount"  parameterType="commentform">
+	<![CDATA[
+	UPDATE comments	
+	SET RECOMMENT_COUNT = RECOMMENT_COUNT + 1
+	WHERE comment_id = #{pa_comment_id}
+	]]>
+	</update>
+	
+	<update id="commentcount"  parameterType="int">
+	<![CDATA[
+	UPDATE board
+	SET comment_count = comment_count + 1
+	WHERE board_id = #{board_id}
+	]]>
+	</update>
+	
+  
+</mapper>

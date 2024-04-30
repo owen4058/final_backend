@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin">
+	
+
+
+	<insert id="form_admin_create"  parameterType="forumadmin" >
+	<![CDATA[
+	insert into forums(
+	forum_id,
+	forum_name,
+	create_date,
+	logo_path,
+	forum_info
+	)values(
+	AAA.NEXTVAL
+	,#{forum_name}
+	,sysdate
+	,#{logo_path}
+	,#{forum_info}
+	)
+	]]>
+  </insert>
+  <select id="form_admin_list"  resultType="forumadmin" parameterType="forumadmin" >
+	<![CDATA[
+	select * from forums order by forum_id
+	]]>
+  </select>
+  
+  <delete id="form_admin_delete" parameterType="int" >
+	<![CDATA[
+	delete 
+	from forums
+	where forum_id = #{forum_id}
+	]]>
+  </delete>  
+</mapper>

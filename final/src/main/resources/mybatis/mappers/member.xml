@@ -42,6 +42,13 @@
       ]]>
 	</select>
 	
+	<select id="finduser"  resultType="member" parameterType="loginform" >
+	<![CDATA[
+		select * from users
+		where user_id = #{user_id}		
+	]]>
+  </select> 
+	
 	<select id="loginById"  resultType="member" parameterType="loginform" >
 	<![CDATA[
 		select * from users

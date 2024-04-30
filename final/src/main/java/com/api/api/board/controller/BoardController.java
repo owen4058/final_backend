@@ -1,6 +1,7 @@
 package com.api.api.board.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.board.BoardCreateForm;
+import com.api.api.board.BoardDetailForm;
 import com.api.api.board.BoardForm;
 import com.api.api.board.Hashtag;
 
@@ -21,4 +23,11 @@ public interface BoardController {
 	public ResponseEntity boardcreate(BoardCreateForm boardCreageForm, 
 			List<Hashtag> hashtag,
 			MultipartFile[] boFiles) throws Exception;
+	
+	public ResponseEntity boarddetail(
+			Integer board_id
+			,Integer user_id
+			) throws Exception;
+	
+	
 }
