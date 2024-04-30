@@ -26,7 +26,6 @@ public class CommentControllerImpl implements CommentController{
 			) throws Exception {
 		// 댓글 추가할떄 필요한거 생각해서 넣을것 대댓글 코멘트 카운트 추가 및 분리
 		Integer Pa_comment_id = commentform.getPa_comment_id();
-		System.out.println(Pa_comment_id);
 		if (Pa_comment_id == null) {
 			return new ResponseEntity(commentService.commentinsert(commentform), HttpStatus.OK);
 		}

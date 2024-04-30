@@ -18,6 +18,8 @@ public class CommentForm {
 	int board_id;
 	int user_id;
 	String content;
+	String nickname;
+	String pro_path;
 	int comment_like;
 	int recomment_count;
 	Date create_date;

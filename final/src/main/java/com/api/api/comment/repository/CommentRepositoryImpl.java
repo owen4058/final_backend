@@ -25,8 +25,8 @@ public class CommentRepositoryImpl implements CommentRepository{
 
 	@Override
 	public int commentinsert(CommentForm commentform) {
-		 sqlSession.insert("mapper.comment.commentinsert", commentform);
-		 int board_id = commentform.getBoard_id();
+		sqlSession.insert("mapper.comment.commentinsert", commentform);
+		int board_id = commentform.getBoard_id();
 		return sqlSession.update("mapper.comment.commentcount", board_id);
 	}
 
@@ -37,8 +37,8 @@ public class CommentRepositoryImpl implements CommentRepository{
 
 	@Override
 	public int pacommentinsert(CommentForm commentform) {
-		 sqlSession.insert("mapper.comment.pacommentinsert", commentform);
-		 sqlSession.insert("mapper.comment.pacommentcount", commentform);
+		sqlSession.insert("mapper.comment.pacommentinsert", commentform);
+		sqlSession.insert("mapper.comment.pacommentcount", commentform);
 		return sqlSession.update("mapper.comment.commentcount", commentform.getBoard_id());
 	}
 
