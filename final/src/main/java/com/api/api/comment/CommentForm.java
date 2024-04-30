@@ -19,6 +19,7 @@ public class CommentForm {
 	int user_id;
 	String content;
 	int comment_like;
+	int recomment_count;
 	Date create_date;
 
 }

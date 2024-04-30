@@ -25,10 +25,8 @@ public class CommentRepositoryImpl implements CommentRepository{
 
 	@Override
 	public int commentinsert(CommentForm commentform) {
-		System.out.println("시도1");
 		 sqlSession.insert("mapper.comment.commentinsert", commentform);
 		 int board_id = commentform.getBoard_id();
-		 System.out.println("시도2 " + board_id);
 		return sqlSession.update("mapper.comment.commentcount", board_id);
 	}
 
