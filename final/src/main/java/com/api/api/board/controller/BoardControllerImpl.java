@@ -74,7 +74,7 @@ public class BoardControllerImpl implements BoardController{
 			@RequestPart(required = false, name = "hashtag") List<Hashtag> hashtag, 
 			@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
 		
-		String filepath = "c:\\board\\upload"+File.separator+board.getTitle();
+		String filepath = "c:\\imgs\\board\\upload"+File.separator+board.getTitle();
 		List<Hashtag> tag  = new ArrayList<>();
 		List<BoardImg>  boardImgs = new ArrayList<BoardImg>();
 		try {

@@ -14,5 +14,6 @@
         <typeAlias type="com.api.api.forum.ForumForm"  alias="forumform"/>
         <typeAlias type="com.api.api.leftsidebar.FavoriteForum"  alias="favoriteforum"/>
         <typeAlias type="com.api.api.leftsidebar.UserForumForm"  alias="userforumform"/>
+        <typeAlias type="com.api.api.admin.ForumAdmin"  alias="forumadmin"/>
 	</typeAliases>
 </configuration>
