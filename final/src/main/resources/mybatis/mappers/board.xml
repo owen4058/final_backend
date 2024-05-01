@@ -109,6 +109,7 @@
 				<result property="pro_path" column="pro_path"/>
 				<result property="comment_like" column="comment_like"/>
 				<result property="recomment_count" column="recomment_count"/>
+				<result property="comment_like_state" column="comment_like_state"/>
 				<result property="create_date" column="create_date"/>
 			</collection>
 	</resultMap>    
@@ -136,9 +137,9 @@
                ELSE 0
             END AS forum_following_state
          ,CASE 
-               WHEN j.user_id  IS NOT NULL THEN 1
+               WHEN (select user_id from comment_like where user_id = #{user_id} and comment_id = c.comment_id)  IS NOT NULL THEN 1
                ELSE 0
-            END AS comment_like
+            END AS comment_like_state
 		from board a
 		left outer join users b on a.user_id = b.user_id 
 		left outer join comments c on a.board_id = c.board_id
@@ -148,7 +149,6 @@
 		left outer join img g on a.board_id = g.board_id
 		left outer join	board_like h ON a.board_id = h.board_id and h.user_id = #{user_id}
         left outer join	board_save i ON a.board_id = i.board_id and i.user_id = #{user_id}
-        left outer join	comment_like j ON c.comment_id = j.comment_id and i.user_id = #{user_id}
 		where a.board_id = #{board_id} and a.user_id = #{user_id}
 		]]>
   </select>

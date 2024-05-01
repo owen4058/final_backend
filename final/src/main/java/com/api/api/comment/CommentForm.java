@@ -22,6 +22,7 @@ public class CommentForm {
 	String pro_path;
 	int comment_like;
 	int recomment_count;
+	int comment_like_state;
 	Date create_date;
 
 }
