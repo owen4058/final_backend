@@ -21,4 +21,5 @@ public interface CommentController {
 			)
 			throws Exception;
 	public ResponseEntity commentlist() throws Exception;
+	public ResponseEntity recomment(int comment_id) throws Exception;
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.api.api.comment.CommentForm;
 import com.api.api.comment.service.CommentService;
@@ -37,6 +38,15 @@ public class CommentControllerImpl implements CommentController{
 	public ResponseEntity commentlist() throws Exception {
 		
 		return new ResponseEntity(commentService.commentlist(), HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/recomment" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	public ResponseEntity recomment(
+			@RequestParam int comment_id
+			) throws Exception {
+		
+		return new ResponseEntity(commentService.recomment(comment_id), HttpStatus.OK);
 	}
 
 

@@ -27,6 +27,15 @@
 	order by comment_id
 	]]>
   </select> 
+	
+	<select id="recomment"  resultType="commentform" parameterType="int">
+	<![CDATA[
+	select *
+	from COMMENTS 
+	where pa_comment_id = #{comment_id}
+	order by create_date
+	]]>
+  </select> 
   
 	<insert id="commentinsert"  parameterType="commentform">
 	<![CDATA[

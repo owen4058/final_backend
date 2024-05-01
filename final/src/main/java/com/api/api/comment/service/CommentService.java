@@ -14,4 +14,6 @@ public interface CommentService {
 	public List<CommentForm> commentinsert(CommentForm commentform);
 	public List<CommentForm> pacommentinsert(CommentForm commentform);
 	public List<CommentForm> commentlist();
+	
+	public List<CommentForm> recomment(int comment_id);
 }

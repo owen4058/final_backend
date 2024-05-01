@@ -40,4 +40,10 @@ public class CommentServiceImpl implements CommentService{
 		return commentRepository.commentlist();
 	}
 
+	@Override
+	public List<CommentForm> recomment(int comment_id) {
+		return commentRepository.recomment(comment_id);
+	}
+	
+
 }

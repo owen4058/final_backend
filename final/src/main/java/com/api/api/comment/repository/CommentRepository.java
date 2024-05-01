@@ -14,5 +14,6 @@ public interface CommentRepository {
 	public int commentinsert(CommentForm commentform);
 	public int pacommentinsert(CommentForm commentform);
 	public List<CommentForm> commentlist();
+	public List<CommentForm> recomment(int comment_id);
 
 }
