@@ -133,11 +133,11 @@
             END AS board_save_state
         , (SELECT COUNT(*) FROM user_forums WHERE forum_id = a.forum_id) as people 
         ,CASE 
-               WHEN (select user_id from user_forums where user_id = #{user_id} and forum_id = d.forum_id) IS NOT NULL THEN 1
+               WHEN k.user_id IS NOT NULL THEN 1
                ELSE 0
             END AS forum_following_state
          ,CASE 
-               WHEN (select user_id from comment_like where user_id = #{user_id} and comment_id = c.comment_id)  IS NOT NULL THEN 1
+               WHEN j.user_id  IS NOT NULL THEN 1
                ELSE 0
             END AS comment_like_state
 		from board a
@@ -149,6 +149,8 @@
 		left outer join img g on a.board_id = g.board_id
 		left outer join	board_like h ON a.board_id = h.board_id and h.user_id = #{user_id}
         left outer join	board_save i ON a.board_id = i.board_id and i.user_id = #{user_id}
+        left outer join	comment_like j ON c.comment_id =j.comment_id and j.user_id = #{user_id}
+        left outer join	user_forums k ON d.forum_id =k.forum_id and k.user_id = #{user_id}
 		where a.board_id = #{board_id} and a.user_id = #{user_id}
 		]]>
   </select>
