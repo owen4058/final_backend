@@ -44,6 +44,7 @@ public class BoardRepositoryImpl implements BoardRepository{
 	}
 	@Override
 	public List<BoardDetailForm> boarddetail(Map<String, Object> boardinfo) {
+		sqlSession.update("mapper.board.boardhit", boardinfo);
 		return sqlSession.selectList("mapper.board.board", boardinfo);
 	}
 

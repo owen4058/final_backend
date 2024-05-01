@@ -300,5 +300,13 @@
 		 
 	</insert>
 	
+	<update id="boardhit"  parameterType="Map">
+	<![CDATA[
+	UPDATE board	
+	SET hits = hits + 1
+	WHERE board_id = #{board_id}
+	]]>
+	</update>
+	
   
 </mapper>
