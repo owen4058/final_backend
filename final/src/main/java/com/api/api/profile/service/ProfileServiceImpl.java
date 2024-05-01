@@ -1,13 +1,10 @@
 package com.api.api.profile.service;
 
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.api.api.board.BoardForm;
 import com.api.api.board.repository.BoardRepository;
 import com.api.api.profile.Profile;
 import com.api.api.profile.repository.ProfileRepository;
@@ -29,11 +26,11 @@ public class ProfileServiceImpl implements ProfileService {
     public Profile updateProfile(int user_id, Profile profile) throws DataAccessException {
         int updatedRows = profileRepository.updateProfile(profile);
         if (updatedRows > 0) {
-            // 업데이트된 행이 있으면, 업데이트된 프로필 정보를 반환
+            // �뾽�뜲�씠�듃�맂 �뻾�씠 �엳�쑝硫�, �뾽�뜲�씠�듃�맂 �봽濡쒗븘 �젙蹂대�� 諛섑솚
             return profileRepository.selectProfile(user_id);
         } else {
-            // 업데이트된 행이 없으면, 적절한 예외를 발생시키거나 다른 처리를 함
-            throw new DataAccessException("프로필 업데이트에 실패했습니다.") {};
+            // �뾽�뜲�씠�듃�맂 �뻾�씠 �뾾�쑝硫�, �쟻�젅�븳 �삁�쇅瑜� 諛쒖깮�떆�궎嫄곕굹 �떎瑜� 泥섎━瑜� �븿
+            throw new DataAccessException("�봽濡쒗븘 �뾽�뜲�씠�듃�뿉 �떎�뙣�뻽�뒿�땲�떎.") {};
         }
     }
 

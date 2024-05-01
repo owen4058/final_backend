@@ -2,6 +2,8 @@ package com.api.api.comment.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,31 +24,30 @@ public class CommentControllerImpl implements CommentController{
 	
 	@Override
 	@RequestMapping(value = "/board_comment" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity commentinsert(
+	public ResponseEntity<List<?>> commentinsert(
 			@RequestBody CommentForm commentform
 			) throws Exception {
-		// 댓글 추가할떄 필요한거 생각해서 넣을것 대댓글 코멘트 카운트 추가 및 분리
-		Integer Pa_comment_id = commentform.getPa_comment_id();
-		if (Pa_comment_id == null) {
-			return new ResponseEntity(commentService.commentinsert(commentform), HttpStatus.OK);
-		}
-		return new ResponseEntity(commentService.pacommentinsert(commentform), HttpStatus.OK);
+//		Integer Pa_comment_id = commentform.getPa_comment_id();
+//		if (Pa_comment_id == null) {
+//			return new ResponseEntity<List<?>>(commentService.commentinsert(commentform), HttpStatus.OK);
+//		}
+		return new ResponseEntity<List<?>>(commentService.commentinsert(commentform), HttpStatus.OK);
 	}
 	
 	@Override
 	@RequestMapping(value = "/board_comment" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
-	public ResponseEntity commentlist() throws Exception {
+	public ResponseEntity<List<?>> commentlist() throws Exception {
 		
-		return new ResponseEntity(commentService.commentlist(), HttpStatus.OK);
+		return new ResponseEntity<List<?>>(commentService.commentlist(), HttpStatus.OK);
 	}
 	
 	@Override
 	@RequestMapping(value = "/recomment" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
-	public ResponseEntity recomment(
+	public ResponseEntity<?> recomment(
 			@RequestParam int comment_id
 			) throws Exception {
 		
-		return new ResponseEntity(commentService.recomment(comment_id), HttpStatus.OK);
+		return new ResponseEntity<List<?>>(commentService.recomment(comment_id), HttpStatus.OK);
 	}
 
 

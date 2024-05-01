@@ -37,7 +37,7 @@
 	]]>
   </select> 
   
-	<insert id="commentinsert"  parameterType="commentform">
+<!-- 	<insert id="commentinsert"  parameterType="commentform">
 	<![CDATA[
 	insert into COMMENTS
 	(
@@ -55,9 +55,9 @@
 	, SYSDATE
 	)
 	]]>
-	</insert>
+	</insert> -->
 	
-	<insert id="pacommentinsert"  parameterType="commentform">
+	<insert id="commentinsert"  parameterType="commentform">
 	<selectKey keyProperty="comment_id" resultType="int" order="BEFORE">
         <![CDATA[
         SELECT MAX(comment_id) + 1 from COMMENTS

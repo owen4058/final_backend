@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
 
-import com.api.api.board.BoardForm;
 import com.api.api.forum.ForumForm;
 
 public interface ForumController {

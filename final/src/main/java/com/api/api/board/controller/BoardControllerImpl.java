@@ -1,13 +1,10 @@
 package com.api.api.board.controller;
 
-import java.io.Console;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,7 +65,7 @@ public class BoardControllerImpl implements BoardController{
 	
 	@Override
 	@RequestMapping(value = "/board_detail" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity boardcreate(
+	public ResponseEntity<?> boardcreate(
 			@RequestPart(name = "board") BoardCreateForm board, 
 			@RequestPart(required = false, name = "hashtag") List<Hashtag> hashtag, 
 			@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
@@ -96,23 +92,23 @@ public class BoardControllerImpl implements BoardController{
 				tag  = hashtag;
 			}
 			
-			return new ResponseEntity(boardService.boardcreate(board, boardImgs, tag), HttpStatus.OK);
+			return new ResponseEntity<BoardCreateForm>(boardService.boardcreate(board, boardImgs, tag), HttpStatus.OK);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity("파일 등록에 실패했습니다.", HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<String>("파일 등록에 실패했습니다.", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
 
 	@Override
 	@RequestMapping(value = "/board_detail" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
-	public ResponseEntity boarddetail(
+	public ResponseEntity<?> boarddetail(
 			@RequestParam Integer board_id
 			, @RequestParam Integer user_id) throws Exception {
 		Map<String, Object> board_info = new HashMap<String, Object>();
 		board_info.put("board_id", board_id);
 		board_info.put("user_id", user_id);
-		return new ResponseEntity(boardService.boarddetail(board_info), HttpStatus.OK);
+		return new ResponseEntity<List<?>>(boardService.boarddetail(board_info), HttpStatus.OK);
 	}
 	
 

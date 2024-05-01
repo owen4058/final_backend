@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.api.api.board.BoardForm;
 import com.api.api.forum.ForumForm;
 import com.api.api.forum.service.ForumService;
 

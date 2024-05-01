@@ -1,8 +1,6 @@
 package com.api.api.board;
 
-import java.util.List;
 
-import javax.annotation.Generated;
 
 import org.springframework.stereotype.Component;
 

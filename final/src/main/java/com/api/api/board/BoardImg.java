@@ -1,6 +1,5 @@
 package com.api.api.board;
 
-import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
