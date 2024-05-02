@@ -17,4 +17,8 @@ public interface BoardService {
 	public BoardCreateForm boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag);
 	
 	public List<BoardDetailForm> boarddetail(Map<String, Object> boardinfo);
+	
+	public List<BoardDetailForm> boardupdate(BoardCreateForm board, List<BoardImg> img, int my_id);
+
+	public List<BoardImg> boardcheck(BoardCreateForm board, List<BoardImg> img);
 }

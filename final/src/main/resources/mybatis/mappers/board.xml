@@ -265,13 +265,21 @@
 		]]>   
 	</insert>
 	
+	<update id="boardupdate"  parameterType="boardcreateform">
+	<![CDATA[
+	UPDATE board	
+	SET title = #{title}, content = #{content}
+	WHERE board_id = #{board_id}
+	]]>
+	</update>
+	
 	 <insert id="imginsert"  parameterType="List">
 		 insert into img(
 		 
 		 img_id, 
 		 board_id, 
 		 img_name, 
-		 img_path 
+		 img_path
 		 
 		 )SELECT AAA.NEXTVAL, A.*
 	    FROM
@@ -306,6 +314,8 @@
 		 
 	</insert>
 	
+	
+	
 	<update id="boardhit"  parameterType="Map">
 	<![CDATA[
 	UPDATE board	
@@ -313,6 +323,12 @@
 	WHERE board_id = #{board_id}
 	]]>
 	</update>
+	
+	<select id="boardcheck"  resultType = "boardimg" parameterType="boardcreateform">
+	<![CDATA[
+	select * from img where board_id = #{board_id} 
+	]]>
+	</select>
 	
   
 </mapper>

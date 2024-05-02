@@ -22,4 +22,8 @@ public interface BoardRepository {
 	
 	public List<BoardDetailForm> boarddetail(Map<String, Object> boardinfo);
 
+	public List<BoardImg> boardcheck(BoardCreateForm board, List<BoardImg> img);
+
+	public int boardupdate(BoardCreateForm board);
+
 }

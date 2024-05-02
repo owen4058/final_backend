@@ -1,5 +1,7 @@
 package com.api.api.board.service;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +56,24 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<BoardDetailForm> boarddetail(Map<String, Object> boardinfo) {
 		return boardRepository.boarddetail(boardinfo);
+	}
+
+	@Override
+	public List<BoardDetailForm> boardupdate(BoardCreateForm board, List<BoardImg> img, int my_id) {
+		Map<String, Object> boardinfo = new HashMap<>();
+		
+		boardinfo.put("board_id", board.getBoard_id());
+		boardinfo.put("user_id", my_id);
+		
+		
+		boardRepository.boardupdate(board);
+			return boardRepository.boarddetail(boardinfo);
+
+	}
+	@Override
+	public List<BoardImg> boardcheck(BoardCreateForm board, List<BoardImg> img) {
+		return boardRepository.boardcheck(board, img);
+		
 	}
 
 }

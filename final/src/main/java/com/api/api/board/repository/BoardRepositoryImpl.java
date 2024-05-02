@@ -44,5 +44,13 @@ public class BoardRepositoryImpl implements BoardRepository{
 		sqlSession.update("mapper.board.boardhit", boardinfo);
 		return sqlSession.selectList("mapper.board.board", boardinfo);
 	}
+	@Override
+	public List<BoardImg> boardcheck(BoardCreateForm board, List<BoardImg> img) {
+		return sqlSession.selectList("mapper.board.boardcheck", board);
+	}
+	@Override
+	public int boardupdate(BoardCreateForm board) {
+		return sqlSession.update("mapper.board.boardupdate", board);
+	}
 
 }
