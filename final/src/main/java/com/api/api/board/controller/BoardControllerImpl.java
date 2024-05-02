@@ -82,7 +82,7 @@ public class BoardControllerImpl implements BoardController{
 			if (files != null) {
 				for (MultipartFile multipart : files) {
 					if (!multipart.isEmpty()) {
-						System.out.println("µ¥ÀÌÅÍ "+ multipart.getOriginalFilename());
+						System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ "+ multipart.getOriginalFilename());
 						String filename = System.currentTimeMillis()+"_"+multipart.getOriginalFilename();
 						FileUtils.copyInputStreamToFile(multipart.getInputStream(), new File(filepath, filename));
 						BoardImg boardImg = new BoardImg();
@@ -101,7 +101,7 @@ public class BoardControllerImpl implements BoardController{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("ÆÄÀÏ µî·Ï¿¡ ½ÇÆĞÇß½À´Ï´Ù.", HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<String>("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
 
@@ -116,7 +116,7 @@ public class BoardControllerImpl implements BoardController{
 		return new ResponseEntity<List<?>>(boardService.boarddetail(board_info), HttpStatus.OK);
 	}
 	
-	// ºñÈ°¼ºÈ­ ÇÒ ÀÌ¹ÌÁö ÀÎÁö ¸ÕÀú °ËÁõ ÇÏ±â   
+	// ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½   
 	
 	@Override
 	@RequestMapping(value = "/board_update" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
@@ -128,7 +128,7 @@ public class BoardControllerImpl implements BoardController{
 			@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
 		
 		if (board.getUser_id() != my_id) {
-			return new ResponseEntity<String>("°Ô½Ã±Û ÀÛ¼ºÀÚ°¡ ¾Æ´Õ´Ï´Ù.", HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
+			return new ResponseEntity<String>("ï¿½Ô½Ã±ï¿½ ï¿½Û¼ï¿½ï¿½Ú°ï¿½ ï¿½Æ´Õ´Ï´ï¿½.", HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
 		}
 		
 		String filepath = "c:\\imgs\\board\\upload"+File.separator+board.getTitle();
@@ -138,7 +138,7 @@ public class BoardControllerImpl implements BoardController{
 			if (files != null) {
 				for (MultipartFile multipart : files) {
 					if (!multipart.isEmpty()) {
-						System.out.println("µ¥ÀÌÅÍ "+ multipart.getOriginalFilename());
+						System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ "+ multipart.getOriginalFilename());
 						String filename = System.currentTimeMillis()+"_"+multipart.getOriginalFilename();
 						FileUtils.copyInputStreamToFile(multipart.getInputStream(), new File(filepath, filename));
 						BoardImg boardImg = new BoardImg();
@@ -149,7 +149,7 @@ public class BoardControllerImpl implements BoardController{
 					}	
 				}	
 			}
-		// ¼öÁ¤ Àü ¹öÀüÀÌ¶û ¼öÁ¤ µÉ ¹öÀüÀÌ¶û ´Ù¸¦‹š ÆÄÀÏ »èÁ¦ ¾Ë°í¸®Áò ±¸Çö ¹× 	
+		// ìˆ˜ì • ì „ ë²„ì „ì´ë‘ ìˆ˜ì • ë  ë²„ì „ì´ë‘ ë‹¤ë¥¼ë–„ íŒŒì¼ ì‚­ì œ ì•Œê³ ë¦¬ì¦˜ êµ¬í˜„ ë° 		
 			
 			if (hashtag != null) {
 				tag  = hashtag;
@@ -171,17 +171,17 @@ public class BoardControllerImpl implements BoardController{
 				String path = "c:\\imgs\\board\\upload"+File.separator+boarddetail.get(0).getTitle();
 				
 				
-				// Æú´õ¿Í ÆÄÀÏµé »èÁ¦
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½
 				File folder = new File(path);
 
 				try {
 
 				    if (folder.exists()) {
-				  	  FileUtils.cleanDirectory(folder);//ÇÏÀ§ Æú´õ¿Í ÆÄÀÏ ¸ğµÎ »èÁ¦
+				  	  FileUtils.cleanDirectory(folder);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 				    if (folder.isDirectory()) {
-				      folder.delete(); // ´ë»óÆú´õ »èÁ¦
-				      System.out.println(folder + "Æú´õ°¡ »èÁ¦µÇ¾ú½À´Ï´Ù.");
+				      folder.delete(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				      System.out.println(folder + "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 				    }
 				    }
 				} catch (IOException e) {
@@ -196,7 +196,7 @@ public class BoardControllerImpl implements BoardController{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("ÆÄÀÏ µî·Ï¿¡ ½ÇÆĞÇß½À´Ï´Ù.", HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<String>("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.", HttpStatus.EXPECTATION_FAILED);
 		}
 		
 	}
