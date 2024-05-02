@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+
+  <mapper namespace="mapper.qna">
+	  <resultMap id="qna" type="com.api.api.qna.Qna">
+	        <id property="question_id" column="QUESTION_ID"/>
+	        <result property="question_title" column="QUESTION_TITLE"/>
+	        <result property="question_content" column="QUESTION_CONTENT"/>
+	        <result property="user_id" column="USER_ID"/>
+	        <result property="nickname" column="NICKNAME"/>
+	        <result property="is_answer" column="IS_ANSWER"/>
+	        <result property="asked_date" column="ASKED_DATE"/>
+	        <result property="answer_content" column="ANSWER_CONTENT"/>
+	        <result property="answer_date" column="ANSWER_DATE"/>
+    </resultMap>
+    
+    <!-- qna 리스트 받기(Answer 없음)  -->
+    <select id="selectQuestionList" resultMap="qna" parameterType="int">
+        SELECT
+            q.QUESTION_ID,
+            q.ASKED_DATE,
+            q.QUESTION_TITLE,
+            q.QUESTION_CONTENT,
+            q.USER_ID,
+            u.NICKNAME,
+		    CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN 1 ELSE 0 END AS IS_ANSWER
+        FROM QUESTION q
+        LEFT JOIN ANSWER a ON q.QUESTION_ID = a.QUESTION_ID
+        LEFT JOIN USERS u ON q.USER_ID = u.USER_ID
+    </select>
+    
+	<!-- question_id로 qna_deatil(답변 O) 받기 -->
+    <select id="selectQna" resultMap="qna" parameterType="int">
+        SELECT
+            q.QUESTION_ID,
+            q.ASKED_DATE,
+            q.QUESTION_TITLE,
+            q.QUESTION_CONTENT,
+            q.USER_ID,
+            u.NICKNAME,
+            CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN true ELSE false END AS IS_ANSWER,
+            a.ANSWER_CONTENT,
+            a.ANSWER_DATE
+        FROM QUESTION q
+        LEFT JOIN ANSWER a ON q.QUESTION_ID = a.QUESTION_ID
+        LEFT JOIN USERS u ON q.USER_ID = u.USER_ID
+    </select>
+    
+    <insert id="insertQuestion" parameterType="qna">
+        INSERT INTO QUESTION (QUESTION_TITLE, QUESTION_CONTENT, USER_ID, ASKED_DATE) 
+        VALUES (#{question_title}, #{question_content}, #{user_id}, SYSDATE())
+    </insert>
+    
+    <update id="updateQuestion" parameterType="qna">
+	    UPDATE QUESTION
+	    SET 
+	        QUESTION_CONTENT = #{question_content}
+	    WHERE QUESTION_ID = #{question_id}
+	</update>
+    
+    <insert id="insertAnswer" parameterType="qna">
+        INSERT INTO ANSWER (question_id, user_id, answer_content, answer_date)
+        VALUES (#{question_id}, #{user_id}, #{answer_content}, NOW())
+    </insert>
+    
+    <update id="updateAnswer" parameterType="qna">
+        INSERT INTO ANSWER (question_id, user_id, answer_content, answer_date)
+        VALUES (#{question_id}, #{user_id}, #{answer_content}, NOW())
+    </update>
+    
+    
+    
+    
+    
+  </mapper>

@@ -24,5 +24,7 @@
         
         <typeAlias type="com.api.api.comment.CommentForm"  alias="commentform"/>
         
+        <typeAlias type="com.api.api.qna.Qna"  alias="qna"/>
+        
 	</typeAliases>
 </configuration>
