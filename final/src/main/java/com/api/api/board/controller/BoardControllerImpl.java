@@ -144,7 +144,7 @@ public class BoardControllerImpl implements BoardController{
 					}	
 				}	
 			}
-		// 수정 전 버전이랑 수정 될 버전이랑 다를떄 파일 삭제 알고리즘 구현 및 		
+		// 수정 전 버전이랑 수정 될 버전이랑 다를떄 파일 삭제 알고리즘 구현 및 데이터 입력 부분 수정 필요
 			
 			if (hashtag != null) {
 				tag  = hashtag;
