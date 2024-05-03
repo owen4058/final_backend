@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.api.api.board.BoardCreateForm;
 import com.api.api.board.BoardForm;
 import com.api.api.board.BoardImg;
+import com.api.api.board.BoardLike;
+import com.api.api.board.BoardSave;
 import com.api.api.board.Hashtag;
 
 public interface BoardController {
@@ -31,6 +33,12 @@ public interface BoardController {
 			List<Hashtag> hashtag,
 			List<BoardImg> boardImgs,
 			MultipartFile[] boFiles) throws Exception;
+
+	public ResponseEntity<?> boarddelete(Integer board_id) throws Exception;
+
+	public ResponseEntity<?> boardlike(BoardLike board) throws Exception;
+
+	public ResponseEntity<?> boardsave(BoardSave board) throws Exception;
 	
 	
 }

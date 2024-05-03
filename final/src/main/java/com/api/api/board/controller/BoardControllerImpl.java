@@ -11,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,8 @@ import com.api.api.board.BoardCreateForm;
 import com.api.api.board.BoardDetailForm;
 import com.api.api.board.BoardForm;
 import com.api.api.board.BoardImg;
+import com.api.api.board.BoardLike;
+import com.api.api.board.BoardSave;
 import com.api.api.board.Hashtag;
 import com.api.api.board.service.BoardService;
 
@@ -109,6 +112,30 @@ public class BoardControllerImpl implements BoardController{
 		board_info.put("board_id", board_id);
 		board_info.put("user_id", user_id);
 		return new ResponseEntity<List<?>>(boardService.boarddetail(board_info), HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/board_detail" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
+	public ResponseEntity<?> boarddelete(
+			@RequestParam Integer board_id
+			) throws Exception {
+		return new ResponseEntity<Integer>(boardService.boarddelete(board_id), HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/board_like" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	public ResponseEntity<?> boardlike(
+			@RequestBody BoardLike board
+			) throws Exception {
+		return new ResponseEntity<Integer>(boardService.boardlike(board), HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/board_save" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	public ResponseEntity<?> boardsave(
+			@RequestBody BoardSave board
+			) throws Exception {
+		return new ResponseEntity<Integer>(boardService.boardsave(board), HttpStatus.OK);
 	}
 	
 	

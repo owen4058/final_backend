@@ -12,6 +12,8 @@ import com.api.api.board.BoardCreateForm;
 import com.api.api.board.BoardDetailForm;
 import com.api.api.board.BoardForm;
 import com.api.api.board.BoardImg;
+import com.api.api.board.BoardLike;
+import com.api.api.board.BoardSave;
 import com.api.api.board.Hashtag;
 import com.api.api.board.repository.BoardRepository;
 
@@ -97,6 +99,21 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int imgdelete(BoardImg boardImg) {
 		return boardRepository.imgdelete(boardImg);
+	}
+
+	@Override
+	public int boarddelete(int board_id) {
+		return boardRepository.boarddelete(board_id);
+	}
+
+	@Override
+	public int boardlike(BoardLike boardLike) {
+		return boardRepository.boardlike(boardLike);
+	}
+
+	@Override
+	public int boardsave(BoardSave boardSave) {
+		return boardRepository.boardsave(boardSave);
 	}
 
 }

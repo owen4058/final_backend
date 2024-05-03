@@ -314,6 +314,36 @@
 		 
 	</insert>
 	
+	<insert id="boardlikeinsert"  parameterType="boardlike">
+		 insert into board_like(
+		 board_id,
+		 user_id, 
+		 like_ud
+		 
+		 )
+	    values
+	    (
+	      #{board_id}
+	      ,#{user_id}
+	      ,#{like_ud}
+	    ) 
+		 
+	</insert>
+	
+	<insert id="boardsaveinsert"  parameterType="boardsave">
+		 insert into board_save(
+		 board_id,
+		 user_id
+		 
+		 )
+	    values
+	    (
+	      #{board_id}
+	      ,#{user_id}
+	    ) 
+		 
+	</insert>
+	
 	<delete id="tagdelete"  parameterType="int">
 	<![CDATA[
 	delete 
@@ -321,6 +351,55 @@
 	WHERE board_id = #{board_id}
 	]]>
 	</delete>
+	
+	<delete id="allimgdelete"  parameterType="int">
+	<![CDATA[
+	delete 
+	from img		
+	WHERE board_id = #{board_id}
+	]]>
+	</delete>
+	
+	<delete id="cmtdelete"  parameterType="int">
+	<![CDATA[
+	delete 
+	from comments		
+	WHERE board_id = #{board_id}
+	]]>
+	</delete>
+	
+	
+	<delete id="cmtlikedelete"  parameterType="int">
+	<![CDATA[
+	delete 
+	from comment_like		
+	WHERE board_id = #{board_id}
+	]]>
+	</delete>
+	
+	<delete id="boardsavedelete"  parameterType="int">
+	<![CDATA[
+	delete 
+	from board_save		
+	WHERE board_id = #{board_id}
+	]]>
+	</delete>
+	<delete id="boardlikedelete"  parameterType="int">
+	<![CDATA[
+	delete 
+	from board_like		
+	WHERE board_id = #{board_id}
+	]]>
+	</delete>
+	<delete id="boarddelete"  parameterType="int">
+	<![CDATA[
+	delete 
+	from board		
+	WHERE board_id = #{board_id}
+	]]>
+	</delete>
+	
+	
 	
 	<delete id="imgdelete"  parameterType="boardimg">
 	<![CDATA[
