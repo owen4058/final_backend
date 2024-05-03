@@ -151,7 +151,7 @@
         left outer join	board_save i ON a.board_id = i.board_id and i.user_id = #{user_id}
         left outer join	comment_like j ON c.comment_id =j.comment_id and j.user_id = #{user_id}
         left outer join	user_forums k ON d.forum_id =k.forum_id and k.user_id = #{user_id}
-		where a.board_id = #{board_id} and a.user_id = #{user_id}
+		where a.board_id = #{board_id} 
 		]]>
   </select>
 	<select id="homelist"  resultMap="boardform" parameterType="int" >
