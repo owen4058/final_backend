@@ -10,5 +10,6 @@ public interface QnaService {
 	public int createAnswer(Qna qna);
 	public int updateAnswer(Qna qna);
 	public Qna getQuestionDetails(int question_id);
-	public List<Qna> getQuestionList(int user_id);
+	public List<Qna> getQuestionListByUser(int user_id);
+	public List<Qna> getQuestionListByAdmin();
 }

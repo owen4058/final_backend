@@ -23,11 +23,22 @@ public class QnaControllerImpl implements QnaController {
 	@Autowired
     private QnaService qnaService;
 
-	//get qna List(Answer X) in qna tab in MyPage
+	//get qna List(Answer X) in qna tab in MyPage By User
 	@GetMapping("")
 	@Override
-	public ResponseEntity<List<Qna>> getQuestionList(@RequestParam int user_id) {
-		List<Qna> qnaList = qnaService.getQuestionList(user_id);
+	public ResponseEntity<List<Qna>> getQuestionListByUser(@RequestParam int user_id) {
+		List<Qna> qnaList = qnaService.getQuestionListByUser(user_id);
+		if (!qnaList.isEmpty()) {
+			return ResponseEntity.ok(qnaList);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	//get qna List(Answer X) in qna tab in MyPage By Admin
+	@GetMapping("/admin")
+	@Override
+	public ResponseEntity<List<Qna>> getQuestionListByAdmin() {
+		List<Qna> qnaList = qnaService.getQuestionListByAdmin();
 		if (!qnaList.isEmpty()) {
 			return ResponseEntity.ok(qnaList);
 		} else {
