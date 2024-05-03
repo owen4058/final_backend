@@ -26,4 +26,8 @@ public interface BoardRepository {
 
 	public int boardupdate(BoardCreateForm board);
 
+	public int imgdelete(BoardImg boardImg);
+
+	public int tagdelete(int board_id);
+
 }

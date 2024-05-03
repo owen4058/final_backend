@@ -124,7 +124,7 @@
 		,f.*
 		,g.*
 		,CASE 
-               WHEN h.user_id  IS NOT NULL THEN 1
+               WHEN h.LIKE_UD  IS NOT NULL THEN h.LIKE_UD
                ELSE 0
             END AS board_like_state
         ,CASE 
@@ -314,7 +314,21 @@
 		 
 	</insert>
 	
+	<delete id="tagdelete"  parameterType="int">
+	<![CDATA[
+	delete 
+	from hashtag		
+	WHERE board_id = #{board_id}
+	]]>
+	</delete>
 	
+	<delete id="imgdelete"  parameterType="boardimg">
+	<![CDATA[
+	delete 
+	from img		
+	WHERE img_id = #{img_id}
+	]]>
+	</delete>
 	
 	<update id="boardhit"  parameterType="Map">
 	<![CDATA[

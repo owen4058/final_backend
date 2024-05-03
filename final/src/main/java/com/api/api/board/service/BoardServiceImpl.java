@@ -32,11 +32,10 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardCreateForm boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag) {
+	public List<BoardDetailForm> boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag) {
 		boardRepository.boardcreate(boardCreateForm);
 		
 		if (!hashtag.isEmpty()) {
-			System.out.println("Ω√¿€");
 			for (int i=0; i<hashtag.size(); i++) {
 				hashtag.get(i).setBoard_id(boardCreateForm.getBoard_id());
 			}
@@ -49,8 +48,11 @@ public class BoardServiceImpl implements BoardService{
 			}
 			boardRepository.imgcreate(boardImgs);
 		}
+		Map<String, Object> boardinfo = new HashMap<>();
 		
-		return boardCreateForm;
+		boardinfo.put("board_id", boardCreateForm.getBoard_id());
+		boardinfo.put("user_id", boardCreateForm.getUser_id());
+		return boardRepository.boarddetail(boardinfo);
 	}
 
 	@Override
@@ -59,7 +61,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardDetailForm> boardupdate(BoardCreateForm board, List<BoardImg> img, int my_id) {
+	public List<BoardDetailForm> boardupdate(BoardCreateForm board, List<BoardImg> img, int my_id, List<Hashtag> hashtag) {
 		Map<String, Object> boardinfo = new HashMap<>();
 		
 		boardinfo.put("board_id", board.getBoard_id());
@@ -67,13 +69,34 @@ public class BoardServiceImpl implements BoardService{
 		
 		
 		boardRepository.boardupdate(board);
-			return boardRepository.boarddetail(boardinfo);
+		boardRepository.tagdelete(board.getBoard_id());
+		if (!hashtag.isEmpty()) {
+			for (int i=0; i<hashtag.size(); i++) {
+				hashtag.get(i).setBoard_id(board.getBoard_id());
+			}
+			boardRepository.tagcreate(hashtag);
+		}
+		
+		
+		if (!img.isEmpty()) {
+			for (int i=0; i<img.size(); i++) {
+				img.get(i).setBoard_id(board.getBoard_id());
+			}
+			boardRepository.imgcreate(img);
+		}
+		
+		return boardRepository.boarddetail(boardinfo);
 
 	}
 	@Override
 	public List<BoardImg> boardcheck(BoardCreateForm board, List<BoardImg> img) {
 		return boardRepository.boardcheck(board, img);
 		
+	}
+
+	@Override
+	public int imgdelete(BoardImg boardImg) {
+		return boardRepository.imgdelete(boardImg);
 	}
 
 }

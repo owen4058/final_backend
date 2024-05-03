@@ -52,5 +52,13 @@ public class BoardRepositoryImpl implements BoardRepository{
 	public int boardupdate(BoardCreateForm board) {
 		return sqlSession.update("mapper.board.boardupdate", board);
 	}
+	@Override
+	public int imgdelete(BoardImg boardImg) {
+		return sqlSession.delete("mapper.board.imgdelete",boardImg);
+	}
+	@Override
+	public int tagdelete(int board_id) {
+		return sqlSession.delete("mapper.board.tagdelete",board_id);
+	}
 
 }

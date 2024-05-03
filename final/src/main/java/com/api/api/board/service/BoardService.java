@@ -14,11 +14,13 @@ public interface BoardService {
 
 	public List<BoardForm> boardlist(Map<String, Object> mapvo);
 	
-	public BoardCreateForm boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag);
+	public List<BoardDetailForm> boardcreate(BoardCreateForm boardCreateForm, List<BoardImg> boardImgs, List<Hashtag> hashtag);
 	
 	public List<BoardDetailForm> boarddetail(Map<String, Object> boardinfo);
 	
-	public List<BoardDetailForm> boardupdate(BoardCreateForm board, List<BoardImg> img, int my_id);
+	public List<BoardDetailForm> boardupdate(BoardCreateForm board, List<BoardImg> img, int my_id, List<Hashtag> hashtag);
 
 	public List<BoardImg> boardcheck(BoardCreateForm board, List<BoardImg> img);
+	
+	public int imgdelete(BoardImg boardImg);
 }
