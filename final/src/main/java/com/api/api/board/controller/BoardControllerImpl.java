@@ -96,7 +96,7 @@ public class BoardControllerImpl implements BoardController{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("���� ��Ͽ� �����߽��ϴ�.", HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<String>("파일등록에 실패했습니다.", HttpStatus.EXPECTATION_FAILED);
 		}
 	}
 
@@ -111,7 +111,6 @@ public class BoardControllerImpl implements BoardController{
 		return new ResponseEntity<List<?>>(boardService.boarddetail(board_info), HttpStatus.OK);
 	}
 	
-	// ��Ȱ��ȭ �� �̹��� ���� ���� ���� �ϱ�   
 	
 	@Override
 	@RequestMapping(value = "/board_update" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
@@ -123,7 +122,7 @@ public class BoardControllerImpl implements BoardController{
 			@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
 		
 		if (board.getUser_id() != my_id) {
-			return new ResponseEntity<String>("�Խñ� �ۼ��ڰ� �ƴմϴ�.", HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
+			return new ResponseEntity<String>("게시글 작성자가 아닙니다.", HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
 		}
 		
 		String filepath = "c:\\imgs\\board\\upload"+File.separator+board.getTitle();
@@ -133,7 +132,6 @@ public class BoardControllerImpl implements BoardController{
 			if (files != null) {
 				for (MultipartFile multipart : files) {
 					if (!multipart.isEmpty()) {
-						System.out.println("������ "+ multipart.getOriginalFilename());
 						String filename = System.currentTimeMillis()+"_"+multipart.getOriginalFilename();
 						FileUtils.copyInputStreamToFile(multipart.getInputStream(), new File(filepath, filename));
 						BoardImg boardImg = new BoardImg();
@@ -166,16 +164,15 @@ public class BoardControllerImpl implements BoardController{
 				String path = "c:\\imgs\\board\\upload"+File.separator+boarddetail.get(0).getTitle();
 				
 				
-				// ������ ���ϵ� ����
 				File folder = new File(path);
 
 				try {
 
 				    if (folder.exists()) {
-				  	  FileUtils.cleanDirectory(folder);//���� ������ ���� ��� ����
+				  	  FileUtils.cleanDirectory(folder);
 
 				    if (folder.isDirectory()) {
-				      folder.delete(); // ������� ����
+				      folder.delete(); 
 				      System.out.println(folder + "������ �����Ǿ����ϴ�.");
 				    }
 				    }
@@ -191,7 +188,7 @@ public class BoardControllerImpl implements BoardController{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("���� ��Ͽ� �����߽��ϴ�.", HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<String>("파일등록에 실패했습니다.", HttpStatus.EXPECTATION_FAILED);
 		}
 		
 	}

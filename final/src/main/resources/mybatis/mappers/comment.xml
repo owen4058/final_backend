@@ -70,7 +70,7 @@
 	, pa_comment_id
 	, board_id
 	, user_id
-	, content	
+	, cmt_content	
 	, create_date	
 	) values
 	(
@@ -78,7 +78,7 @@
 	,#{pa_comment_id}
 	,#{board_id}
 	,#{user_id}
-	,#{content}
+	,#{cmt_content}
 	, SYSDATE
 	)
 	]]>
