@@ -12,5 +12,7 @@ public interface CommentRepository {
 	public List<CommentForm> recomment(int comment_id);
 	public int commentupdate(CommentUpdateForm commentUpdateForm);
 	public int commentdelete(int comment_id);
+	public int commentcountmi(int board_id);
+	public int pacommentcountmi(int pa_comment_id);
 
 }

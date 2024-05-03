@@ -96,5 +96,24 @@
 	]]>
 	</update>
 	
+	
+	
+	<update id="commentcountmi"  parameterType="int">
+	<![CDATA[
+	UPDATE board
+	SET comment_count = comment_count - 1
+	WHERE board_id = #{board_id}
+	]]>
+	</update>
+	
+	<update id="pacommentcountmi"  parameterType="commentform">
+	<![CDATA[
+	UPDATE comments	
+	SET RECOMMENT_COUNT = RECOMMENT_COUNT - 1
+	WHERE comment_id = #{pa_comment_id}
+	]]>
+	</update>
+
+	
   
 </mapper>

@@ -62,9 +62,12 @@ public class CommentControllerImpl implements CommentController{
 	@RequestMapping(value = "/board_comment" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
 	public ResponseEntity<?> commentdelete(
 			@RequestParam int comment_id
+			,@RequestParam int board_id
+			,@RequestParam(required = false) int pa_comment_id
 			) throws Exception {
 		
-		return new ResponseEntity<Integer>(commentService.commentdelete(comment_id), HttpStatus.OK);
+
+		return new ResponseEntity<Integer>(commentService.commentdelete(comment_id, board_id ,pa_comment_id), HttpStatus.OK);
 	}
 
 

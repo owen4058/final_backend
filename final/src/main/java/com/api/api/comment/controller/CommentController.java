@@ -18,5 +18,5 @@ public interface CommentController {
 	public ResponseEntity<?> commentlist() throws Exception;
 	public ResponseEntity<?> recomment(int comment_id) throws Exception;
 	public ResponseEntity<?> commentupdate(CommentUpdateForm commentUpdateForm) throws Exception;
-	public ResponseEntity<?> commentdelete(int comment_id) throws Exception;
+	public ResponseEntity<?> commentdelete(int comment_id,int board_id , int pa_comment_id) throws Exception;
 }

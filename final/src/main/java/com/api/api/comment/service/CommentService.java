@@ -11,5 +11,5 @@ public interface CommentService {
 	public List<CommentForm> commentlist();
 	public List<CommentForm> recomment(int comment_id);
 	public int commentupdate(CommentUpdateForm commentUpdateForm);
-	public int commentdelete(int comment_id);
+	public int commentdelete(int comment_id, int board_id , int pa_comment_id);
 }

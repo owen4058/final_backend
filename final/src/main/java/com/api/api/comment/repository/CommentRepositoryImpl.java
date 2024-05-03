@@ -45,6 +45,14 @@ public class CommentRepositoryImpl implements CommentRepository{
 	public int commentdelete(int comment_id) {
 		return sqlSession.update("mapper.comment.commentdelete", comment_id);
 	}
+	@Override
+	public int commentcountmi(int board_id) {
+		return sqlSession.update("mapper.comment.commentcountmi", board_id);
+	}
+	@Override
+	public int pacommentcountmi(int pa_comment_id) {
+		return sqlSession.update("mapper.comment.pacommentcountmi", pa_comment_id);
+	}
 
 
 }

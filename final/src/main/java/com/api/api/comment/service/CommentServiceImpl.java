@@ -43,7 +43,11 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public int commentdelete(int comment_id) {
+	public int commentdelete(int comment_id, int board_id, int pa_comment_id) {
+		if (pa_comment_id != 0) {
+			commentRepository.pacommentcountmi(pa_comment_id);
+		}
+		commentRepository.commentcountmi(board_id);
 		return commentRepository.commentdelete(comment_id);
 	}
 	
