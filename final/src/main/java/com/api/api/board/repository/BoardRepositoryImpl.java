@@ -74,7 +74,8 @@ public class BoardRepositoryImpl implements BoardRepository{
 	}
 	@Override
 	public int boardlike(BoardLike boardLike) {
-		return sqlSession.insert("mapper.board.boardlikeinsert",boardLike);
+		sqlSession.insert("mapper.board.boardlikeinsert",boardLike);
+		return sqlSession.insert("mapper.board.boardlikecount",boardLike);
 	}
 	@Override
 	public int boardsave(BoardSave boardSave) {

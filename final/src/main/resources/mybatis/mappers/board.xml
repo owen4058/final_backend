@@ -330,6 +330,13 @@
 		 
 	</insert>
 	
+	<update id="boardlikecount"  parameterType="boardlike">
+		UPDATE board	
+		SET like_count = like_count + #{like_ud} 
+		WHERE board_id = #{board_id}
+		 
+	</update>
+	
 	<insert id="boardsaveinsert"  parameterType="boardsave">
 		 insert into board_save(
 		 board_id,

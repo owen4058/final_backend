@@ -25,6 +25,7 @@
         <typeAlias type="com.api.api.admin.ForumAdmin"  alias="forumadmin"/>
         
         <typeAlias type="com.api.api.comment.CommentForm"  alias="commentform"/>
+        <typeAlias type="com.api.api.comment.CommentUpdateForm"  alias="commentupdateform"/>
         
         <typeAlias type="com.api.api.qna.Qna"  alias="qna"/>
         

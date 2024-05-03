@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.api.api.comment.CommentForm;
+import com.api.api.comment.CommentUpdateForm;
 
 @Repository("commentRepository")
 public class CommentRepositoryImpl implements CommentRepository{
@@ -34,6 +35,15 @@ public class CommentRepositoryImpl implements CommentRepository{
 	@Override
 	public List<CommentForm> recomment(int comment_id) {
 		return sqlSession.selectList("mapper.comment.recomment", comment_id);
+	}
+	
+	@Override
+	public int commentupdate(CommentUpdateForm commentUpdateForm) {
+		return sqlSession.update("mapper.comment.commentupdate", commentUpdateForm);
+	}
+	@Override
+	public int commentdelete(int comment_id) {
+		return sqlSession.update("mapper.comment.commentdelete", comment_id);
 	}
 
 

@@ -37,26 +37,6 @@
 	]]>
   </select> 
   
-<!-- 	<insert id="commentinsert"  parameterType="commentform">
-	<![CDATA[
-	insert into COMMENTS
-	(
-	  comment_id
-	, board_id
-	, user_id
-	, content	
-	, create_date	
-	) values
-	(
-	AAA.NEXTVAL
-	,#{board_id}
-	,#{user_id}
-	,#{content}
-	, SYSDATE
-	)
-	]]>
-	</insert> -->
-	
 	<insert id="commentinsert"  parameterType="commentform">
 	<selectKey keyProperty="comment_id" resultType="int" order="BEFORE">
         <![CDATA[
@@ -97,6 +77,22 @@
 	UPDATE board
 	SET comment_count = comment_count + 1
 	WHERE board_id = #{board_id}
+	]]>
+	</update>
+	
+	<update id="commentdelete"  parameterType="int">
+	<![CDATA[
+	UPDATE comments
+	SET CMT_CONTENT = '삭제된 댓글입니다.', comment_state = 0
+	WHERE comment_id = #{comment_id}
+	]]>
+	</update>
+	
+	<update id="commentupdate"  parameterType="commentupdateform">
+	<![CDATA[
+	UPDATE comments
+	SET cmt_content = #{cmt_content}
+	WHERE comment_id = #{comment_id}
 	]]>
 	</update>
 	

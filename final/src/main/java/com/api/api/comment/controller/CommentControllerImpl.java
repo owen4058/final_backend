@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.api.api.comment.CommentForm;
+import com.api.api.comment.CommentUpdateForm;
 import com.api.api.comment.service.CommentService;
 
 @Controller("commentController")
@@ -48,6 +49,22 @@ public class CommentControllerImpl implements CommentController{
 			) throws Exception {
 		
 		return new ResponseEntity<List<?>>(commentService.recomment(comment_id), HttpStatus.OK);
+	}
+	@Override
+	@RequestMapping(value = "/board_comment" ,produces = "application/json; charset=utf8", method = RequestMethod.PUT)
+	public ResponseEntity<?> commentupdate(
+			@RequestBody CommentUpdateForm commentUpdateForm
+			) throws Exception {
+		
+		return new ResponseEntity<Integer>(commentService.commentupdate(commentUpdateForm), HttpStatus.OK);
+	}
+	@Override
+	@RequestMapping(value = "/board_comment" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
+	public ResponseEntity<?> commentdelete(
+			@RequestParam int comment_id
+			) throws Exception {
+		
+		return new ResponseEntity<Integer>(commentService.commentdelete(comment_id), HttpStatus.OK);
 	}
 
 
