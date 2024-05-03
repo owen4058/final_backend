@@ -9,7 +9,7 @@
         <result property="pa_comment_id" column="pa_comment_id" />
         <result property="board_id" column="board_id"/>
         <result property="user_id" column="user_id"/>
-        <result property="content" column="content"/>
+        <result property="cmt_content" column="cmt_content"/>
         <result property="nickname" column="nickname"/>
         <result property="pro_path" column="pro_path"/>
         <result property="comment_like" column="comment_like"/>

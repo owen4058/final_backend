@@ -17,7 +17,7 @@ public class CommentForm {
 	int pa_comment_id;
 	int board_id;
 	int user_id;
-	String content;
+	String cmt_content;
 	String nickname;
 	String pro_path;
 	int comment_like;
