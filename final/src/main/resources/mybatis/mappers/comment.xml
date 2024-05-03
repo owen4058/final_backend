@@ -113,6 +113,30 @@
 	WHERE comment_id = #{pa_comment_id}
 	]]>
 	</update>
+	
+	<update id="commentlike"  parameterType="commentlike">
+	<![CDATA[
+	UPDATE comments
+	SET comment_like = comment_like + 1
+	WHERE comment_id = #{comment_id}
+	]]>
+	</update>
+	
+	<insert id="commentlikeinsert"  parameterType="commentlike">
+    	<![CDATA[
+	insert into comments
+	(
+	  comment_id
+	, user_id
+	, board_id
+	) values
+	(
+	#{comment_id}
+	,#{user_id}
+	,#{board_id}
+	)
+	]]>
+	</insert>
 
 	
   

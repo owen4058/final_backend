@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.api.api.comment.CommentForm;
+import com.api.api.comment.CommentLike;
 import com.api.api.comment.CommentUpdateForm;
 
 @Repository("commentRepository")
@@ -52,6 +53,11 @@ public class CommentRepositoryImpl implements CommentRepository{
 	@Override
 	public int pacommentcountmi(int pa_comment_id) {
 		return sqlSession.update("mapper.comment.pacommentcountmi", pa_comment_id);
+	}
+	@Override
+	public int commentlike(CommentLike commentLike) {
+		sqlSession.update("mapper.comment.commentlike", commentLike);
+		return sqlSession.insert("mapper.comment.commentlikeinsert", commentLike);
 	}
 
 

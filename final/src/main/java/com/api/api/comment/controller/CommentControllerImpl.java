@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.api.api.comment.CommentForm;
+import com.api.api.comment.CommentLike;
 import com.api.api.comment.CommentUpdateForm;
 import com.api.api.comment.service.CommentService;
 
@@ -68,6 +69,16 @@ public class CommentControllerImpl implements CommentController{
 		
 
 		return new ResponseEntity<Integer>(commentService.commentdelete(comment_id, board_id ,pa_comment_id), HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/comment_like" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	public ResponseEntity<?> commentlike(
+			@RequestBody CommentLike commentLike
+			) throws Exception {
+		
+
+		return new ResponseEntity<Integer>(commentService.commentlike(commentLike), HttpStatus.OK);
 	}
 
 

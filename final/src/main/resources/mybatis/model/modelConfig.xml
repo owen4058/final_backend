@@ -26,6 +26,7 @@
         
         <typeAlias type="com.api.api.comment.CommentForm"  alias="commentform"/>
         <typeAlias type="com.api.api.comment.CommentUpdateForm"  alias="commentupdateform"/>
+        <typeAlias type="com.api.api.comment.CommentLike"  alias="commentlike"/>
         
         <typeAlias type="com.api.api.qna.Qna"  alias="qna"/>
         

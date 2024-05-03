@@ -3,6 +3,7 @@ package com.api.api.comment.repository;
 import java.util.List;
 
 import com.api.api.comment.CommentForm;
+import com.api.api.comment.CommentLike;
 import com.api.api.comment.CommentUpdateForm;
 
 public interface CommentRepository {
@@ -14,5 +15,6 @@ public interface CommentRepository {
 	public int commentdelete(int comment_id);
 	public int commentcountmi(int board_id);
 	public int pacommentcountmi(int pa_comment_id);
+	public int commentlike(CommentLike commentLike);
 
 }

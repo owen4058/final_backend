@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.api.comment.CommentForm;
+import com.api.api.comment.CommentLike;
 import com.api.api.comment.CommentUpdateForm;
 import com.api.api.comment.repository.CommentRepository;
 
@@ -49,6 +50,11 @@ public class CommentServiceImpl implements CommentService{
 		}
 		commentRepository.commentcountmi(board_id);
 		return commentRepository.commentdelete(comment_id);
+	}
+
+	@Override
+	public int commentlike(CommentLike commentLike) {
+		return commentRepository.commentlike(commentLike);
 	}
 	
 
