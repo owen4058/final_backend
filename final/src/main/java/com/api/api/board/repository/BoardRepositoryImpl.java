@@ -81,5 +81,44 @@ public class BoardRepositoryImpl implements BoardRepository{
 	public int boardsave(BoardSave boardSave) {
 		return sqlSession.insert("mapper.board.boardsaveinsert",boardSave);
 	}
+	
+	@Override
+	public BoardLike boardlikecheck(BoardLike boardLike) {
+		return sqlSession.selectOne("mapper.board.boardlikecheck",boardLike);
+	}
+	
+	@Override
+	public int boardlikepl(BoardLike boardLike) {
+		return sqlSession.update("mapper.board.boardlikeplcount",boardLike);
+	}
+	@Override
+	public int boardlikepl2(BoardLike boardLike) {
+		return sqlSession.update("mapper.board.boardlikeplcount2",boardLike);
+	}
+	
+	@Override
+	public int boardlikemi(BoardLike boardLike) {
+		return sqlSession.update("mapper.board.boardlikedscount",boardLike);
+	}
+	@Override
+	public int boardlikemi2(BoardLike boardLike) {
+		return sqlSession.update("mapper.board.boardlikedscount2",boardLike);
+	}
+	
+	@Override
+	public int boardlikedelete(BoardLike boardLike) {
+		return sqlSession.delete("mapper.board.boardlikedeletechoice",boardLike);
+	}
+	
+	@Override
+	public int boardlikesetpl(BoardLike boardLike) {
+		return sqlSession.update("mapper.board.boardlikesetpl",boardLike);
+	}
+	@Override
+	public int boardlikesetmi(BoardLike boardLike) {
+		return sqlSession.update("mapper.board.boardlikesetmi",boardLike);
+	}
+	
+	
 
 }

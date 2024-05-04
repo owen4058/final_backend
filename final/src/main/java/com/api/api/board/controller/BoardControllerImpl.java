@@ -127,7 +127,17 @@ public class BoardControllerImpl implements BoardController{
 	public ResponseEntity<?> boardlike(
 			@RequestBody BoardLike board
 			) throws Exception {
-		return new ResponseEntity<Integer>(boardService.boardlike(board), HttpStatus.OK);
+		int result =  boardService.boardlike(board);
+		
+		if (result == 1) {
+			return new ResponseEntity<String>("정상입력 됐습니다.", HttpStatus.OK);
+		}else if (result == 2) {
+			return new ResponseEntity<String>("싫어요는 두번 이상 불가능합니다.", HttpStatus.BAD_REQUEST);
+		}else if (result == 3) {
+			return new ResponseEntity<String>("입력오류입니다.", HttpStatus.BAD_REQUEST);
+		}else {
+			return new ResponseEntity<String>("좋아요는 두번 이상 불가능합니다.", HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@Override

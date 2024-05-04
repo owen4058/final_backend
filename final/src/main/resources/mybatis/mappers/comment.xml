@@ -21,19 +21,24 @@
 	<![CDATA[
 	select a.* ,b.nickname ,b.pro_path
 	from COMMENTS a
-	left outer join
-	users b
-	on a.user_id = b.user_id
+	left outer join users b	on a.user_id = b.user_id
 	order by comment_id
 	]]>
   </select> 
 	
-	<select id="recomment"  resultType="commentform" parameterType="int">
+	<select id="recomment"  resultType="commentform" parameterType="Map">
 	<![CDATA[
-	select *
-	from COMMENTS 
-	where pa_comment_id = #{comment_id}
-	order by create_date
+	select a.*
+		,b.* 
+		,CASE 
+		WHEN j.user_id  IS NOT NULL THEN 1
+		ELSE 0
+		END AS comment_like_state
+	from COMMENTS a
+	left outer join users b	on a.user_id = b.user_id
+	left outer join	comment_like j ON a.comment_id = j.comment_id and j.user_id = #{user_id}
+	where a.pa_comment_id = #{comment_id}
+	order by a.create_date
 	]]>
   </select> 
   
@@ -114,30 +119,89 @@
 	]]>
 	</update>
 	
-	<update id="commentlike"  parameterType="commentlike">
-	<![CDATA[
-	UPDATE comments
-	SET comment_like = comment_like + 1
-	WHERE comment_id = #{comment_id}
-	]]>
-	</update>
 	
 	<insert id="commentlikeinsert"  parameterType="commentlike">
     	<![CDATA[
-	insert into comments
+	insert into COMMENT_LIKE
 	(
 	  comment_id
 	, user_id
 	, board_id
+	, cmt_like_ud
 	) values
 	(
 	#{comment_id}
 	,#{user_id}
 	,#{board_id}
+	,#{cmt_like_ud}
 	)
 	]]>
 	</insert>
-
 	
-  
+	<!-- 코멘트 좋아요 관련  -->
+	
+	<update id="commentlike"  parameterType="commentlike">
+		UPDATE comments	
+		SET comment_like = comment_like + #{cmt_like_ud} 
+		WHERE comment_id = #{comment_id}
+		 
+	</update>
+	
+	<update id="commentlikeplcount"  parameterType="commentlike">
+		UPDATE comments	
+		SET comment_like = comment_like + 1
+		WHERE comment_id = #{comment_id}
+		 
+	</update>
+	
+	<update id="commentlikeplcount2"  parameterType="commentlike">
+		UPDATE comments	
+		SET comment_like = comment_like + 2 
+		WHERE comment_id = #{comment_id} 
+		 
+	</update>
+	
+	<update id="commentlikedscount"  parameterType="commentlike">
+		UPDATE comments	
+		SET comment_like = comment_like - 1
+		WHERE comment_id = #{comment_id}
+		 
+	</update>
+	
+	<update id="commentlikedscount2"  parameterType="commentlike">
+		UPDATE comments	
+		SET comment_like = comment_like - 2
+		WHERE comment_id = #{comment_id}
+		 
+	</update>
+	
+	<select id="commentlikecheck"  resultType = "commentlike" parameterType="commentlike">
+	<![CDATA[
+	select * from comment_like where comment_id = #{comment_id} and user_id = #{user_id} and board_id = #{board_id}
+	]]>
+	</select>
+	
+	<delete id="commentlikedelete"  parameterType="commentlike">
+	<![CDATA[
+	delete 
+	from comment_like		
+	WHERE board_id = #{board_id} and user_id = #{user_id} and comment_id = #{comment_id}
+	]]>
+	</delete>
+	
+	<update id="commentlikesetmi"  parameterType="commentlike">
+		UPDATE comment_like	
+		SET cmt_like_ud = -1
+		WHERE board_id = #{board_id} and user_id = #{user_id} and comment_id = #{comment_id}
+		 
+	</update>
+	
+	<update id="commentlikesetpl"  parameterType="commentlike">
+		UPDATE comment_like	
+		SET cmt_like_ud = +1
+		WHERE board_id = #{board_id} and user_id = #{user_id} and comment_id = #{comment_id}
+		 
+	</update>
+	
+	  
 </mapper>

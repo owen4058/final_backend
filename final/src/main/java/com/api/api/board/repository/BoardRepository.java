@@ -37,6 +37,22 @@ public interface BoardRepository {
 	public int boardlike(BoardLike boardLike);
 
 	public int boardsave(BoardSave boardSave);
+
+	public BoardLike boardlikecheck(BoardLike boardLike);
+
+	public int boardlikepl(BoardLike boardLike);
+	
+	public int boardlikepl2(BoardLike boardLike);
+	
+	public int boardlikemi(BoardLike boardLike);
+	
+	public int boardlikemi2(BoardLike boardLike);
+
+	public int boardlikedelete(BoardLike boardLike);
+
+	public int boardlikesetpl(BoardLike boardLike);
+	
+	public int boardlikesetmi(BoardLike boardLike);
 	
 	
 
