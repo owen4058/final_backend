@@ -18,7 +18,8 @@
     </resultMap>
     
     <!-- qna 리스트 받기(Answer 없음)  -->
-    <select id="selectQuestionList" resultMap="qna" parameterType="int">
+    <select id="selectQuestionListByUser" resultMap="qna" parameterType="int">
+    <![CDATA[
         SELECT
             q.QUESTION_ID,
             q.ASKED_DATE,
@@ -30,10 +31,29 @@
         FROM QUESTION q
         LEFT JOIN ANSWER a ON q.QUESTION_ID = a.QUESTION_ID
         LEFT JOIN USERS u ON q.USER_ID = u.USER_ID
+        WHERE q.USER_ID = #{user_id}
+     ]]>
+    </select>
+    <!-- qna 리스트 받기(Answer 없음)  -->
+    <select id="selectQuestionListByAdmin" resultMap="qna">
+    <![CDATA[
+        SELECT
+            q.QUESTION_ID,
+            q.ASKED_DATE,
+            q.QUESTION_TITLE,
+            q.QUESTION_CONTENT,
+            q.USER_ID,
+            u.NICKNAME,
+		    CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN 1 ELSE 0 END AS IS_ANSWER
+        FROM QUESTION q
+        LEFT JOIN ANSWER a ON q.QUESTION_ID = a.QUESTION_ID
+        LEFT JOIN USERS u ON q.USER_ID = u.USER_ID
+     ]]>
     </select>
     
 	<!-- question_id로 qna_deatil(답변 O) 받기 -->
     <select id="selectQna" resultMap="qna" parameterType="int">
+    <![CDATA[
         SELECT
             q.QUESTION_ID,
             q.ASKED_DATE,
@@ -47,28 +67,38 @@
         FROM QUESTION q
         LEFT JOIN ANSWER a ON q.QUESTION_ID = a.QUESTION_ID
         LEFT JOIN USERS u ON q.USER_ID = u.USER_ID
+        WHERE q.QUESTION_ID = #{question_id}
+     ]]>
     </select>
     
     <insert id="insertQuestion" parameterType="qna">
+    <![CDATA[
         INSERT INTO QUESTION (QUESTION_TITLE, QUESTION_CONTENT, USER_ID, ASKED_DATE) 
         VALUES (#{question_title}, #{question_content}, #{user_id}, SYSDATE())
+    ]]>
     </insert>
     
     <update id="updateQuestion" parameterType="qna">
+    <![CDATA[
 	    UPDATE QUESTION
 	    SET 
 	        QUESTION_CONTENT = #{question_content}
 	    WHERE QUESTION_ID = #{question_id}
+   	]]>
 	</update>
     
     <insert id="insertAnswer" parameterType="qna">
+    <![CDATA[
         INSERT INTO ANSWER (question_id, user_id, answer_content, answer_date)
         VALUES (#{question_id}, #{user_id}, #{answer_content}, NOW())
+    ]]>
     </insert>
     
     <update id="updateAnswer" parameterType="qna">
+    <![CDATA[
         INSERT INTO ANSWER (question_id, user_id, answer_content, answer_date)
         VALUES (#{question_id}, #{user_id}, #{answer_content}, NOW())
+    ]]>
     </update>
     
     

@@ -39,7 +39,11 @@ public class QnaServiceImpl implements QnaService{
     }
 
     @Override
-    public List<Qna> getQuestionList(int user_id) {
-        return qnaRepository.findList(user_id);
+    public List<Qna> getQuestionListByUser(int user_id) {
+        return qnaRepository.findListByUser(user_id);
+    }
+    @Override
+    public List<Qna> getQuestionListByAdmin() {
+        return qnaRepository.findListByAdmin();
     }
 }

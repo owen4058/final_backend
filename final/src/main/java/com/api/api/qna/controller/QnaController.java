@@ -16,6 +16,7 @@ public interface QnaController {
 	public ResponseEntity<Qna> createAnswer(Qna qna);
 	public ResponseEntity<Qna> updateAnswer(Qna qna);
 	public ResponseEntity<Qna> getQuestionDetails(int question_id);
-	public ResponseEntity<List<Qna>> getQuestionList(int user_id);
+	public ResponseEntity<List<Qna>> getQuestionListByUser(int user_id);
+	public ResponseEntity<List<Qna>> getQuestionListByAdmin();
 
 }

@@ -41,8 +41,13 @@ public class QnaRepositoryImpl implements QnaRepository {
     }
 
     @Override
-    public List<Qna> findList(int user_id) {
-        return sqlSession.selectList("mapper.qna.selectQuestionList", user_id);
+    public List<Qna> findListByUser(int user_id) {
+        return sqlSession.selectList("mapper.qna.selectQuestionListByUser", user_id);
+    }
+    
+    @Override
+    public List<Qna> findListByAdmin() {
+        return sqlSession.selectList("mapper.qna.selectQuestionListByAdmin");
     }
 	
 	

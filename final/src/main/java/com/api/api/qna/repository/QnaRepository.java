@@ -12,5 +12,6 @@ public interface QnaRepository {
 	public int saveAnswer(Qna qna) throws DataAccessException;
 	public int editAnswer(Qna qna) throws DataAccessException;
     public Qna findDetail(int question_id) throws DataAccessException;
-    public List<Qna> findList(int user_id) throws DataAccessException;
+    public List<Qna> findListByUser(int user_id) throws DataAccessException;
+    public List<Qna> findListByAdmin() throws DataAccessException;
 }

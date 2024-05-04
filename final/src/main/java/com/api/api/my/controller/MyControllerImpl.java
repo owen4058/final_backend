@@ -54,7 +54,7 @@ public class MyControllerImpl implements MyController {
             return ResponseEntity.notFound().build();
         }
 	}
-	@RequestMapping(value = "/profile/save_board", produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	@RequestMapping(value = "/profile/saved_board", produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	@Override
 	public ResponseEntity<List<BoardForm>> getSaveMyBoardlist(@RequestParam int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
 		System.out.println("getSavedMyBoardList controller");
