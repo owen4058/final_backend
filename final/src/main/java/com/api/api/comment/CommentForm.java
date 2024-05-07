@@ -23,6 +23,7 @@ public class CommentForm {
 	int comment_like;
 	int recomment_count;
 	int comment_like_state;
+	int comment_state;
 	Date create_date;
 
 }
