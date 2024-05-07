@@ -24,6 +24,7 @@
 	)
 	]]>
   </insert>
+  
   <select id="form_admin_list"  resultType="forumadmin" parameterType="forumadmin" >
 	<![CDATA[
 	select * from forums order by forum_id
@@ -36,5 +37,38 @@
 	from forums
 	where forum_id = #{forum_id}
 	]]>
-  </delete>  
+  </delete>
+  
+  <!--  섹션 관련  -->
+  <insert id="section_admin_create"  parameterType="sectionadmin" >
+	<![CDATA[
+	insert into forum_section(
+	forum_id,
+	section_id,
+	section_name,
+	create_date
+	)values(
+	#{forum_id}
+	,AAA.NEXTVAL
+	,#{section_name}
+	,sysdate
+	)
+	]]>
+  </insert>
+  
+   <select id="section_admin_list"  resultType="sectionadmin" parameterType="sectionadmin" >
+	<![CDATA[
+	select * from forum_section order by section_id
+	]]>
+  </select>
+  
+  <delete id="section_admin_delete" parameterType="int" >
+	<![CDATA[
+	delete 
+	from forum_section
+	where section_id = #{section_id}
+	]]>
+  </delete>
+  
+    
 </mapper>

@@ -23,6 +23,7 @@
         <typeAlias type="com.api.api.leftsidebar.UserForumForm"  alias="userforumform"/>
         
         <typeAlias type="com.api.api.admin.ForumAdmin"  alias="forumadmin"/>
+        <typeAlias type="com.api.api.admin.SectionAdmin"  alias="sectionadmin"/>
         
         <typeAlias type="com.api.api.comment.CommentForm"  alias="commentform"/>
         <typeAlias type="com.api.api.comment.CommentUpdateForm"  alias="commentupdateform"/>

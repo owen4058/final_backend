@@ -1,7 +1,6 @@
 package com.api.api.board.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.board.BoardCreateForm;
-import com.api.api.board.BoardDetailForm;
 import com.api.api.board.BoardForm;
 import com.api.api.board.BoardImg;
 import com.api.api.board.BoardLike;
