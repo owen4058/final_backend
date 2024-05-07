@@ -138,7 +138,7 @@
                ELSE 0
             END AS forum_following_state
          ,CASE 
-               WHEN j.user_id  IS NOT NULL THEN 1
+               WHEN j.CMT_LIKE_UD  IS NOT NULL THEN j.CMT_LIKE_UD
                ELSE 0
             END AS comment_like_state
 		from board a
