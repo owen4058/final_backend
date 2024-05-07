@@ -31,7 +31,7 @@
 	select a.*
 		,b.* 
 		,CASE 
-		WHEN j.user_id  IS NOT NULL THEN 1
+		WHEN j.cmt_like_ud  IS NOT NULL THEN j.cmt_like_ud
 		ELSE 0
 		END AS comment_like_state
 	from COMMENTS a
