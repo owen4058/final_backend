@@ -1,11 +1,9 @@
 package com.api.api.qna;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.api.api.forum.SectionForm;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.admin.ForumAdmin;
+import com.api.api.admin.SectionAdmin;
 import com.api.api.admin.service.AdminService;
 
 @Controller("adminController")
@@ -53,6 +55,28 @@ public class AdminControllerImpl implements AdminController{
 			@RequestParam Integer forum_id
 			) throws Exception {
 		return new ResponseEntity<List<ForumAdmin>>(adminservice.adminforumdelete(forum_id), HttpStatus.OK);
+	}
+
+	@Override
+	@RequestMapping(value = "/Manage_section" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	public ResponseEntity<?> adminsectioncreate(
+			@RequestBody SectionAdmin sectionAdmin
+			) throws Exception {
+		return new ResponseEntity<>(adminservice.adminsectioncreate(sectionAdmin),HttpStatus.OK);
+	}
+
+	@Override
+	@RequestMapping(value = "/Manage_section" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	public ResponseEntity<?> adminsectionlist() throws Exception {
+		return  new ResponseEntity<>(adminservice.adminsectionlist(),HttpStatus.OK);
+	}
+
+	@Override
+	@RequestMapping(value = "/Manage_section" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
+	public ResponseEntity<?> adminsectiondelete(
+			@RequestParam Integer section_id
+			) throws Exception {
+		return  new ResponseEntity<>(adminservice.adminsectiondelete(section_id),HttpStatus.OK);
 	}
 	
 

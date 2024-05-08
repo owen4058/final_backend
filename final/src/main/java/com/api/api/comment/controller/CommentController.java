@@ -12,12 +12,12 @@ import com.api.api.comment.CommentUpdateForm;
 
 public interface CommentController {
 	
-	public ResponseEntity<List<?>> commentinsert(
+	public ResponseEntity<List<CommentForm>> commentinsert(
 			CommentForm commentform
 			)
 			throws Exception;
-	public ResponseEntity<?> commentlist() throws Exception;
-	public ResponseEntity<?> recomment(int comment_id) throws Exception;
+	public ResponseEntity<List<CommentForm>> commentlist() throws Exception;
+	public ResponseEntity<?> recomment(int comment_id, int user_id) throws Exception;
 	public ResponseEntity<?> commentupdate(CommentUpdateForm commentUpdateForm) throws Exception;
 	public ResponseEntity<?> commentdelete(int comment_id,int board_id , int pa_comment_id) throws Exception;
 	public ResponseEntity<?> commentlike(CommentLike commentLike) throws Exception;

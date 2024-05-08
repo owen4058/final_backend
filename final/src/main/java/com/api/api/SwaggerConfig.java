@@ -2,44 +2,37 @@ package com.api.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.ResponseMessage;
-import springfox.documentation.service.VendorExtension;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.ArrayList;
 
 @Configuration
 @EnableWebMvc
 @EnableSwagger2
 public class SwaggerConfig {
 	
-	private static final String API_NAME = "API ¸í¼¼";
+	private static final String API_NAME = "API ï¿½ï¿½";
     private static final String API_VERSION = "0.0.1";
-    private static final String API_DESCRIPTION = "API ¸í¼¼¼­ÀÔ´Ï´Ù.";
+    private static final String API_DESCRIPTION = "API ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.";
     
-	@Bean // ÇÊ¼öÇ×¸ñ
+	@Bean // ï¿½Ê¼ï¿½ï¿½×¸ï¿½
 	public Docket customImplementation() {
 		return new Docket(DocumentationType.SWAGGER_2)
 	                .apiInfo(apiInfo())
-	                .select()                   // return ApiSelectoorBuilder(È­¸é °ü¸®)
-	                .apis(RequestHandlerSelectors.basePackage("com")) // Swagger¸¦ Àû¿ëÇÒ ÆÐÅ°Áö
-	                .paths(PathSelectors.any()) // url path ÁöÁ¤(¿¹¸¦µé¸é PathSelectors.ant("/home/**")ÀÎ °æ¿ì /home/ path¸¦ °¡Áø url¸¸ °ø°³ÇÏ°Ú´Ù´Â ÀÇ¹Ì. anyÀÎ °æ¿ì ÀüÃ¼ url
+	                .select()                   // return ApiSelectoorBuilder(È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+	                .apis(RequestHandlerSelectors.basePackage("com")) // Swaggerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½
+	                .paths(PathSelectors.any()) // url path ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PathSelectors.ant("/home/**")ï¿½ï¿½ ï¿½ï¿½ï¿½ /home/ pathï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú´Ù´ï¿½ ï¿½Ç¹ï¿½. anyï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ url
 	                .build();                   // selector build
 	    }
 	
-	//**apiInfo()** ¸Þ¼­µå¿¡¼­´Â API ¹®¼­ÀÇ Á¦¸ñ, ¹öÀü, ¼³¸í µîÀ» ¼³Á¤ÇÑ ÈÄ **ApiInfo** °´Ã¼¸¦ ¹ÝÈ¯ÇÔ. ÀÌ ¼³Á¤Àº Swagger UI¸¦ ÅëÇØ API ¹®¼­¸¦ »ý¼ºÇÏ°í Ç¥½ÃÇÏ´Â µ¥ »ç¿ëµÊ
+	//**apiInfo()** ï¿½Þ¼ï¿½ï¿½å¿¡ï¿½ï¿½ï¿½ï¿½ API ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ **ApiInfo** ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Swagger UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ API ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ Ç¥ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title(API_NAME)

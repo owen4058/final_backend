@@ -1,7 +1,6 @@
 package com.api.api.board.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +10,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +29,7 @@ import com.api.api.board.Hashtag;
 import com.api.api.board.service.BoardService;
 
 
-@RestController("boardController")
+@Controller("boardController")
 public class BoardControllerImpl implements BoardController{
 	
 	@Autowired
@@ -80,7 +80,6 @@ public class BoardControllerImpl implements BoardController{
 			if (files != null) {
 				for (MultipartFile multipart : files) {
 					if (!multipart.isEmpty()) {
-						System.out.println("������ "+ multipart.getOriginalFilename());
 						String filename = System.currentTimeMillis()+"_"+multipart.getOriginalFilename();
 						FileUtils.copyInputStreamToFile(multipart.getInputStream(), new File(filepath, filename));
 						BoardImg boardImg = new BoardImg();
@@ -105,18 +104,18 @@ public class BoardControllerImpl implements BoardController{
 
 	@Override
 	@RequestMapping(value = "/board_detail" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
-	public ResponseEntity<?> boarddetail(
+	public ResponseEntity<List<BoardDetailForm>> boarddetail(
 			@RequestParam Integer board_id
 			, @RequestParam Integer user_id) throws Exception {
 		Map<String, Object> board_info = new HashMap<String, Object>();
 		board_info.put("board_id", board_id);
 		board_info.put("user_id", user_id);
-		return new ResponseEntity<List<?>>(boardService.boarddetail(board_info), HttpStatus.OK);
+		return new ResponseEntity<List<BoardDetailForm>>(boardService.boarddetail(board_info), HttpStatus.OK);
 	}
 	
 	@Override
 	@RequestMapping(value = "/board_detail" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
-	public ResponseEntity<?> boarddelete(
+	public ResponseEntity<Integer> boarddelete(
 			@RequestParam Integer board_id
 			) throws Exception {
 		return new ResponseEntity<Integer>(boardService.boarddelete(board_id), HttpStatus.OK);
@@ -124,15 +123,25 @@ public class BoardControllerImpl implements BoardController{
 	
 	@Override
 	@RequestMapping(value = "/board_like" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity<?> boardlike(
+	public ResponseEntity<String> boardlike(
 			@RequestBody BoardLike board
 			) throws Exception {
-		return new ResponseEntity<Integer>(boardService.boardlike(board), HttpStatus.OK);
+		int result =  boardService.boardlike(board);
+		
+		if (result == 1) {
+			return new ResponseEntity<String>("정상입력 됐습니다.", HttpStatus.OK);
+		}else if (result == 2) {
+			return new ResponseEntity<String>("싫어요는 두번 이상 불가능합니다.", HttpStatus.BAD_REQUEST);
+		}else if (result == 3) {
+			return new ResponseEntity<String>("입력오류입니다.", HttpStatus.BAD_REQUEST);
+		}else {
+			return new ResponseEntity<String>("좋아요는 두번 이상 불가능합니다.", HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@Override
 	@RequestMapping(value = "/board_save" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity<?> boardsave(
+	public ResponseEntity<Integer> boardsave(
 			@RequestBody BoardSave board
 			) throws Exception {
 		return new ResponseEntity<Integer>(boardService.boardsave(board), HttpStatus.OK);

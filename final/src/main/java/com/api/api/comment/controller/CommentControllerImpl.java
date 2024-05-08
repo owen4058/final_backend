@@ -2,7 +2,9 @@ package com.api.api.comment.controller;
 
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,42 +28,48 @@ public class CommentControllerImpl implements CommentController{
 	
 	@Override
 	@RequestMapping(value = "/board_comment" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity<List<?>> commentinsert(
+	public ResponseEntity<List<CommentForm>> commentinsert(
 			@RequestBody CommentForm commentform
 			) throws Exception {
 //		Integer Pa_comment_id = commentform.getPa_comment_id();
 //		if (Pa_comment_id == null) {
 //			return new ResponseEntity<List<?>>(commentService.commentinsert(commentform), HttpStatus.OK);
 //		}
-		return new ResponseEntity<List<?>>(commentService.commentinsert(commentform), HttpStatus.OK);
+		return new ResponseEntity<List<CommentForm>>(commentService.commentinsert(commentform), HttpStatus.OK);
 	}
 	
 	@Override
 	@RequestMapping(value = "/board_comment" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
-	public ResponseEntity<List<?>> commentlist() throws Exception {
+	public ResponseEntity<List<CommentForm>> commentlist() throws Exception {
 		
-		return new ResponseEntity<List<?>>(commentService.commentlist(), HttpStatus.OK);
+		return new ResponseEntity<List<CommentForm>>(commentService.commentlist(), HttpStatus.OK);
 	}
 	
 	@Override
 	@RequestMapping(value = "/recomment" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
-	public ResponseEntity<?> recomment(
+	public ResponseEntity<List<CommentForm>> recomment(
 			@RequestParam int comment_id
+			,@RequestParam int user_id
 			) throws Exception {
+		Map<String, Object> commentinfo = new HashMap<>();
+		commentinfo.put("comment_id", comment_id);
+		commentinfo.put("user_id", user_id);
 		
-		return new ResponseEntity<List<?>>(commentService.recomment(comment_id), HttpStatus.OK);
+		return new ResponseEntity<List<CommentForm>>(commentService.recomment(commentinfo), HttpStatus.OK);
 	}
+	
 	@Override
 	@RequestMapping(value = "/board_comment" ,produces = "application/json; charset=utf8", method = RequestMethod.PUT)
-	public ResponseEntity<?> commentupdate(
+	public ResponseEntity<Integer> commentupdate(
 			@RequestBody CommentUpdateForm commentUpdateForm
 			) throws Exception {
 		
 		return new ResponseEntity<Integer>(commentService.commentupdate(commentUpdateForm), HttpStatus.OK);
 	}
+	
 	@Override
 	@RequestMapping(value = "/board_comment" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
-	public ResponseEntity<?> commentdelete(
+	public ResponseEntity<Integer> commentdelete(
 			@RequestParam int comment_id
 			,@RequestParam int board_id
 			,@RequestParam(required = false) int pa_comment_id
@@ -73,12 +81,20 @@ public class CommentControllerImpl implements CommentController{
 	
 	@Override
 	@RequestMapping(value = "/comment_like" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity<?> commentlike(
+	public ResponseEntity<String> commentlike(
 			@RequestBody CommentLike commentLike
 			) throws Exception {
+		int result = commentService.commentlike(commentLike);
 		
-
-		return new ResponseEntity<Integer>(commentService.commentlike(commentLike), HttpStatus.OK);
+		if (result == 1) {
+			return new ResponseEntity<String>("정상입력 됐습니다.", HttpStatus.OK);
+		}else if (result == 2) {
+			return new ResponseEntity<String>("싫어요는 두번 이상 불가능합니다.", HttpStatus.BAD_REQUEST);
+		}else if (result == 3) {
+			return new ResponseEntity<String>("입력오류입니다.", HttpStatus.BAD_REQUEST);
+		}else {
+			return new ResponseEntity<String>("좋아요는 두번 이상 불가능합니다.", HttpStatus.BAD_REQUEST);
+		}
 	}
 
 

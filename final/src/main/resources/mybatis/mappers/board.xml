@@ -110,6 +110,7 @@
 				<result property="comment_like" column="comment_like"/>
 				<result property="recomment_count" column="recomment_count"/>
 				<result property="comment_like_state" column="comment_like_state"/>
+				<result property="comment_state" column="comment_state"/>
 				<result property="create_date" column="create_date"/>
 			</collection>
 	</resultMap>    
@@ -137,19 +138,19 @@
                ELSE 0
             END AS forum_following_state
          ,CASE 
-               WHEN j.user_id  IS NOT NULL THEN 1
+               WHEN j.CMT_LIKE_UD  IS NOT NULL THEN j.CMT_LIKE_UD
                ELSE 0
             END AS comment_like_state
 		from board a
 		left outer join users b on a.user_id = b.user_id 
-		left outer join comments c on a.board_id = c.board_id
+		left outer join comments c on a.board_id = c.board_id and c.pa_comment_id = 0
 		left outer join forums d on a.forum_id = d.forum_id
 		left outer join forum_section e on a.section_id = e.section_id
 		left outer join hashtag f on a.board_id = f.board_id
 		left outer join img g on a.board_id = g.board_id
 		left outer join	board_like h ON a.board_id = h.board_id and h.user_id = #{user_id}
         left outer join	board_save i ON a.board_id = i.board_id and i.user_id = #{user_id}
-        left outer join	comment_like j ON c.comment_id =j.comment_id and j.user_id = #{user_id}
+        left outer join	comment_like j ON c.comment_id = j.comment_id and j.user_id = #{user_id} 
         left outer join	user_forums k ON d.forum_id =k.forum_id and k.user_id = #{user_id}
 		where a.board_id = #{board_id} 
 		]]>
@@ -314,6 +315,26 @@
 		 
 	</insert>
 	
+	
+	
+	<!-- 게시글 좋아요 관련 -->
+	
+	<delete id="boardlikedelete"  parameterType="int">
+	<![CDATA[
+	delete 
+	from board_like		
+	WHERE board_id = #{board_id}
+	]]>
+	</delete>
+	
+	<delete id="boardlikedeletechoice"  parameterType="boardlike">
+	<![CDATA[
+	delete 
+	from board_like		
+	WHERE board_id = #{board_id} and user_id = #{user_id}
+	]]>
+	</delete>
+	
 	<insert id="boardlikeinsert"  parameterType="boardlike">
 		 insert into board_like(
 		 board_id,
@@ -337,6 +358,57 @@
 		 
 	</update>
 	
+	<update id="boardlikeplcount"  parameterType="boardlike">
+		UPDATE board	
+		SET like_count = like_count + 1
+		WHERE board_id = #{board_id}
+		 
+	</update>
+	
+	<update id="boardlikepcount2"  parameterType="boardlike">
+		UPDATE board	
+		SET like_count = like_count + 2 
+		WHERE board_id = #{board_id}
+		 
+	</update>
+	
+	<update id="boardlikedscount"  parameterType="boardlike">
+		UPDATE board	
+		SET like_count = like_count - 1
+		WHERE board_id = #{board_id}
+		 
+	</update>
+	
+	<update id="boardlikedscount2"  parameterType="boardlike">
+		UPDATE board	
+		SET like_count = like_count - 2
+		WHERE board_id = #{board_id}
+		 
+	</update>
+	
+	<select id="boardlikecheck"  resultType = "boardlike" parameterType="boardlike">
+	<![CDATA[
+	select * from board_like where board_id = #{board_id} and user_id = #{user_id}
+	]]>
+	</select>
+	
+	
+	
+	<update id="boardlikesetmi"  parameterType="boardlike">
+		UPDATE board_like	
+		SET like_ud = -1
+		WHERE board_id = #{board_id} and user_id = #{user_id}
+		 
+	</update>
+	
+	<update id="boardlikesetpl"  parameterType="boardlike">
+		UPDATE board_like	
+		SET like_ud = +1
+		WHERE board_id = #{board_id} and user_id = #{user_id}
+		 
+	</update>
+	
+	<!--  -->
 	<insert id="boardsaveinsert"  parameterType="boardsave">
 		 insert into board_save(
 		 board_id,
@@ -391,13 +463,7 @@
 	WHERE board_id = #{board_id}
 	]]>
 	</delete>
-	<delete id="boardlikedelete"  parameterType="int">
-	<![CDATA[
-	delete 
-	from board_like		
-	WHERE board_id = #{board_id}
-	]]>
-	</delete>
+	
 	<delete id="boarddelete"  parameterType="int">
 	<![CDATA[
 	delete 
@@ -429,6 +495,8 @@
 	select * from img where board_id = #{board_id} 
 	]]>
 	</select>
+	
+	
 	
   
 </mapper>
