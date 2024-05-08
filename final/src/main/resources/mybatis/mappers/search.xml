@@ -123,10 +123,10 @@
 			c.*,
 			d.pro_path,
 			d.nickname,
+            f.*,
 			e.*,
-			f.*,
 			CASE 
-               WHEN g.user_id  IS NOT NULL THEN 1
+               WHEN g.like_ud  IS NOT NULL THEN g.like_ud
                ELSE 0
             END AS board_like_state,
             CASE 
@@ -136,23 +136,24 @@
 		FROM 
 			(
 			SELECT 
-				ROWNUM AS RNUM, 
-				A.* 
+				A.*,
+                ROWNUM AS RNUM
+				
 			FROM 
 				(
 				SELECT 
-					* 
+					i.*
 				FROM 
-					board i
-					LEFT OUTER JOIN	hashtag u ON i.board_id = u.board_id on lower(HASHTAG_NAME) like '%'||#{search}||'%'					
-					where lower(content) like '%'||#{search}||'%' 
-					ORDER BY board_id DESC
+					board i	
+                    LEFT OUTER JOIN	hashtag u ON i.board_id = u.board_id  
+					where lower(i.content) like '%'||#{search}||'%' or lower(u.hashtag_name) like '%'||#{search}||'%'
+					ORDER BY i.board_id DESC
 				) A 
 				WHERE ROWNUM <= #{page} * 5
 			) c 
 			LEFT OUTER JOIN	USERS d	ON	c.user_id = d.user_id
 			LEFT OUTER JOIN img e ON c.board_id = e.board_id
-        	LEFT OUTER JOIN	hashtag f ON c.board_id = f.board_id
+            LEFT OUTER JOIN	hashtag f ON c.board_id = f.board_id
         	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
         WHERE RNUM > (#{page}-1) * 5

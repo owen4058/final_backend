@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.api.board.BoardForm;
 import com.api.api.forum.ForumForm;
 import com.api.api.search.repository.copy.SearchRepository;
 
@@ -22,8 +23,13 @@ public class SearchServiceImpl implements SearchService{
 	}
 
 	@Override
-	public List<ForumForm> searchboardtitle(Map<String, Object> searchinfo) {
+	public List<BoardForm> searchboardtitle(Map<String, Object> searchinfo) {
 		return searchRepository.searchboardtitle(searchinfo);
+	}
+
+	@Override
+	public List<BoardForm> searchboardcontent(Map<String, Object> searchinfo) {
+		return searchRepository.searchboardcontent(searchinfo);
 	}
 
 }

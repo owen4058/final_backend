@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.api.api.board.BoardForm;
 import com.api.api.forum.ForumForm;
 import com.api.api.search.service.copy.SearchService;
 
@@ -40,7 +41,7 @@ public class SearchControllerImpl implements SearchController{
 
 	@Override
 	@RequestMapping(value = "/search_title" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
-	public ResponseEntity<List<ForumForm>> searchboardtitle(
+	public ResponseEntity<List<BoardForm>> searchboardtitle(
 			@RequestParam String search_title
 			,@RequestParam Integer user_id
 			,@RequestParam(defaultValue = "1") Integer page
@@ -50,7 +51,21 @@ public class SearchControllerImpl implements SearchController{
 		searchinfo.put("user_id", user_id);
 		searchinfo.put("page", page);
 		
-		return new ResponseEntity<List<ForumForm>>(searchService.searchboardtitle(searchinfo), HttpStatus.OK);
+		return new ResponseEntity<List<BoardForm>>(searchService.searchboardtitle(searchinfo), HttpStatus.OK);
+	}
+	@Override
+	@RequestMapping(value = "/search_content" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	public ResponseEntity<List<BoardForm>> searchboardcontent(
+			@RequestParam String search_content
+			,@RequestParam Integer user_id
+			,@RequestParam(defaultValue = "1") Integer page
+			) throws Exception {
+		Map<String, Object> searchinfo = new HashMap<>();
+		searchinfo.put("search", search_content.toLowerCase());
+		searchinfo.put("user_id", user_id);
+		searchinfo.put("page", page);
+		
+		return new ResponseEntity<List<BoardForm>>(searchService.searchboardcontent(searchinfo), HttpStatus.OK);
 	}
 
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.api.api.board.BoardForm;
 import com.api.api.forum.ForumForm;
 
 
@@ -22,8 +23,12 @@ public class SearchRepositoryImpl implements SearchRepository{
 	}
 	
 	@Override
-	public List<ForumForm> searchboardtitle(Map<String, Object> searchinfo) {
+	public List<BoardForm> searchboardtitle(Map<String, Object> searchinfo) {
 		return sqlSession.selectList("mapper.search.boardtitle", searchinfo);
+	}
+	@Override
+	public List<BoardForm> searchboardcontent(Map<String, Object> searchinfo) {
+		return sqlSession.selectList("mapper.search.boardcontent", searchinfo);
 	}
 
 

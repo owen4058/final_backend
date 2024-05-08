@@ -204,7 +204,7 @@
 			e.*,
 			f.*,
 			CASE 
-               WHEN g.user_id  IS NOT NULL THEN 1
+               WHEN g.LIKE_UD  IS NOT NULL THEN g.LIKE_UD
                ELSE 0
             END AS board_like_state,
             CASE 
