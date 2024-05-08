@@ -29,6 +29,7 @@
         <typeAlias type="com.api.api.comment.CommentLike"  alias="commentlike"/>
         
         <typeAlias type="com.api.api.qna.Qna"  alias="qna"/>
+        <typeAlias type="com.api.api.save.Save"  alias="save"/>
         
 	</typeAliases>
 </configuration>

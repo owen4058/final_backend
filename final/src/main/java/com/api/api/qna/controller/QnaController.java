@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.api.api.qna.Qna;
 
 public interface QnaController {
-	public ResponseEntity<Qna> createQuestion(Qna qna);
-	public ResponseEntity<Qna> updateQuestion(Qna qna);
-	public ResponseEntity<Qna> createAnswer(Qna qna);
-	public ResponseEntity<Qna> updateAnswer(Qna qna);
-	public ResponseEntity<Qna> getQuestionDetails(int question_id);
-	public ResponseEntity<List<Qna>> getQuestionListByUser(int user_id);
-	public ResponseEntity<List<Qna>> getQuestionListByAdmin();
-
+	public ResponseEntity<Qna> createQuestion(Qna qna) throws Exception;
+	public ResponseEntity<Qna> updateQuestion(Qna qna) throws Exception;
+	public ResponseEntity<Qna> createAnswer(Qna qna) throws Exception;
+	public ResponseEntity<Qna> updateAnswer(Qna qna) throws Exception;
+	public ResponseEntity<Qna> getQuestionDetails(int question_id) throws Exception;
+	public ResponseEntity<List<Qna>> getQuestionListByUser(int user_id) throws Exception;
+	public ResponseEntity<List<Qna>> getQuestionListByAdmin() throws Exception;
+	
 }
