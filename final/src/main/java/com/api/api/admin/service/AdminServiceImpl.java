@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.api.api.admin.ForumAdmin;
 import com.api.api.admin.SectionAdmin;
 import com.api.api.admin.repository.AdminRepository;
+import com.api.api.member.Member;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService{
@@ -62,6 +63,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ForumAdmin adminforumcheck(ForumAdmin forumAdmin) {
 		return adminRepository.adminforumcheck(forumAdmin);
+	}
+
+	@Override
+	public List<Member> deletememberlist() {
+		return adminRepository.deletememberlist();
+	}
+
+	@Override
+	public int recovermember(int user_id) {
+		return adminRepository.recovermember(user_id);
 	}
 
 

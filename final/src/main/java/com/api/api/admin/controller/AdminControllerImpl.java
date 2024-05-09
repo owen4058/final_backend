@@ -121,4 +121,18 @@ public class AdminControllerImpl implements AdminController{
 		return  new ResponseEntity<Integer>(adminservice.adminforumedit(forum), HttpStatus.OK);
 	}
 
+	@Override
+	@RequestMapping(value = "/Recover_member" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	public ResponseEntity<?> recovermember(
+			@RequestParam Integer user_id
+			) throws Exception {
+		return new ResponseEntity<>(adminservice.recovermember(user_id), HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleted_member" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	public ResponseEntity<?> deletememberlist() throws Exception {
+		return new ResponseEntity<>(adminservice.deletememberlist(),HttpStatus.OK);
+	}
+
 }

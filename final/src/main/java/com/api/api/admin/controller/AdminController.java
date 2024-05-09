@@ -3,7 +3,6 @@ package com.api.api.admin.controller;
 
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.admin.ForumAdmin;
@@ -38,5 +37,9 @@ public interface AdminController {
 			ForumAdmin forumAdmin
 			, MultipartFile file
 			) throws Exception;
-
+	
+	public ResponseEntity<?> recovermember(
+			 Integer section_id
+			) throws Exception;
+	public ResponseEntity<?> deletememberlist() throws Exception;
 }

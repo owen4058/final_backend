@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.api.api.admin.ForumAdmin;
 import com.api.api.admin.SectionAdmin;
+import com.api.api.member.Member;
 
 @Repository("adminRepository")
 public class AdminRepositoryImpl implements AdminRepository{
@@ -51,6 +52,14 @@ public class AdminRepositoryImpl implements AdminRepository{
 	@Override
 	public ForumAdmin adminforumcheck(ForumAdmin forumAdmin) {
 		return sqlSession.selectOne("mapper.admin.form_logo_check",forumAdmin);
+	}
+	@Override
+	public List<Member> deletememberlist() {
+		return sqlSession.selectList("mapper.admin.delete_member_list");
+	}
+	@Override
+	public int recovermember(int user_id) {
+		return sqlSession.update("mapper.admin.recover_member",user_id);
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.api.api.admin.ForumAdmin;
 import com.api.api.admin.SectionAdmin;
+import com.api.api.member.Member;
 
 public interface AdminService {
 	public List<ForumAdmin> adminforumlist();
@@ -23,5 +24,9 @@ public interface AdminService {
 	public int adminforumedit(ForumAdmin forumAdmin);
 	
 	public ForumAdmin adminforumcheck(ForumAdmin forumAdmin);
+	
+	public List<Member> deletememberlist();
+	
+	public int recovermember(int user_id);
 
 }

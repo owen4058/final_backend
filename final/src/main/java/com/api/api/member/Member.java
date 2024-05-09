@@ -21,5 +21,6 @@ public class Member {
 	String pro_path; // 占쏙옙占쏙옙占쏙옙 占쏙옙占�
 	Date dateOfBirth;// 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
 	Date createdate; // 占쏙옙占쏙옙占쏙옙짜
+	int active_state;
 	
 }

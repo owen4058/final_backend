@@ -14,6 +14,7 @@
         <result property="pro_path" column="pro_path" />
         <result property="dateOfBirth" column="dateOfBirth" />
         <result property="createdate" column="createdate" />
+        <result property="active_state" column="active_state" />
         
 	</resultMap> 
 	

@@ -97,5 +97,21 @@
 	]]>
   </select>
   
+   <update id="recover_member"  parameterType="Int" >
+	<![CDATA[
+	update users 
+	set ACTIVE_STATE = 1
+	where user_id = #{user_id}
+	]]>
+  </update>
+  
+  <select id="delete_member_list"  resultType="member" parameterType="int" >
+	<![CDATA[
+	select * 
+	from users 
+	where ACTIVE_STATE = 0
+	]]>
+  </select>
+  
   
 </mapper>
