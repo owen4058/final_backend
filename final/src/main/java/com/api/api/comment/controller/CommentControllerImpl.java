@@ -51,6 +51,9 @@ public class CommentControllerImpl implements CommentController{
 			@RequestParam int comment_id
 			,@RequestParam int user_id
 			) throws Exception {
+		if (comment_id == 0) {
+			comment_id = -1;
+		}
 		Map<String, Object> commentinfo = new HashMap<>();
 		commentinfo.put("comment_id", comment_id);
 		commentinfo.put("user_id", user_id);
