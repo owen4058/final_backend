@@ -48,6 +48,21 @@ public class AdminServiceImpl implements AdminService{
 		adminRepository.adminsectiondelete(section_id);
 		return adminRepository.adminsectionlist();
 	}
+	
+	@Override
+	public int adminsectionedit(SectionAdmin sectionAdmin) {
+		return adminRepository.adminsectionedit(sectionAdmin);
+	}
+
+	@Override
+	public int adminforumedit(ForumAdmin forumAdmin) {
+		return adminRepository.adminforumedit(forumAdmin);
+	}
+
+	@Override
+	public ForumAdmin adminforumcheck(ForumAdmin forumAdmin) {
+		return adminRepository.adminforumcheck(forumAdmin);
+	}
 
 
 }

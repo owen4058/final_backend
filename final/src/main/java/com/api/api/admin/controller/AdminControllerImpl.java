@@ -80,4 +80,45 @@ public class AdminControllerImpl implements AdminController{
 	}
 	
 
+	@Override
+	@RequestMapping(value = "/Manage_section_edit" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	public ResponseEntity<Integer> adminsectionedit(
+			@RequestBody SectionAdmin sectionAdmin
+			) throws Exception {
+		return  new ResponseEntity<Integer>(adminservice.adminsectionedit(sectionAdmin),HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/Manage_Forum_edit" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	public ResponseEntity<Integer> adminforumedit(
+			@RequestPart(name = "forum") ForumAdmin forum
+			,@RequestPart(required = false ,name = "file") MultipartFile file
+			) throws Exception {
+		
+		String filepath = "c:\\imgs\\admin\\forum_logo"+File.separator+forum.getForum_name();
+		if (!file.isEmpty()) {
+			String filename = file.getOriginalFilename();
+			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
+			forum.setLogo_path(filepath+"/"+ filename);
+		}
+		
+		System.out.println("이상 무");
+		ForumAdmin vo = adminservice.adminforumcheck(forum);
+		String logo = vo.getLogo_path();
+		System.out.println("ddddd " + logo);
+		if (forum.getLogo_path() != null) {
+			if (logo != forum.getLogo_path()) {
+				//현재 게시판에 존재하는 파일객체를 만듬
+				File file2 = new File(logo);
+						
+				if(file2.exists()) { // 파일이 존재하면
+					file2.delete(); // 파일 삭제	
+				}
+			}
+		}
+		
+		
+		return  new ResponseEntity<Integer>(adminservice.adminforumedit(forum), HttpStatus.OK);
+	}
+
 }

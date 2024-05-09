@@ -6,7 +6,7 @@
 <mapper namespace="mapper.admin">
 	
 
-
+	<!--  포럼 관련  -->
 	<insert id="form_admin_create"  parameterType="forumadmin" >
 	<![CDATA[
 	insert into forums(
@@ -30,6 +30,7 @@
 	select * from forums order by forum_id
 	]]>
   </select>
+  
   
   <delete id="form_admin_delete" parameterType="int" >
 	<![CDATA[
@@ -62,6 +63,24 @@
 	]]>
   </select>
   
+  
+  
+  <update id="section_admin_edit"  parameterType="sectionadmin" >
+	<![CDATA[
+	update forum_section 
+	set section_name = #{section_name}, forum_id = #{forum_id}
+	where section_id = #{section_id}
+	]]>
+  </update>
+  
+   <update id="form_admin_edit"  parameterType="forumadmin" >
+	<![CDATA[
+	update forums 
+	set forum_name = #{forum_name}, forum_info = #{forum_info}, logo_path = #{logo_path}
+	where forum_id = #{forum_id}
+	]]>
+  </update>
+  
   <delete id="section_admin_delete" parameterType="int" >
 	<![CDATA[
 	delete 
@@ -70,5 +89,13 @@
 	]]>
   </delete>
   
-    
+  <select id="form_logo_check"  resultType="forumadmin" parameterType="forumadmin" >
+	<![CDATA[
+	select * 
+	from forums 
+	where forum_id = #{forum_id}
+	]]>
+  </select>
+  
+  
 </mapper>

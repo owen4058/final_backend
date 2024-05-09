@@ -13,6 +13,9 @@ public interface AdminRepository {
 	public List<SectionAdmin> adminsectionlist();
 	public int adminsectioncreate(SectionAdmin sectionAdmin);
 	public int adminsectiondelete(int section_id);
+	public int adminsectionedit(SectionAdmin sectionAdmin);
+	public int adminforumedit(ForumAdmin forumAdmin);
+	public ForumAdmin adminforumcheck(ForumAdmin forumAdmin);
 
 
 

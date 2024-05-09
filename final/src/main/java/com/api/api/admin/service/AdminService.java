@@ -18,4 +18,10 @@ public interface AdminService {
 	
 	public List<SectionAdmin> adminsectiondelete(int forum_id);
 
+	public int adminsectionedit(SectionAdmin sectionAdmin);
+	
+	public int adminforumedit(ForumAdmin forumAdmin);
+	
+	public ForumAdmin adminforumcheck(ForumAdmin forumAdmin);
+
 }
