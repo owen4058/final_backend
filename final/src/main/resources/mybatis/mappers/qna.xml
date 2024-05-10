@@ -73,8 +73,8 @@
     
     <insert id="insertQuestion" parameterType="qna">
     <![CDATA[
-        INSERT INTO QUESTION (QUESTION_TITLE, QUESTION_CONTENT, USER_ID, ASKED_DATE) 
-        VALUES (#{question_title}, #{question_content}, #{user_id}, SYSDATE())
+        INSERT INTO QUESTION (QUESTION_ID, QUESTION_TITLE, QUESTION_CONTENT, USER_ID, ASKED_DATE) 
+        VALUES (question_seq.NEXTVAL, #{question_title}, #{question_content}, #{user_id}, SYSDATE)
     ]]>
     </insert>
     
@@ -90,14 +90,14 @@
     <insert id="insertAnswer" parameterType="qna">
     <![CDATA[
         INSERT INTO ANSWER (question_id, user_id, answer_content, answer_date)
-        VALUES (#{question_id}, #{user_id}, #{answer_content}, NOW())
+        VALUES (#{question_id}, #{user_id}, #{answer_content}, SYSDATE)
     ]]>
     </insert>
     
     <update id="updateAnswer" parameterType="qna">
     <![CDATA[
         INSERT INTO ANSWER (question_id, user_id, answer_content, answer_date)
-        VALUES (#{question_id}, #{user_id}, #{answer_content}, NOW())
+        VALUES (#{question_id}, #{user_id}, #{answer_content}, SYSDATE)
     ]]>
     </update>
     

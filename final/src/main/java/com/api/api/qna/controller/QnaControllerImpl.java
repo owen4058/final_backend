@@ -19,6 +19,7 @@ import com.api.api.qna.service.QnaService;
 @Controller("qnaController")
 @RequestMapping("profile/qna")
 public class QnaControllerImpl implements QnaController {
+	
 	@Autowired
     private QnaService qnaService;
 
@@ -46,7 +47,7 @@ public class QnaControllerImpl implements QnaController {
 	}
 	
 	//get qna Detail(Answer O) in MyPage
-	@GetMapping("/detail/{question_id}")
+	@GetMapping("/detail")
 	@Override
 	public ResponseEntity<Qna> getQuestionDetails(@RequestParam int question_id) {
 		Qna qna = qnaService.getQuestionDetails(question_id);
@@ -55,13 +56,14 @@ public class QnaControllerImpl implements QnaController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
-	}
+	} 
 	
 	
 	//create qna
     @PostMapping("/detail")
     @Override
     public ResponseEntity<Qna> createQuestion(@RequestBody Qna qna) {
+    	System.out.println("createQuestion Controller, qna Data : " + qna);
         int result = qnaService.createQuestion(qna);
         if (result > 0) {
             return ResponseEntity.ok(qna);
