@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +42,18 @@ public class ProfileControllerImpl implements ProfileController{
             return ResponseEntity.ok(profile);
         } else {
             return ResponseEntity.notFound().build();
+        }
+	}
+	
+	@RequestMapping(value = "/profile", produces = "application/json; charset=utf8", method = RequestMethod.PUT)
+	@Override
+	public ResponseEntity<Boolean> checkNicknameAvailablity(@RequestBody String nickname, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+		System.out.println("checkNickname Controller");
+		boolean isAvailable = profileService.isNicknameAvailable(nickname);
+		if (isAvailable) {
+            return ResponseEntity.ok().body(isAvailable);
+        } else {
+            return ResponseEntity.badRequest().body(isAvailable);
         }
 	}
 	

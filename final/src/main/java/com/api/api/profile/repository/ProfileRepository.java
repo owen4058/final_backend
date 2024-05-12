@@ -11,4 +11,5 @@ public interface ProfileRepository {
 	public Profile selectProfile(int user_id) throws DataAccessException;
 	public int updateProfile(Profile profile) throws DataAccessException;
 	public List<BoardForm> selectMyBoardList(int user_id) throws DataAccessException;
+	public boolean findByNickname(String nickname) throws DataAccessException;
 }

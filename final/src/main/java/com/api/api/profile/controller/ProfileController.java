@@ -12,5 +12,6 @@ import com.api.api.profile.Profile;
 public interface ProfileController {
 	public ResponseEntity<Profile> getProfile(@RequestBody int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 	public ResponseEntity<Profile> updateProfile(@RequestBody int user_id, Profile profile, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
+	public ResponseEntity<Boolean> checkNicknameAvailablity(@RequestBody String nickname, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 
 }

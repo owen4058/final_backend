@@ -64,17 +64,22 @@
     </select>
 	
 	<update id="updateProfile" parameterType="profile">
-       	<![CDATA[
-	    UPDATE profile
+    	<![CDATA[
+	    UPDATE USERS
 	    SET 
 	        nickname = #{nickname},
 	        password = #{password},
 	        pro_path = #{pro_path},
 	    WHERE user_id = #{user_id}
-        ]]>
-	    
+       	]]>
 	</update>
-	
+	<select id="getNickname" parameterType="String">
+       	<![CDATA[
+       	SELECT nickname
+       	FROM USERS
+       	WHERE nickname=#{nickname}
+        ]]>
+	</select>
   
   </mapper>
   

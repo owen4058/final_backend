@@ -49,5 +49,10 @@ public class ProfileRepositoryImpl implements ProfileRepository {
         }
     }
 	
+	@Override
+	public boolean findByNickname(String nickname) throws DataAccessException {
+		return sqlSession.selectOne("mapper.profile.getNickname", nickname);
+	}
+	
 
 }
