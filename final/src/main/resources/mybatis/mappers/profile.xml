@@ -50,6 +50,7 @@
         SELECT
             u.user_id,
             u.nickname,
+            u.user_email,
             NVL(u.pro_path, '') AS pro_path,
             (SELECT COUNT(*) FROM USER_FOLLOW WHERE opponent_id = u.user_id) AS follower_count,
             (SELECT COUNT(*) FROM USER_FOLLOW WHERE user_id = u.user_id) AS following_count,
