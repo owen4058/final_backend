@@ -45,7 +45,7 @@ public class ProfileControllerImpl implements ProfileController{
         }
 	}
 	
-	@RequestMapping(value = "/profile", produces = "application/json; charset=utf8", method = RequestMethod.PUT)
+	@RequestMapping(value = "/profile/nickname", produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	@Override
 	public ResponseEntity<Boolean> checkNicknameAvailablity(@RequestBody String nickname, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 		System.out.println("checkNickname Controller");
