@@ -48,12 +48,13 @@ public class ProfileControllerImpl implements ProfileController{
 	@RequestMapping(value = "/profile/nickname", produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	@Override
 	public ResponseEntity<Boolean> checkNicknameAvailablity(@RequestParam String nickname, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-		System.out.println("checkNickname Controller");
+		System.out.println("checkNickname Controller " + nickname);
 		boolean isAvailable = profileService.isNicknameAvailable(nickname);
+		System.out.println("isAvailable " + isAvailable);
 		if (isAvailable) {
             return ResponseEntity.ok().body(isAvailable);
         } else {
-            return ResponseEntity.badRequest().body(isAvailable);
+            return ResponseEntity.ok().body(isAvailable);
         }
 	}
 	

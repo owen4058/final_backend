@@ -50,8 +50,14 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     }
 	
 	@Override
-	public int findByNickname(String nickname) throws DataAccessException {
-		return sqlSession.selectOne("mapper.profile.getNickname", nickname);
+	public String findByNickname(String nickname) throws DataAccessException {
+		try {
+			String result = sqlSession.selectOne("mapper.profile.getNickname", nickname);
+			System.out.println("result " + result);
+			return result;
+        } catch (Exception e) {
+            throw new DataAccessException("게시글 목록 조회 중 오류가 발생했습니다.", e) {};
+        }
 	}
 	
 
