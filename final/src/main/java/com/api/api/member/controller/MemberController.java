@@ -16,7 +16,13 @@ public interface MemberController {
 	public ResponseEntity<Integer> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)throws Exception;
 	public ResponseEntity<List<Member>> memberlist(int page, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
 			throws Exception;
-	public ResponseEntity<String> memberdleate(int user_id, HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) throws Exception;
+	public ResponseEntity<String> memberdleate(
+			int user_id
+			,HttpServletRequest httpServletRequest
+			,HttpServletResponse httpServletResponse
+			) throws Exception;
+	public ResponseEntity<String> logout(
+			HttpServletRequest request
+			) throws Exception;
 }
  

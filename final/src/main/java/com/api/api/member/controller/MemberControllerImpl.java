@@ -31,16 +31,13 @@ public class MemberControllerImpl implements MemberController{
 			HttpServletResponse httpServletResponse) throws Exception {
 		int vo = memberService.addmember(member);
 		if (vo!=1) {
-			return new ResponseEntity<>("È¸¿ø°¡ÀÔ ½ÇÆĞ", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("íšŒì›ê°€ì… ì‹¤íŒ¨", HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity<>("È¸¿ø°¡ÀÔ ¼º°ø",HttpStatus.OK);
+		return new ResponseEntity<>("íšŒì›ê°€ì… ì„±ê³µ",HttpStatus.OK);
 	}
 	
 	
-/*
- * ·Î±×ÀÎ±â´É jwt·Î ¼öÁ¤ÇÒ°Í	
- */
 	@RequestMapping(value = "/login" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	@Override
 	public ResponseEntity<Integer> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest,
@@ -57,6 +54,19 @@ public class MemberControllerImpl implements MemberController{
 		return new ResponseEntity<>(loginmember.getUser_id(),HttpStatus.OK);
 	}
 	
+	@Override
+	@RequestMapping(value = "/logout" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	public ResponseEntity<String> logout(
+			HttpServletRequest request
+			) throws Exception {
+		HttpSession session = request.getSession(false);	
+		 if (session != null) {
+	            session.invalidate();
+	        }
+		return new ResponseEntity<>("ë¡œê·¸ì•„ì›ƒ ì„±ê³µ", HttpStatus.OK);
+	}
+	
+	
 	@RequestMapping(value = "/admin/Manage_member" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	@Override
 	public ResponseEntity<List<Member>> memberlist(@RequestParam(defaultValue = "1") int page, HttpServletRequest httpServletRequest,
@@ -72,9 +82,9 @@ public class MemberControllerImpl implements MemberController{
 		;
 		
 		 if (memberService.memberdelate(user_id) == 0) {
-			 return new ResponseEntity<>("»èÁ¦ ½ÇÆĞ",HttpStatus.NOT_FOUND);
+			 return new ResponseEntity<>("íšŒì› ì‚­ì œ ì‹¤íŒ¨",HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>("»èÁ¦ ¼º°ø",HttpStatus.OK);
+		return new ResponseEntity<>("íšŒì› ì‚­ì œ ì„±ê³µ",HttpStatus.OK);
 	}
 
 }
