@@ -40,7 +40,7 @@ public class MemberControllerImpl implements MemberController{
 	
 	@RequestMapping(value = "/login" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	@Override
-	public ResponseEntity<Integer> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest,
+	public ResponseEntity<?> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
 		Member loginmember = memberService.login(loginform);
 		
@@ -51,7 +51,7 @@ public class MemberControllerImpl implements MemberController{
 		HttpSession session = httpServletRequest.getSession();
 		session.setAttribute("loginMember", loginmember);
 		
-		return new ResponseEntity<>(loginmember.getUser_id(),HttpStatus.OK);
+		return new ResponseEntity<>(loginmember,HttpStatus.OK);
 	}
 	
 	@Override
