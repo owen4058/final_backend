@@ -89,15 +89,15 @@
     
     <insert id="insertAnswer" parameterType="qna">
     <![CDATA[
-        INSERT INTO ANSWER (question_id, user_id, answer_content, answer_date)
-        VALUES (#{question_id}, #{user_id}, #{answer_content}, SYSDATE)
+        INSERT INTO ANSWER (question_id, answer_content, answer_date)
+        VALUES (#{question_id}, #{answer_content}, SYSDATE)
     ]]>
     </insert>
     
     <update id="updateAnswer" parameterType="qna">
     <![CDATA[
-        INSERT INTO ANSWER (question_id, user_id, answer_content, answer_date)
-        VALUES (#{question_id}, #{user_id}, #{answer_content}, SYSDATE)
+        INSERT INTO ANSWER (question_id, answer_content, answer_date)
+        VALUES (#{question_id}, #{answer_content}, SYSDATE)
     ]]>
     </update>
     
