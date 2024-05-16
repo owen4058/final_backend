@@ -34,8 +34,8 @@ public class ProfileServiceImpl implements ProfileService {
     
     @Override
     public boolean isNicknameAvailable(String nickname) throws DataAccessException {
-    	int updatedRows = profileRepository.findByNickname(nickname);
-    	if (updatedRows > 0) {
+    	String result = profileRepository.findByNickname(nickname);
+    	if (result == null) {
             return true;
         }
     	return false;

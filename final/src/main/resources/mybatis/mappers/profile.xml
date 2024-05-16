@@ -74,11 +74,11 @@
 	    WHERE user_id = #{user_id}
        	]]>
 	</update>
-	<select id="getNickname" parameterType="String">
+	<select id="getNickname" parameterType="String" resultType="java.lang.String">
        	<![CDATA[
        	SELECT nickname
        	FROM USERS
-       	WHERE nickname=#{nickname}
+       	WHERE nickname = #{nickname}
         ]]>
 	</select>
   
