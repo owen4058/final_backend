@@ -3,7 +3,6 @@ package com.api.api.admin.controller;
 import java.io.File;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +27,7 @@ public class AdminControllerImpl implements AdminController{
 	@Autowired
 	private AdminService adminservice;
 	
-	@Override
-	@RequestMapping(value = "/Manage_Forum" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity<List<ForumAdmin>> adminforumcreate(
-			@RequestPart(name = "forum") ForumAdmin forum
-			,@RequestPart(required = false ,name = "file") MultipartFile file
-			) throws Exception {
-		String filepath = "c:\\imgs\\admin\\forum_logo"+File.separator+forum.getForum_name();
-		if (!file.isEmpty()) {
-			String filename = file.getOriginalFilename();
-			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
-			forum.setLogo_path(filepath+"/"+ filename);
-		}
-		
-		return new ResponseEntity<List<ForumAdmin>>(adminservice.adminforumcreate(forum), HttpStatus.OK);
-	}
+	
 
 	@Override
 	@RequestMapping(value = "/Manage_Forum" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)

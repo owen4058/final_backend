@@ -2,7 +2,6 @@ package com.api.api.admin.controller;
 
 
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,11 +12,7 @@ import com.api.api.admin.SectionAdmin;
 
 public interface AdminController {
 	
-	public ResponseEntity<?> adminforumcreate(
-			ForumAdmin forumAdmin
-			, MultipartFile file
-			)
-			throws Exception;
+	
 	
 	public ResponseEntity<?> adminforumlist()
 			throws Exception;
