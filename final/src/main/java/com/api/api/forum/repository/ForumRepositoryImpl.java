@@ -17,8 +17,14 @@ public class ForumRepositoryImpl implements ForumRepository{
 	private SqlSession sqlSession;
 
 	@Override
-	public List<ForumForm> forumlist(Map<String, Object> data) {
-		return sqlSession.selectList("mapper.forum.form", data);
+	public List<ForumForm> forumselect(Map<String, Object> data) {
+		return sqlSession.selectList("mapper.forum.forumselect", data);
 	}
+	
+	@Override
+	public List<ForumForm> forumlist() {
+		return sqlSession.selectList("mapper.forum.formlist");
+	}
+
 
 }

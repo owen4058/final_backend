@@ -17,8 +17,13 @@ public class ForumServiceImpl implements ForumService{
 	private ForumRepository forumRepository;
 
 	@Override
-	public List<ForumForm> forumlist(Map<String, Object> data) {
-		return forumRepository.forumlist(data);
+	public List<ForumForm> forumselect(Map<String, Object> data) {
+		return forumRepository.forumselect(data);
+	}
+	
+	@Override
+	public List<ForumForm> forumlist() {
+		return forumRepository.forumlist();
 	}
 
 }

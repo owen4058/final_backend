@@ -18,7 +18,7 @@
 		</collection>
 	</resultMap>  
 
-	<select id="form"  resultMap="forumform" parameterType="Map" >
+	<select id="forumselect"  resultMap="forumform" parameterType="Map" >
 	<![CDATA[
 			SELECT a.*, b.*,
 			(SELECT COUNT(*) FROM user_forums WHERE forum_id = a.forum_id) as people,
@@ -31,7 +31,15 @@
 			ON a.forum_id = b.forum_id
 			where a.forum_id = #{forum_id}
 	]]>
-  </select> 
 	
+  </select> 
+	<select id="formlist"  resultMap="forumform" parameterType="Map" >
+	<![CDATA[
+			SELECT a.*, b.*
+			FROM forums a 
+			LEFT OUTER JOIN forum_section b 
+			ON a.forum_id = b.forum_id
+	]]>
+  </select> 
   
 </mapper>

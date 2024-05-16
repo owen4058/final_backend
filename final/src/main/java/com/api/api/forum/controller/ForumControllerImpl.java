@@ -26,7 +26,7 @@ public class ForumControllerImpl implements ForumController{
 	
 	@Override
 	@RequestMapping(value = "/forum_information" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
-	public ResponseEntity<List<ForumForm>> forumlist(
+	public ResponseEntity<List<ForumForm>> forumselect(
 			@RequestParam Integer forum_id,
 			@RequestParam Integer user_id,
 			HttpServletRequest httpServletRequest,
@@ -36,7 +36,16 @@ public class ForumControllerImpl implements ForumController{
 		data.put("forum_id", forum_id);
 		data.put("user_id", user_id);
 
-		List<ForumForm> vo = forumService.forumlist(data);
+		List<ForumForm> vo = forumService.forumselect(data);
+		
+		return new ResponseEntity<List<ForumForm>>(vo, HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/forum" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	public ResponseEntity<List<ForumForm>> forumlist() throws Exception {
+
+		List<ForumForm> vo = forumService.forumlist();
 		
 		return new ResponseEntity<List<ForumForm>>(vo, HttpStatus.OK);
 	}

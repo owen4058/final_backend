@@ -10,7 +10,8 @@ import org.springframework.http.ResponseEntity;
 import com.api.api.forum.ForumForm;
 
 public interface ForumController {
-	public ResponseEntity<List<ForumForm>> forumlist(Integer forum_id,Integer user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+	public ResponseEntity<List<ForumForm>> forumselect(Integer forum_id,Integer user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
 			throws Exception;
 
+	public ResponseEntity<List<ForumForm>> forumlist() throws Exception;
 }

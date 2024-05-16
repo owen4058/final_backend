@@ -7,6 +7,8 @@ import com.api.api.forum.ForumForm;
 
 
 public interface ForumRepository {
-	public List<ForumForm> forumlist(Map<String, Object> data);
+	public List<ForumForm> forumselect(Map<String, Object> data);
+	
+	public List<ForumForm> forumlist();
 
 }
