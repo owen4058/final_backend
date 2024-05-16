@@ -33,8 +33,23 @@
 		<beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
 	
-	
-	
-	
+	<beans:bean id="LoginSessionInterceptor" class="com.api.api.LoginSessionInterceptor"> </beans:bean> 
+	<beans:bean id="adminInterceptor" class="com.api.api.adminInterceptor"> </beans:bean> 
+	<interceptors>
+		<interceptor> 
+			<mapping path="/board_detail"/>
+			<mapping path="/board_update"/>
+			<mapping path="/board_like"/>
+			<mapping path="/board_save"/>
+			<mapping path="/board_comment"/>
+			<mapping path="/comment_like"/>
+			<mapping path="/favorite_forum"/>
+			<beans:ref bean="LoginSessionInterceptor"/>
+		</interceptor>
+		<interceptor> 
+			<mapping path="/admin/*"/>
+			<beans:ref bean="adminInterceptor"/>
+		</interceptor>
+	</interceptors>	
 	
 </beans:beans>

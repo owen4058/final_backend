@@ -52,6 +52,5 @@
             <max-age>1800</max-age>
         </cookie-config>
     </session-config>
-    
 
 </web-app>

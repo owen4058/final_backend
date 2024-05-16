@@ -58,6 +58,10 @@ public class AdminRepositoryImpl implements AdminRepository{
 		return sqlSession.selectList("mapper.admin.delete_member_list");
 	}
 	@Override
+	public int roleuser(int user_id) {
+		return sqlSession.update("mapper.admin.Role_member",user_id);
+	}
+	@Override
 	public int recovermember(int user_id) {
 		return sqlSession.update("mapper.admin.recover_member",user_id);
 	}

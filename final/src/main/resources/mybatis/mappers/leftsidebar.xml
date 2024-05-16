@@ -41,6 +41,31 @@
       ]]>
 	</select>
 	
+	<select id="favoriteforumlist_guest" resultMap="favoriteforum" parameterType="Int">
+      <![CDATA[
+       SELECT 
+      		c.*,
+			d.*
+      FROM 
+			(
+			SELECT 
+				ROWNUM AS RNUM, 
+				A.*
+			FROM 
+				(
+				select 
+				s.* 
+				from 
+					FORUMS s
+                 order by (SELECT COUNT(*) FROM user_forums WHERE forum_id = s.forum_id) desc
+				) A 
+				WHERE ROWNUM <= #{page} * 5
+			) c 
+			LEFT OUTER JOIN forum_section d on c.forum_id = d.forum_id
+			WHERE RNUM > (#{page}-1) * 5;	 	
+      ]]>
+	</select>
+	
   <insert id="favoriteforuminsert"  parameterType="userforumform"> 
 		<![CDATA[
 		 insert into USER_FORUMS

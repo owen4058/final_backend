@@ -105,6 +105,14 @@
 	]]>
   </update>
   
+   <update id="Role_member"  parameterType="Int" >
+	<![CDATA[
+	update users 
+	set Role = 'admin'
+	where user_id = #{user_id}
+	]]>
+  </update>
+  
   <select id="delete_member_list"  resultType="member" parameterType="int" >
 	<![CDATA[
 	select * 

@@ -2,7 +2,10 @@ package com.api.api.admin.controller;
 
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.admin.ForumAdmin;
@@ -41,5 +44,10 @@ public interface AdminController {
 	public ResponseEntity<?> recovermember(
 			 Integer section_id
 			) throws Exception;
+	
+	public ResponseEntity<?> adminmember(
+			@RequestParam Integer user_id
+			) throws Exception;
+	
 	public ResponseEntity<?> deletememberlist() throws Exception;
 }

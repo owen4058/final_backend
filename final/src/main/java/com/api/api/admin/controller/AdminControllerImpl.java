@@ -3,6 +3,7 @@ package com.api.api.admin.controller;
 import java.io.File;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +129,21 @@ public class AdminControllerImpl implements AdminController{
 			) throws Exception {
 		return new ResponseEntity<>(adminservice.recovermember(user_id), HttpStatus.OK);
 	}
+	
+	@Override
+	@RequestMapping(value = "/Manage_member" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	public ResponseEntity<?> adminmember(
+			@RequestParam Integer user_id
+			) throws Exception {
+		
+		if (adminservice.roleuser(user_id) == 1) {
+			return new ResponseEntity<>("ok", HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("bad", HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
 	
 	@Override
 	@RequestMapping(value = "/deleted_member" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)

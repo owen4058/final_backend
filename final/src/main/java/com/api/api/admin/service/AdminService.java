@@ -27,6 +27,8 @@ public interface AdminService {
 	
 	public List<Member> deletememberlist();
 	
+	public int roleuser(int user_id);
+	
 	public int recovermember(int user_id);
 
 }

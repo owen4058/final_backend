@@ -42,5 +42,10 @@ public class SidebarServiceImpl implements SidebarService{
 		
 		return sidebarRepository.formlist(data);
 	}
+	
+	@Override
+	public List<FavoriteForum> formlist_guest(int page) {
+		return sidebarRepository.formlist_guest(page);
+	}
 
 }

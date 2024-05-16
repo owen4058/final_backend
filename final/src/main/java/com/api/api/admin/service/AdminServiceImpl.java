@@ -71,6 +71,11 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public int roleuser(int user_id) {
+		return adminRepository.roleuser(user_id);
+	}
+	
+	@Override
 	public int recovermember(int user_id) {
 		return adminRepository.recovermember(user_id);
 	}

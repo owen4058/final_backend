@@ -13,5 +13,6 @@ public interface SidebarRepository {
 	
 	public int forumdelete(UserForumForm userForumForm);
 	
+	public List<FavoriteForum> formlist_guest(int page);
 
 }

@@ -29,8 +29,12 @@ public class SidebarControllerImpl implements SidebarController {
 	@RequestMapping(value = "/favorite_forum" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	public ResponseEntity<List<FavoriteForum>> forumlist(
 			@RequestParam(defaultValue = "1") Integer page, 
-			Integer user_id
+			@RequestParam(required = false)Integer user_id
 			) throws Exception {
+		
+		if (user_id == null) {
+			return new ResponseEntity<List<FavoriteForum>>(sidebarService.formlist_guest(page),HttpStatus.OK) ;
+		}
 		
 		Map<String,Object> data = new HashMap<String, Object>();
 		data.put("page", page);

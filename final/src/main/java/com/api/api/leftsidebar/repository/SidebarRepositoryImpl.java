@@ -28,5 +28,10 @@ public class SidebarRepositoryImpl implements SidebarRepository{
 	public int forumdelete(UserForumForm userForumForm) {
 		return sqlsession.delete("mapper.leftsidebar.favoriteforumdelate", userForumForm);
 	}
+	
+	@Override
+	public List<FavoriteForum> formlist_guest(int page) {
+		return sqlsession.selectList("mapper.leftsidebar.favoriteforumlist",page);
+	}
 
 }

@@ -13,4 +13,5 @@ public interface SidebarService {
 	
 	public List<FavoriteForum> forumdelete(UserForumForm userForumForm);
 
+	public List<FavoriteForum> formlist_guest(int page);
 }
