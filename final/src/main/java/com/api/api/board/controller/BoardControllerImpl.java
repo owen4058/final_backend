@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.board.BoardCreateForm;
@@ -72,6 +71,8 @@ public class BoardControllerImpl implements BoardController{
 			@RequestPart(name = "board") BoardCreateForm board, 
 			@RequestPart(required = false, name = "hashtag") List<Hashtag> hashtag, 
 			@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
+		
+		System.out.println("board_detail : ");
 		
 		String filepath = "c:\\imgs\\board\\upload";
 		List<Hashtag> tag  = new ArrayList<>();
