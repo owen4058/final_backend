@@ -15,6 +15,6 @@ public interface ForumService {
 	
 	public List<SectionAdmin> sectioncreate(SectionAdmin sectionAdmin);
 	
-	public List<ForumAdmin> forumcreate(ForumAdmin forumAdmin);
+	public List<ForumAdmin> forumcreate(ForumAdmin forumAdmin, List<SectionAdmin>  section);
 
 }

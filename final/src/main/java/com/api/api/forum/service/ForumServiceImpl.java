@@ -28,8 +28,14 @@ public class ForumServiceImpl implements ForumService{
 	}
 	
 	@Override
-	public List<ForumAdmin> forumcreate(ForumAdmin forumAdmin) {
+	public List<ForumAdmin> forumcreate(ForumAdmin forumAdmin, List<SectionAdmin> section) {
 		forumRepository.forumcreate(forumAdmin);
+		
+		for (SectionAdmin sectionAdmin : section) {
+			sectionAdmin.setForum_id(forumAdmin.getForum_id());
+		}
+		forumRepository.sectioncreate(section);
+		
 		return adminRepository.adminforumlist();
 	}
 	

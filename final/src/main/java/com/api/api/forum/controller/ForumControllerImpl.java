@@ -37,6 +37,7 @@ public class ForumControllerImpl implements ForumController{
 	@RequestMapping(value = "/forum" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	public ResponseEntity<List<ForumAdmin>> forumcreate(
 			@RequestPart(name = "forum") ForumAdmin forum
+			,@RequestPart(name = "section") List<SectionAdmin>  section
 			,@RequestPart(name = "file", required = false) MultipartFile file
 			) throws Exception {
 		forum.setLogo_path("null");
@@ -49,10 +50,10 @@ public class ForumControllerImpl implements ForumController{
 				forum.setLogo_path(filepath+"/"+ filename);
 			}
 		} catch (NullPointerException e) {
-			return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum), HttpStatus.OK);
+			return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum, section), HttpStatus.OK);
 		}
 		
-		return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum), HttpStatus.OK);
+		return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum, section), HttpStatus.OK);
 	}
 	
 	@Override

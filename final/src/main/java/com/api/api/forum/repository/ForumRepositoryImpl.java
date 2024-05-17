@@ -34,6 +34,11 @@ public class ForumRepositoryImpl implements ForumRepository{
 	}
 	
 	@Override
+	public int sectioncreate( List<SectionAdmin> section) {
+		return sqlSession.insert("mapper.forum.section_list_create", section);
+	}
+	
+	@Override
 	public List<ForumForm> forumlist() {
 		return sqlSession.selectList("mapper.forum.formlist");
 	}
