@@ -23,6 +23,7 @@
         SELECT
             q.QUESTION_ID,
             q.ASKED_DATE,
+            a.ANSWER_DATE,
             q.QUESTION_TITLE,
             q.QUESTION_CONTENT,
             q.USER_ID,
@@ -40,6 +41,7 @@
         SELECT
             q.QUESTION_ID,
             q.ASKED_DATE,
+            a.ANSWER_DATE,
             q.QUESTION_TITLE,
             q.QUESTION_CONTENT,
             q.USER_ID,
