@@ -22,8 +22,8 @@
     <![CDATA[
         SELECT
             q.QUESTION_ID,
-            q.ASKED_DATE,
-            a.ANSWER_DATE,
+            TO_CHAR(q.ASKED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ASKED_DATE,
+    		TO_CHAR(a.ANSWER_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ANSWER_DATE,
             q.QUESTION_TITLE,
             q.QUESTION_CONTENT,
             q.USER_ID,
@@ -33,15 +33,15 @@
         LEFT JOIN ANSWER a ON q.QUESTION_ID = a.QUESTION_ID
         LEFT JOIN USERS u ON q.USER_ID = u.USER_ID
         WHERE q.USER_ID = #{user_id}
-     ]]>
+     ]]> 
     </select>
     <!-- qna 리스트 받기(Answer 없음)  -->
     <select id="selectQuestionListByAdmin" resultMap="qna">
     <![CDATA[
         SELECT
             q.QUESTION_ID,
-            q.ASKED_DATE,
-            a.ANSWER_DATE,
+            TO_CHAR(q.ASKED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ASKED_DATE,
+    		TO_CHAR(a.ANSWER_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ANSWER_DATE,
             q.QUESTION_TITLE,
             q.QUESTION_CONTENT,
             q.USER_ID,
