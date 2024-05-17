@@ -1,6 +1,8 @@
 package com.api.api.forum.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,9 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,6 +60,31 @@ public class ForumControllerImpl implements ForumController{
 		
 		return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum, section), HttpStatus.OK);
 	}
+	@GetMapping("/forum/display")
+	public ResponseEntity<byte[]> getImage(@RequestParam String fileName, @RequestParam String forum_name) {
+		
+		System.out.println("getImage()........." + fileName);
+		
+		File file = new File("c:\\imgs\\admin\\forum_logo\\"+forum_name+File.separator+ fileName);
+		
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			
+			HttpHeaders header = new HttpHeaders();
+			
+			header.add("Content-type", Files.probeContentType(file.toPath()));
+			
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
 	
 	@Override
 	@RequestMapping(value = "/section" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
