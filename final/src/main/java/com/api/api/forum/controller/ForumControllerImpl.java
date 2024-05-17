@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.admin.ForumAdmin;
-import com.api.api.admin.service.AdminService;
+import com.api.api.admin.SectionAdmin;
 import com.api.api.forum.ForumForm;
 import com.api.api.forum.service.ForumService;
 
@@ -30,25 +31,43 @@ public class ForumControllerImpl implements ForumController{
 	@Autowired
 	private ForumService forumService;
 	
-	@Autowired
-	private AdminService adminservice;
 	
 	
 	@Override
 	@RequestMapping(value = "/forum" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	public ResponseEntity<List<ForumAdmin>> forumcreate(
+			@RequestParam Integer user_id,
 			@RequestPart(name = "forum") ForumAdmin forum
-			,@RequestPart(required = false ,name = "file") MultipartFile file
+			,@RequestPart(name = "file", required = false) MultipartFile file
 			) throws Exception {
+		forum.setLogo_path("null");
 		String filepath = "c:\\imgs\\admin\\forum_logo"+File.separator+forum.getForum_name();
-		if (!file.isEmpty()) {
-			String filename = file.getOriginalFilename();
-			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
-			forum.setLogo_path(filepath+"/"+ filename);
+		
+		try {
+			if (user_id != 0) {
+				forum.setCreate_user_id(user_id);
+			}
+			
+			if (!file.isEmpty()) {
+				String filename = file.getOriginalFilename();
+				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
+				forum.setLogo_path(filepath+"/"+ filename);
+			}
+		} catch (NullPointerException e) {
+			return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum), HttpStatus.OK);
 		}
 		
-		return new ResponseEntity<List<ForumAdmin>>(adminservice.adminforumcreate(forum), HttpStatus.OK);
+		return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum), HttpStatus.OK);
 	}
+	
+	@Override
+	@RequestMapping(value = "/section" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	public ResponseEntity<?> sectioncreate(
+			@RequestBody SectionAdmin sectionAdmin
+			) throws Exception {
+		return new ResponseEntity<>(forumService.sectioncreate(sectionAdmin),HttpStatus.OK);
+	}
+	
 	
 	
 	@Override

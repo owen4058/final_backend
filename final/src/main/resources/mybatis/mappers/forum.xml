@@ -18,6 +18,48 @@
 		</collection>
 	</resultMap>  
 
+<!--  섹션 관련  -->
+<insert id="section_create"  parameterType="sectionadmin" >
+	<![CDATA[
+	insert into forum_section(
+	forum_id,
+	section_id,
+	section_name,
+	create_date
+	)values(
+	#{forum_id}
+	,AAA.NEXTVAL
+	,#{section_name}
+	,sysdate
+	)
+	]]>
+  </insert>
+
+
+<!--  포럼 관련  -->
+	<insert id="form_create"  parameterType="forumadmin" >
+	<![CDATA[
+	insert into forums(
+	forum_id,
+	forum_name,
+	create_date,
+	logo_path,
+	forum_info,
+	create_user_id
+	)values(
+	AAA.NEXTVAL
+	,#{forum_name}
+	,sysdate
+	,#{logo_path}
+	,#{forum_info}
+	,#{create_user_id}
+	)
+	]]>
+  </insert>
+
+
+
+
 	<select id="forumselect"  resultMap="forumform" parameterType="Map" >
 	<![CDATA[
 			SELECT a.*, b.*,

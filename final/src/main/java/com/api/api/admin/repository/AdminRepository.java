@@ -8,11 +8,9 @@ import com.api.api.member.Member;
 
 public interface AdminRepository {
 	public List<ForumAdmin> adminforumlist();
-	public int adminforumcreate(ForumAdmin forumAdmin);
-	public int adminforumdelete(int forum_id);
 	
+	public int adminforumdelete(int forum_id);
 	public List<SectionAdmin> adminsectionlist();
-	public int adminsectioncreate(SectionAdmin sectionAdmin);
 	public int adminsectiondelete(int section_id);
 	public int adminsectionedit(SectionAdmin sectionAdmin);
 	public int adminforumedit(ForumAdmin forumAdmin);
