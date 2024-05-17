@@ -22,8 +22,8 @@
     <![CDATA[
         SELECT
             q.QUESTION_ID,
-            q.ASKED_DATE,
-            a.ANSWER_DATE,
+            TO_CHAR(q.ASKED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ASKED_DATE,
+    		TO_CHAR(a.ANSWER_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ANSWER_DATE,
             q.QUESTION_TITLE,
             q.QUESTION_CONTENT,
             q.USER_ID,
@@ -40,8 +40,8 @@
     <![CDATA[
         SELECT
             q.QUESTION_ID,
-            q.ASKED_DATE,
-            a.ANSWER_DATE,
+            TO_CHAR(q.ASKED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ASKED_DATE,
+    		TO_CHAR(a.ANSWER_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ANSWER_DATE,
             q.QUESTION_TITLE,
             q.QUESTION_CONTENT,
             q.USER_ID,
