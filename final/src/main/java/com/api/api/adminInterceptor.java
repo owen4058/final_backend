@@ -24,12 +24,16 @@ public class adminInterceptor implements HandlerInterceptor {
 		vo = (Member) session.getAttribute("loginMember");
 		
 		System.out.println("인터셉터 작동 어드민 = " + vo.getRole());
-		
-		if (vo.getRole().equals("admin")) {
-			return true;
-		}else {
+		try {
+			if (vo.getRole().equals("admin")) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (NullPointerException e) {
 			return false;
 		}
+		
 
     }
 

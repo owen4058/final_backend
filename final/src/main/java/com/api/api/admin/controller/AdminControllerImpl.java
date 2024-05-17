@@ -110,10 +110,12 @@ public class AdminControllerImpl implements AdminController{
 	}
 	
 	@Override
-	@RequestMapping(value = "/Manage_member" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	@RequestMapping(value = "/user_admin" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	public ResponseEntity<?> adminmember(
 			@RequestParam Integer user_id
 			) throws Exception {
+		
+		System.out.println();
 		
 		if (adminservice.roleuser(user_id) == 1) {
 			return new ResponseEntity<>("ok", HttpStatus.OK);
