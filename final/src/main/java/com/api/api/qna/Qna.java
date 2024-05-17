@@ -19,8 +19,8 @@ public class Qna {
 	String question_content;
 	int user_id;
 	String nickname;
-	boolean is_answer;
+	boolean has_answer;
 	Date asked_date;
 	String answer_content;
-	String answer_date;
+	Date answer_date;
 }

@@ -23,11 +23,12 @@
         SELECT
             q.QUESTION_ID,
             q.ASKED_DATE,
+            a.ANSWER_DATE,
             q.QUESTION_TITLE,
             q.QUESTION_CONTENT,
             q.USER_ID,
             u.NICKNAME,
-		    CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN 1 ELSE 0 END AS IS_ANSWER
+		    CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN 1 ELSE 0 END AS HAS_ANSWER
         FROM QUESTION q
         LEFT JOIN ANSWER a ON q.QUESTION_ID = a.QUESTION_ID
         LEFT JOIN USERS u ON q.USER_ID = u.USER_ID
@@ -40,11 +41,12 @@
         SELECT
             q.QUESTION_ID,
             q.ASKED_DATE,
+            a.ANSWER_DATE,
             q.QUESTION_TITLE,
             q.QUESTION_CONTENT,
             q.USER_ID,
             u.NICKNAME,
-		    CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN 1 ELSE 0 END AS IS_ANSWER
+		    CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN 1 ELSE 0 END AS HAS_ANSWER
         FROM QUESTION q
         LEFT JOIN ANSWER a ON q.QUESTION_ID = a.QUESTION_ID
         LEFT JOIN USERS u ON q.USER_ID = u.USER_ID
@@ -61,7 +63,7 @@
             q.QUESTION_CONTENT,
             q.USER_ID,
             u.NICKNAME,
-            CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN true ELSE false END AS IS_ANSWER,
+            CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN 1 ELSE 0 END AS HAS_ANSWER,
             a.ANSWER_CONTENT,
             a.ANSWER_DATE
         FROM QUESTION q
@@ -89,15 +91,15 @@
     
     <insert id="insertAnswer" parameterType="qna">
     <![CDATA[
-        INSERT INTO ANSWER (question_id, user_id, answer_content, answer_date)
-        VALUES (#{question_id}, #{user_id}, #{answer_content}, SYSDATE)
+        INSERT INTO ANSWER (question_id, answer_content, answer_date)
+        VALUES (#{question_id}, #{answer_content}, SYSDATE)
     ]]>
     </insert>
     
     <update id="updateAnswer" parameterType="qna">
     <![CDATA[
-        INSERT INTO ANSWER (question_id, user_id, answer_content, answer_date)
-        VALUES (#{question_id}, #{user_id}, #{answer_content}, SYSDATE)
+        INSERT INTO ANSWER (question_id, answer_content, answer_date)
+        VALUES (#{question_id}, #{answer_content}, SYSDATE)
     ]]>
     </update>
     

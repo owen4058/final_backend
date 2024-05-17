@@ -37,7 +37,7 @@ public class QnaRepositoryImpl implements QnaRepository {
 
     @Override
     public Qna findDetail(int question_id) {
-        return sqlSession.selectOne("mapper.qna.selectDetail", question_id);
+        return sqlSession.selectOne("mapper.qna.selectQna", question_id);
     }
 
     @Override
