@@ -7,7 +7,7 @@
 	
 	<resultMap id="forumform" type="forumform">
         	<result property="forum_id" column="forum_id" />
-        	<result property="logo_path" column="logo_path" />
+        	<result property="logo_name" column="logo_name" />
         	<result property="forum_name" column="forum_name" />
         	<result property="forum_info" column="forum_info" />
         	<result property="forum_following_state" column="forum_following_state" />
