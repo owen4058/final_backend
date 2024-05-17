@@ -15,7 +15,6 @@ import com.api.api.forum.ForumForm;
 public interface ForumController {
 	
 	public ResponseEntity<?> forumcreate(
-			Integer user_id,
 			ForumAdmin forumAdmin
 			, MultipartFile file
 			)

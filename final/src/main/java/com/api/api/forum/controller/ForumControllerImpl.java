@@ -36,7 +36,6 @@ public class ForumControllerImpl implements ForumController{
 	@Override
 	@RequestMapping(value = "/forum" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	public ResponseEntity<List<ForumAdmin>> forumcreate(
-			@RequestParam Integer user_id,
 			@RequestPart(name = "forum") ForumAdmin forum
 			,@RequestPart(name = "file", required = false) MultipartFile file
 			) throws Exception {
@@ -44,10 +43,6 @@ public class ForumControllerImpl implements ForumController{
 		String filepath = "c:\\imgs\\admin\\forum_logo"+File.separator+forum.getForum_name();
 		
 		try {
-			if (user_id != 0) {
-				forum.setCreate_user_id(user_id);
-			}
-			
 			if (!file.isEmpty()) {
 				String filename = file.getOriginalFilename();
 				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
