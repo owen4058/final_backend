@@ -62,11 +62,18 @@ public class ForumControllerImpl implements ForumController{
 		return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum, section), HttpStatus.OK);
 	}
 	@GetMapping("/forum/display")
-	public ResponseEntity<byte[]> getImage(@RequestParam String fileName, @RequestParam String forum_name) {
+	public ResponseEntity<byte[]> getImage(@RequestParam Integer forum_id) {
 		
-		System.out.println("getImage()........." + fileName);
+		System.out.println("getImage()........." + forum_id);
 		
-		File file = new File("c:\\imgs\\admin\\forum_logo\\"+forum_name+File.separator+ fileName);
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("forum_id", forum_id);
+		data.put("user_id", 0);
+		ForumForm forum_name = forumService.forumselect(data).get(0);
+		
+		
+		
+		File file = new File("c:\\imgs\\admin\\forum_logo\\"+forum_name.getForum_name()+File.separator+ forum_name.getLogo_name());
 		
 		ResponseEntity<byte[]> result = null;
 		
