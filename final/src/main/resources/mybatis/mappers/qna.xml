@@ -61,7 +61,7 @@
             q.QUESTION_CONTENT,
             q.USER_ID,
             u.NICKNAME,
-            CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN true ELSE false END AS IS_ANSWER,
+            CASE WHEN a.ANSWER_CONTENT IS NOT NULL THEN 1 ELSE 0 END AS HAS_ANSWER,
             a.ANSWER_CONTENT,
             a.ANSWER_DATE
         FROM QUESTION q
