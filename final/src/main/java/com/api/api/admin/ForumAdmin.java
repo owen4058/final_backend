@@ -12,11 +12,11 @@ import lombok.Setter;
 @Setter
 
 public class ForumAdmin {
-	
 	int forum_id;
 	String forum_name;
 	Date create_date;
 	String logo_path;
 	String forum_info;
+	int create_user_id;
 	
 }

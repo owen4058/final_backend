@@ -20,10 +20,7 @@ public class AdminRepositoryImpl implements AdminRepository{
 	public List<ForumAdmin> adminforumlist() {
 		return sqlSession.selectList("mapper.admin.form_admin_list");
 	}
-	@Override
-	public int adminforumcreate(ForumAdmin forumAdmin) {
-		return sqlSession.insert("mapper.admin.form_admin_create", forumAdmin);
-	}
+	
 	@Override
 	public int adminforumdelete(int forum_id) {
 		return sqlSession.delete("mapper.admin.form_admin_delete", forum_id);
@@ -31,10 +28,6 @@ public class AdminRepositoryImpl implements AdminRepository{
 	@Override
 	public List<SectionAdmin> adminsectionlist() {
 		return sqlSession.selectList("mapper.admin.section_admin_list");
-	}
-	@Override
-	public int adminsectioncreate(SectionAdmin sectionAdmin) {
-		return sqlSession.insert("mapper.admin.section_admin_create", sectionAdmin);
 	}
 	@Override
 	public int adminsectiondelete(int section_id) {

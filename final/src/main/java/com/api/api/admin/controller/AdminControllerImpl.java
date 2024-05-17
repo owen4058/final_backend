@@ -43,13 +43,7 @@ public class AdminControllerImpl implements AdminController{
 		return new ResponseEntity<List<ForumAdmin>>(adminservice.adminforumdelete(forum_id), HttpStatus.OK);
 	}
 
-	@Override
-	@RequestMapping(value = "/Manage_section" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity<?> adminsectioncreate(
-			@RequestBody SectionAdmin sectionAdmin
-			) throws Exception {
-		return new ResponseEntity<>(adminservice.adminsectioncreate(sectionAdmin),HttpStatus.OK);
-	}
+
 
 	@Override
 	@RequestMapping(value = "/Manage_section" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)

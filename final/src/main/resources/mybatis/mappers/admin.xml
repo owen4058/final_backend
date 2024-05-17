@@ -6,24 +6,7 @@
 <mapper namespace="mapper.admin">
 	
 
-	<!--  포럼 관련  -->
-	<insert id="form_admin_create"  parameterType="forumadmin" >
-	<![CDATA[
-	insert into forums(
-	forum_id,
-	forum_name,
-	create_date,
-	logo_path,
-	forum_info
-	)values(
-	AAA.NEXTVAL
-	,#{forum_name}
-	,sysdate
-	,#{logo_path}
-	,#{forum_info}
-	)
-	]]>
-  </insert>
+	
   
   <select id="form_admin_list"  resultType="forumadmin" parameterType="forumadmin" >
 	<![CDATA[
@@ -41,21 +24,7 @@
   </delete>
   
   <!--  섹션 관련  -->
-  <insert id="section_admin_create"  parameterType="sectionadmin" >
-	<![CDATA[
-	insert into forum_section(
-	forum_id,
-	section_id,
-	section_name,
-	create_date
-	)values(
-	#{forum_id}
-	,AAA.NEXTVAL
-	,#{section_name}
-	,sysdate
-	)
-	]]>
-  </insert>
+  
   
    <select id="section_admin_list"  resultType="sectionadmin" parameterType="sectionadmin" >
 	<![CDATA[

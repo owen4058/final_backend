@@ -19,11 +19,6 @@ public interface AdminController {
 
 	public ResponseEntity<?> adminforumdelete(Integer forum_id) throws Exception;
 	
-	public ResponseEntity<?> adminsectioncreate(
-			SectionAdmin sectionAdmin
-			)
-					throws Exception;
-	
 	public ResponseEntity<?> adminsectionlist()
 			throws Exception;
 	

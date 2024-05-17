@@ -22,12 +22,6 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<ForumAdmin> adminforumcreate(ForumAdmin forumAdmin) {
-		adminRepository.adminforumcreate(forumAdmin);
-		return adminRepository.adminforumlist();
-	}
-
-	@Override
 	public List<ForumAdmin> adminforumdelete(int forum_id) {
 		adminRepository.adminforumdelete(forum_id);
 		return adminRepository.adminforumlist();
@@ -35,12 +29,6 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public List<SectionAdmin> adminsectionlist() {
-		return adminRepository.adminsectionlist();
-	}
-	
-	@Override
-	public List<SectionAdmin> adminsectioncreate(SectionAdmin sectionAdmin) {
-		adminRepository.adminsectioncreate(sectionAdmin);
 		return adminRepository.adminsectionlist();
 	}
 	

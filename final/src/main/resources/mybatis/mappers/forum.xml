@@ -18,6 +18,75 @@
 		</collection>
 	</resultMap>  
 
+<!--  섹션 관련  -->
+<insert id="section_create"  parameterType="sectionadmin" >
+	<![CDATA[
+	insert into forum_section(
+	forum_id,
+	section_id,
+	section_name,
+	create_date
+	)values(
+	#{forum_id}
+	,AAA.NEXTVAL
+	,#{section_name}
+	,sysdate
+	)
+	]]>
+  </insert>
+  
+  <insert id="section_list_create"  parameterType="list" >
+	
+	insert into forum_section(
+	section_id,
+	forum_id,
+	section_name,
+	create_date
+	)SELECT AAA.NEXTVAL, A.*
+	FROM
+	(
+	<foreach collection="list" item="i" separator="UNION ALL">
+	SELECT #{i.forum_id} AS forum_id
+			,#{i.section_name} AS section_name
+			,sysdate
+			FROM DUAL
+	</foreach>
+	) A
+	
+  </insert>
+
+
+<!--  포럼 관련  -->
+	<insert id="form_create"  parameterType="forumadmin" >
+	
+	<selectKey keyProperty="forum_id" resultType="int" order="BEFORE">
+        <![CDATA[
+        SELECT MAX(forum_id) + 1 from forums
+        ]]>
+    	</selectKey>
+    	
+	<![CDATA[
+	insert into forums(
+	forum_id,
+	forum_name,
+	create_date,
+	logo_path,
+	forum_info,
+	create_user_id
+	)values(
+	#{forum_id}
+	,#{forum_name}
+	,sysdate
+	,#{logo_path}
+	,#{forum_info}
+	,#{create_user_id}
+	)
+	]]>
+  </insert>
+
+
+
+
 	<select id="forumselect"  resultMap="forumform" parameterType="Map" >
 	<![CDATA[
 			SELECT a.*, b.*,
