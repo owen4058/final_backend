@@ -53,6 +53,7 @@ public class ForumControllerImpl implements ForumController{
 				String filename = file.getOriginalFilename();
 				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
 				forum.setLogo_path(filepath+"/"+ filename);
+				forum.setLogo_name(filename);
 			}
 		} catch (NullPointerException e) {
 			return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum, section), HttpStatus.OK);
