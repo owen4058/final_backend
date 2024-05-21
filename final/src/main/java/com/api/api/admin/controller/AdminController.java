@@ -26,7 +26,7 @@ public interface AdminController {
 
 	public ResponseEntity<?> adminsectionedit(SectionAdmin sectionAdmin) throws Exception;
 
-	public ResponseEntity<Integer> adminforumedit(
+	public ResponseEntity<String> adminforumedit(
 			ForumAdmin forumAdmin
 			, MultipartFile file
 			) throws Exception;

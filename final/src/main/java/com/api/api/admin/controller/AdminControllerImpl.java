@@ -62,15 +62,20 @@ public class AdminControllerImpl implements AdminController{
 
 	@Override
 	@RequestMapping(value = "/Manage_section_edit" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity<Integer> adminsectionedit(
+	public ResponseEntity<String> adminsectionedit(
 			@RequestBody SectionAdmin sectionAdmin
 			) throws Exception {
-		return  new ResponseEntity<Integer>(adminservice.adminsectionedit(sectionAdmin),HttpStatus.OK);
+		if (adminservice.adminsectionedit(sectionAdmin) == 1) {
+			return  new ResponseEntity<String>("섹션 수정이 완료되었습니다.",HttpStatus.OK);
+		}else {
+			return  new ResponseEntity<String>("섹션 수정에 실패 했습니다.",HttpStatus.OK);
+		}
+		
 	}
 	
 	@Override
 	@RequestMapping(value = "/Manage_Forum_edit" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-	public ResponseEntity<Integer> adminforumedit(
+	public ResponseEntity<String> adminforumedit(
 			@RequestPart(name = "forum") ForumAdmin forum
 			,@RequestPart(required = false ,name = "file") MultipartFile file
 			) throws Exception {
@@ -97,8 +102,11 @@ public class AdminControllerImpl implements AdminController{
 			}
 		}
 		
-		
-		return  new ResponseEntity<Integer>(adminservice.adminforumedit(forum), HttpStatus.OK);
+		if (adminservice.adminforumedit(forum) == 1) {
+			return  new ResponseEntity<String>("포럼 수정이 완료되었습니다.",HttpStatus.OK);
+		}else {
+			return  new ResponseEntity<String>("포럼 수정에 실패 했습니다.",HttpStatus.OK);
+		}		
 	}
 
 	@Override
