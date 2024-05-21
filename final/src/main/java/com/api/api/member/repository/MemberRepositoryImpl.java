@@ -34,4 +34,14 @@ public class MemberRepositoryImpl implements MemberRepository{
 	public int memberdelate(int user_id) throws DataAccessException {
 		return sqlSession.update("mapper.member.deleteMember",user_id);
 	}
+	@Override
+	public String findByEmail(String user_email) throws DataAccessException {
+		try {
+			String result = sqlSession.selectOne("mapper.member.getEmail", user_email);
+			System.out.println("result " + result);
+			return result;
+        } catch (Exception e) {
+            throw new DataAccessException("조회 오류.", e) {};
+        }
+	}
 }

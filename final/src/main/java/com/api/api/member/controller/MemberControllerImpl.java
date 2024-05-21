@@ -31,10 +31,10 @@ public class MemberControllerImpl implements MemberController{
 			HttpServletResponse httpServletResponse) throws Exception {
 		int vo = memberService.addmember(member);
 		if (vo!=1) {
-			return new ResponseEntity<>("회원가입 실패", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("�쉶�썝媛��엯 �떎�뙣", HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity<>("회원가입 성공",HttpStatus.OK);
+		return new ResponseEntity<>("�쉶�썝媛��엯 �꽦怨�",HttpStatus.OK);
 	}
 	
 	
@@ -63,7 +63,7 @@ public class MemberControllerImpl implements MemberController{
 		 if (session != null) {
 	            session.invalidate();
 	        }
-		return new ResponseEntity<>("로그아웃 성공", HttpStatus.OK);
+		return new ResponseEntity<>("濡쒓렇�븘�썐 �꽦怨�", HttpStatus.OK);
 	}
 	
 	
@@ -82,9 +82,22 @@ public class MemberControllerImpl implements MemberController{
 		;
 		
 		 if (memberService.memberdelate(user_id) == 0) {
-			 return new ResponseEntity<>("회원 삭제 실패",HttpStatus.NOT_FOUND);
+			 return new ResponseEntity<>("�쉶�썝 �궘�젣 �떎�뙣",HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>("회원 삭제 성공",HttpStatus.OK);
+		return new ResponseEntity<>("�쉶�썝 �궘�젣 �꽦怨�",HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/assign/email", produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	@Override
+	public ResponseEntity<Boolean> checkEmailAvailablity(@RequestParam String user_email, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+		System.out.println("checkEmail Controller " + user_email);
+		boolean isAvailable = memberService.isEmailAvailable(user_email);
+		System.out.println("isAvailable " + isAvailable);
+		if (isAvailable) {
+            return ResponseEntity.ok().body(isAvailable);
+        } else {
+            return ResponseEntity.ok().body(isAvailable);
+        }
 	}
 
 }

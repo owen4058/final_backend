@@ -33,5 +33,12 @@ public class MemberServiceImpl implements MemberService {
 	public int memberdelate(int user_id) throws DataAccessException {
 		return memberRepository.memberdelate(user_id);
 	}
-
+	@Override
+    public boolean isEmailAvailable(String user_email) throws DataAccessException {
+    	String result = memberRepository.findByEmail(user_email);
+    	if (result == null) {
+            return true;
+        }
+    	return false;
+    }
 }

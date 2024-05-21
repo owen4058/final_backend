@@ -13,4 +13,5 @@ public interface MemberRepository {
 	public Optional<Member> login(LoginForm loginForm) throws DataAccessException;
 	public List<Member> memberlist(int page) throws DataAccessException;
 	public int memberdelate(int user_id) throws DataAccessException;	
+	public String findByEmail(String user_email) throws DataAccessException;
 }

@@ -12,5 +12,5 @@ public interface MemberService {
 	public Member login(LoginForm loginForm)throws DataAccessException;
 	public List<Member> memberlist(int page) throws DataAccessException;
 	public int memberdelate(int user_id) throws DataAccessException;
-	
+	public boolean isEmailAvailable(String user_email) throws DataAccessException;
 }

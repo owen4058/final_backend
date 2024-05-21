@@ -76,6 +76,13 @@
 
 	]]>      
   </update>
+  <select id="getEmail" parameterType="String" resultType="java.lang.String">
+       	<![CDATA[
+       	SELECT user_email
+       	FROM USERS
+       	WHERE user_email = #{user_email}
+        ]]>
+	</select>
    
   <!--  <update id="updateMember"  parameterType="member">
      <![CDATA[

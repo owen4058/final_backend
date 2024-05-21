@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   <mapper namespace="mapper.report">
+	  <resultMap id="report" type="com.api.api.report.Report">
+	        <id property="report_id" column="REPORT_ID"/>
+	        <result property="content" column="CONTENT"/>
+	        <result property="user_id" column="USER_ID"/>
+	        <result property="report_reason" column="REPORT_REASON"/>
+	        <result property="create_date" column="CREATE_DATE"/>
+    </resultMap>
+    
+   <insert id="insertReport" parameterType="report">
+    <![CDATA[
+        INSERT INTO REPORT (CONTENT, REPORT_REASON, USER_ID, CREATE_DATE) 
+        VALUES (#{content}, #{report_reason}, #{user_id}, SYSDATE())
+    ]]>
+    </insert>
+  
+    <select id="selectReportListByAdmin" resultMap="report">
+    <![CDATA[
+      SELECT
+            R.report_id,
+            R.user_id,
+            U.user_id,
+            U.user_name,
+            U.user_nickname,
+            U.email,
+            U.create_date
+        FROM
+            REPORT R
+            JOIN USERS U ON R.user_id = U.user_id;
+     ]]>
+    </select>
+    
+    <select id="selectReport" resultMap="report" parameterType="int">
+    <![CDATA[
+        SELECT content, report_reason
+        FROM REPORT
+        WHERE id = #{report_id}
+     ]]>
+    </select>
+    
+    
+    
+    
+    
+  </mapper>

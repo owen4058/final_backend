@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.api.api.member.LoginForm;
 import com.api.api.member.Member;
@@ -24,5 +25,6 @@ public interface MemberController {
 	public ResponseEntity<String> logout(
 			HttpServletRequest request
 			) throws Exception;
+	public ResponseEntity<Boolean> checkEmailAvailablity(@RequestParam String user_email, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 }
  
