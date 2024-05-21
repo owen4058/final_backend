@@ -22,6 +22,7 @@
         <result property="board_id" column="board_id" />
         <result property="section_id" column="section_id" />
         <result property="forum_id" column="forum_id" />
+        <result property="forum_name" column="forum_name" />
         <result property="board_like_state" column="board_like_state" />
         <result property="board_save_state" column="board_save_state" />
         <result property="nickname" column="nickname" />
@@ -125,6 +126,7 @@
 			d.nickname,
             f.*,
 			e.*,
+			i.*,
 			CASE 
                WHEN g.like_ud  IS NOT NULL THEN g.like_ud
                ELSE 0
@@ -156,6 +158,7 @@
             LEFT OUTER JOIN	hashtag f ON c.board_id = f.board_id
         	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
+            LEFT OUTER JOIN	forums i ON c.forum_id = i.forum_id 
         WHERE RNUM > (#{page}-1) * 5
 	]]>
   </select>
