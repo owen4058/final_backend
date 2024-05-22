@@ -17,7 +17,8 @@ public interface ForumController {
 	public ResponseEntity<?> forumcreate(
 			ForumAdmin forumAdmin
 			,List<SectionAdmin>  section
-			, MultipartFile file
+			, MultipartFile file,
+			HttpServletRequest request
 			)
 			throws Exception;
 	

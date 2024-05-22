@@ -43,10 +43,12 @@ public class ForumControllerImpl implements ForumController{
 	public ResponseEntity<List<ForumAdmin>> forumcreate(
 			@RequestPart(name = "forum") ForumAdmin forum
 			,@RequestPart(name = "section") List<SectionAdmin>  section
-			,@RequestPart(name = "file", required = false) MultipartFile file
+			,@RequestPart(name = "file", required = false) MultipartFile file,
+			HttpServletRequest request
 			) throws Exception {
 		forum.setLogo_path("null");
-		String filepath = "c:\\imgs\\admin\\forum_logo"+File.separator+forum.getForum_name();
+		System.out.println(request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum.getForum_name()));
+		String filepath = request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum.getForum_name()) ;
 		
 		try {
 			if (!file.isEmpty()) {
@@ -62,7 +64,7 @@ public class ForumControllerImpl implements ForumController{
 		return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum, section), HttpStatus.OK);
 	}
 	@GetMapping("/forum/display")
-	public ResponseEntity<byte[]> getImage(@RequestParam Integer forum_id) {
+	public ResponseEntity<byte[]> getImage(@RequestParam Integer forum_id, HttpServletRequest request) {
 		
 		System.out.println("getImage()........." + forum_id);
 		
@@ -73,7 +75,7 @@ public class ForumControllerImpl implements ForumController{
 		
 		
 		
-		File file = new File("c:\\imgs\\admin\\forum_logo\\"+forum_name.getForum_name()+File.separator+ forum_name.getLogo_name());
+		File file = new File( request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum_name.getForum_name()+File.separator+ forum_name.getLogo_name()));
 		
 		ResponseEntity<byte[]> result = null;
 		
