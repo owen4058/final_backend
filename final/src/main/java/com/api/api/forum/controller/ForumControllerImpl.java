@@ -2,6 +2,7 @@ package com.api.api.forum.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
@@ -63,10 +64,13 @@ public class ForumControllerImpl implements ForumController{
 		
 		return new ResponseEntity<List<ForumAdmin>>(forumService.forumcreate(forum, section), HttpStatus.OK);
 	}
+	
 	@GetMapping("/forum/display")
 	public ResponseEntity<byte[]> getImage(@RequestParam Integer forum_id, HttpServletRequest request) {
 		
 		System.out.println("getImage()........." + forum_id);
+		URL r = this.getClass().getResource("");
+		System.out.println(request.getSession().getServletContext().getRealPath("/"));
 		
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("forum_id", forum_id);
@@ -75,7 +79,7 @@ public class ForumControllerImpl implements ForumController{
 		
 		
 		
-		File file = new File( request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum_name.getForum_name()+File.separator+ forum_name.getLogo_name()));
+		File file = new File(request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum_name.getForum_name()+File.separator+ forum_name.getLogo_name()));
 		
 		ResponseEntity<byte[]> result = null;
 		
