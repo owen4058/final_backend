@@ -58,7 +58,7 @@ public class BoardControllerImpl implements BoardController{
 		
 		System.out.println("getImage()........." + fileName);
 		
-		File file = new File(request.getSession().getServletContext().getRealPath("imgs\\board\\upload"+File.separator+fileName));
+		File file = new File(request.getSession().getServletContext().getRealPath("imgs\\board\\upload" +File.separator+fileName));
 		
 		ResponseEntity<byte[]> result = null;
 		

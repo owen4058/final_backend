@@ -22,8 +22,7 @@
 			d.*
       FROM 
 			(
-			SELECT 
-				ROWNUM AS RNUM, 
+			SELECT  
 				A.*
 			FROM 
 				(
@@ -33,11 +32,10 @@
 					USER_FORUMS 
 				where user_id = #{user_id} 
 				) A 
-				WHERE ROWNUM <= #{page} * 5
 			) c 
 			LEFT OUTER JOIN forums b on c.forum_id = b.forum_id
 			LEFT OUTER JOIN forum_section d on c.forum_id = d.forum_id
-			WHERE RNUM > (#{page}-1) * 5	 	
+			 	
       ]]>
 	</select>
 	
