@@ -2,6 +2,8 @@ package com.api.api.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +22,8 @@ public interface BoardController {
 	
 	public ResponseEntity<?> boardcreate(BoardCreateForm boardCreageForm, 
 			List<Hashtag> hashtag,
-			MultipartFile[] boFiles) throws Exception;
+			MultipartFile[] boFiles,
+			HttpServletRequest request) throws Exception;
 	
 	public ResponseEntity<?> boarddetail(
 			Integer board_id

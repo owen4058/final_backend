@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -52,11 +54,11 @@ public class BoardControllerImpl implements BoardController{
 	}
 	
 	@GetMapping("/board/display")
-	public ResponseEntity<byte[]> getImage(@RequestParam String fileName) {
+	public ResponseEntity<byte[]> getImage(@RequestParam String fileName, HttpServletRequest request) {
 		
 		System.out.println("getImage()........." + fileName);
 		
-		File file = new File("c:\\imgs\\board\\upload\\"+ fileName);
+		File file = new File(request.getSession().getServletContext().getRealPath("imgs\\board\\upload\\"+ fileName));
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -99,11 +101,12 @@ public class BoardControllerImpl implements BoardController{
 	public ResponseEntity<?> boardcreate(
 			@RequestPart(name = "board") BoardCreateForm board, 
 			@RequestPart(required = false, name = "hashtag") List<Hashtag> hashtag, 
-			@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
+			@RequestPart(required = false, name = "files") MultipartFile[] files,
+			HttpServletRequest request) throws Exception {
 		
 		System.out.println("board_detail : ");
 		
-		String filepath = "c:\\imgs\\board\\upload";
+		String filepath = request.getSession().getServletContext().getRealPath("imgs\\board\\upload");
 		List<Hashtag> tag  = new ArrayList<>();
 		List<BoardImg>  boardImgs = new ArrayList<BoardImg>();
 		try {
