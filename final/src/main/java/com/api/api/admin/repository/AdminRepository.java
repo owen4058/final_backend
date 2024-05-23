@@ -19,6 +19,7 @@ public interface AdminRepository {
 	public int roleuser(int user_id);
 	public int recovermember(int user_id);
 	public int adminforumsectiondelete(int forum_id);
+	public int adminforumeditnologo(ForumAdmin forumAdmin);
 
 
 

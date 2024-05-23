@@ -46,6 +46,10 @@ public class AdminRepositoryImpl implements AdminRepository{
 	public int adminforumedit(ForumAdmin forumAdmin) {
 		return sqlSession.update("mapper.admin.form_admin_edit", forumAdmin);
 	}
+	@Override
+	public int adminforumeditnologo(ForumAdmin forumAdmin) {
+		return sqlSession.update("mapper.admin.form_admin_edit_nologo", forumAdmin);
+	}
 
 	@Override
 	public ForumAdmin adminforumcheck(ForumAdmin forumAdmin) {

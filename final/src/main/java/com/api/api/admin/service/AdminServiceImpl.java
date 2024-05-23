@@ -46,6 +46,9 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public int adminforumedit(ForumAdmin forumAdmin) {
+		if (forumAdmin.getLogo_path() == null) {
+			return adminRepository.adminforumeditnologo(forumAdmin);
+		}
 		return adminRepository.adminforumedit(forumAdmin);
 	}
 
