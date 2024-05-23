@@ -15,6 +15,7 @@
 		<typeAlias type="com.api.api.board.BoardDetailForm"  alias="boarddetailform"/>
 		
 		<typeAlias type="com.api.api.profile.Profile"  alias="profile"/>
+		<typeAlias type="com.api.api.profile.UserFollow"  alias="userfollow"/>
 		
 		<typeAlias type="com.api.api.forum.SectionForm"  alias="sectionform"/>
         <typeAlias type="com.api.api.forum.ForumForm"  alias="forumform"/>
@@ -32,6 +33,7 @@
         <typeAlias type="com.api.api.qna.Qna"  alias="qna"/>
         <typeAlias type="com.api.api.save.Save"  alias="save"/>
         <typeAlias type="com.api.api.report.Report"  alias="report"/>
+        
         
 	</typeAliases>
 </configuration>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.api.api.board.repository.BoardRepository;
 import com.api.api.profile.Profile;
+import com.api.api.profile.UserFollow;
 import com.api.api.profile.repository.ProfileRepository;
 
 @Service("profileService")
@@ -23,10 +24,10 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Profile updateProfile(int user_id, Profile profile) throws DataAccessException {
+    public int updateProfile(Profile profile) throws DataAccessException {
         int updatedRows = profileRepository.updateProfile(profile);
         if (updatedRows > 0) {
-            return profileRepository.selectProfile(user_id);
+            return updatedRows;
         } else {
             throw new DataAccessException("�봽濡쒗븘 �뾽�뜲�씠�듃�뿉 �떎�뙣�뻽�뒿�땲�떎.") {};
         }
@@ -40,5 +41,20 @@ public class ProfileServiceImpl implements ProfileService {
         }
     	return false;
     }
+    
+    public boolean followUser(UserFollow userFollow) throws DataAccessException {
+    	int result = profileRepository.insertUserFollow(userFollow);
+    	if (result >= 1) {
+            return true;
+        }
+    	return false;
+    }
+	public boolean unfollowUser(UserFollow userFollow) throws DataAccessException {
+		int result = profileRepository.deleteUserUnFollow(userFollow);
+    	if (result >= 1) {
+            return true;
+        }
+    	return false;
+	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.api.api.profile.Profile;
+import com.api.api.profile.UserFollow;
 import com.api.api.profile.service.ProfileService;
 
 @Controller("profileController")
@@ -35,11 +36,11 @@ public class ProfileControllerImpl implements ProfileController{
 	
 	@RequestMapping(value = "/profile", produces = "application/json; charset=utf8", method = RequestMethod.PUT)
 	@Override
-	public ResponseEntity<Profile> updateProfile(@RequestParam int user_id, Profile profile, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+	public ResponseEntity<Integer> updateProfile(@RequestBody Profile profile, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
 		System.out.println("updateProfile controller");
-		Profile updatedProfile = profileService.updateProfile(user_id, profile);
-        if (profile != null) {
-            return ResponseEntity.ok(profile);
+		int updated = profileService.updateProfile(profile);
+        if (updated > 0) {
+            return ResponseEntity.ok().body(updated);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -50,11 +51,34 @@ public class ProfileControllerImpl implements ProfileController{
 	public ResponseEntity<Boolean> checkNicknameAvailablity(@RequestParam String nickname, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 		System.out.println("checkNickname Controller " + nickname);
 		boolean isAvailable = profileService.isNicknameAvailable(nickname);
-		System.out.println("isAvailable " + isAvailable);
 		if (isAvailable) {
             return ResponseEntity.ok().body(isAvailable);
         } else {
             return ResponseEntity.ok().body(isAvailable);
+        }
+	}
+	
+	@RequestMapping(value = "/profile/follow", produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	@Override
+	public ResponseEntity<Boolean> followUser(@RequestBody UserFollow userFollow, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+		System.out.println("userFollow Controller " + userFollow.getUser_id() + " " + userFollow.getOpponent_id());
+		boolean success = profileService.followUser(userFollow);
+		if (success) {
+            return ResponseEntity.ok().body(success);
+        } else {
+            return ResponseEntity.ok().body(success);
+        }
+	}
+	
+	@RequestMapping(value = "/profile/follow", produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
+	@Override
+	public ResponseEntity<Boolean> unfollowUser(@RequestBody UserFollow userFollow, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+		System.out.println("userUnfollow Controller " + userFollow.getUser_id() + " " + userFollow.getOpponent_id());
+		boolean success = profileService.unfollowUser(userFollow);
+		if (success) {
+            return ResponseEntity.ok().body(success);
+        } else {
+            return ResponseEntity.ok().body(success);
         }
 	}
 	

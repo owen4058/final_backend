@@ -69,8 +69,7 @@
 	    UPDATE USERS
 	    SET 
 	        nickname = #{nickname},
-	        password = #{password},
-	        pro_path = #{pro_path},
+	        password = #{password}
 	    WHERE user_id = #{user_id}
        	]]>
 	</update>
@@ -81,6 +80,19 @@
        	WHERE nickname = #{nickname}
         ]]>
 	</select>
+	<insert id="insertIntoUserFollow" parameterType="userfollow">
+		<![CDATA[
+       	INSERT INTO USER_FOLLOW (USER_ID, OPPONENT_ID)
+		VALUES (#{user_id}, #{oppoenent_id})
+        ]]>
+	</insert>
+	<delete id="deleteFromUserFollow" parameterType="userfollow">
+		<![CDATA[
+       	DELETE FROM USER_FOLLOW
+        WHERE USER_ID = #{user_id}
+        AND OPPONENT_ID = #{opponent_id}
+        ]]>
+	</delete> 
   
   </mapper>
   

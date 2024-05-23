@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.api.api.board.BoardForm;
 import com.api.api.profile.Profile;
+import com.api.api.profile.UserFollow;
 
 @Repository("profileRepository")
 public class ProfileRepositoryImpl implements ProfileRepository {
@@ -57,6 +58,27 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 			return result;
         } catch (Exception e) {
             throw new DataAccessException("게시글 목록 조회 중 오류가 발생했습니다.", e) {};
+        }
+	}
+	
+	@Override
+	public int insertUserFollow(UserFollow userFollow) throws DataAccessException {
+		try {
+			int result = sqlSession.insert("mapper.profile.insertIntoUserFollow", userFollow);
+			System.out.println("insertIntoUserFollow " + userFollow.getUser_id());
+			return result;
+        } catch (Exception e) {
+            throw new DataAccessException("user follow repo error", e) {};
+        }
+	}
+	@Override
+	public int deleteUserUnFollow(UserFollow userFollow) throws DataAccessException {
+		try {
+			int result = sqlSession.delete("mapper.profile.deleteFromUserFollow", userFollow);
+			System.out.println("deleteFromUserFollow " + userFollow.getUser_id());
+			return result;
+        } catch (Exception e) {
+            throw new DataAccessException("user unfollow repo error", e) {};
         }
 	}
 	

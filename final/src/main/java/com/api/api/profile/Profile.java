@@ -13,6 +13,7 @@ public class Profile {
 	int user_id;
 	String nickname;
 	String user_email;
+	String password;
 	String pro_path; // profile image
 	int following_count;
 	int follower_count;
