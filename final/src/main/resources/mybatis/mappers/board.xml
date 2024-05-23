@@ -193,7 +193,7 @@
         	ON 
         	c.board_id = f.board_id
         WHERE RNUM > (#{page}-1) * 5
-        ORDER BY create_date desc
+        ORDER BY c.create_date desc
 	]]>
   </select> 
 	
@@ -236,7 +236,7 @@
         	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
         WHERE RNUM > (#{page}-1) * 5
-        ORDER BY create_date desc
+        ORDER BY c.create_date desc
 	]]>
   </select>
   
