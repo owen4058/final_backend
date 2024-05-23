@@ -18,6 +18,7 @@ public interface AdminRepository {
 	public List<Member> deletememberlist();
 	public int roleuser(int user_id);
 	public int recovermember(int user_id);
+	public int adminforumsectiondelete(int forum_id);
 
 
 

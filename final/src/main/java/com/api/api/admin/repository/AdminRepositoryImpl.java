@@ -26,6 +26,11 @@ public class AdminRepositoryImpl implements AdminRepository{
 		return sqlSession.delete("mapper.admin.form_admin_delete", forum_id);
 	}
 	@Override
+	public int adminforumsectiondelete(int forum_id) {
+		return sqlSession.delete("mapper.admin.forumSection_admin_delete", forum_id);
+	}
+	
+	@Override
 	public List<SectionAdmin> adminsectionlist() {
 		return sqlSession.selectList("mapper.admin.section_admin_list");
 	}

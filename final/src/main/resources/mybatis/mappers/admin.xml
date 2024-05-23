@@ -23,6 +23,14 @@
 	]]>
   </delete>
   
+  <delete id="forumSection_admin_delete" parameterType="int" >
+	<![CDATA[
+	delete 
+	from forum_section
+	where forum_id = #{forum_id}
+	]]>
+  </delete>
+  
   <!--  섹션 관련  -->
   
   
@@ -49,6 +57,8 @@
 	where forum_id = #{forum_id}
 	]]>
   </update>
+  
+  
   
   <delete id="section_admin_delete" parameterType="int" >
 	<![CDATA[

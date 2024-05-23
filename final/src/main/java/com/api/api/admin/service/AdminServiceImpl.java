@@ -23,6 +23,7 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public List<ForumAdmin> adminforumdelete(int forum_id) {
+		adminRepository.adminforumsectiondelete(forum_id);
 		adminRepository.adminforumdelete(forum_id);
 		return adminRepository.adminforumlist();
 	}
