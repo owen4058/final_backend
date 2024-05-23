@@ -61,9 +61,9 @@
   <insert id="insertMember"  parameterType="member"> 
 		<![CDATA[
 		 insert into users
-		 (user_id, dateOfBirth, nickname, password, user_email, create_date, name)
+		 (user_id, dateOfBirth, nickname, password, user_email, create_date, name, ROLE)
 		 values
-		 (AAA.NEXTVAL, #{dateOfBirth}, #{nickname} , #{password}, #{user_email}, SYSDATE, #{name} )
+		 (AAA.NEXTVAL, #{dateOfBirth}, #{nickname} , #{password}, #{user_email}, SYSDATE, #{name}, 'user')
 		]]>      
 	</insert>
 	
