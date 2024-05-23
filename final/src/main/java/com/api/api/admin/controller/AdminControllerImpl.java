@@ -81,7 +81,7 @@ public class AdminControllerImpl implements AdminController{
 			) throws Exception {
 		
 		String filepath = "c:\\imgs\\admin\\forum_logo"+File.separator+forum.getForum_name();
-		if (!file.isEmpty()) {
+		if (file != null) {
 			String filename = file.getOriginalFilename();
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
 			forum.setLogo_path(filepath+"/"+ filename);
