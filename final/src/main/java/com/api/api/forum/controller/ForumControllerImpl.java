@@ -114,7 +114,7 @@ public class ForumControllerImpl implements ForumController{
 	@RequestMapping(value = "/forum_information" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	public ResponseEntity<List<ForumForm>> forumselect(
 			@RequestParam Integer forum_id,
-			@RequestParam Integer user_id,
+			@RequestParam(defaultValue = "0") Integer user_id,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
 		
