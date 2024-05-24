@@ -27,7 +27,7 @@ public class SearchControllerImpl implements SearchController{
 	@RequestMapping(value = "/search_forum" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	public ResponseEntity<List<ForumForm>> searchforum(
 			@RequestParam String search_forum
-			,@RequestParam Integer user_id
+			,@RequestParam(defaultValue = "0") Integer user_id
 			,@RequestParam(defaultValue = "1") Integer page
 			) throws Exception {
 		
@@ -43,7 +43,7 @@ public class SearchControllerImpl implements SearchController{
 	@RequestMapping(value = "/search_title" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	public ResponseEntity<List<BoardForm>> searchboardtitle(
 			@RequestParam String search_title
-			,@RequestParam Integer user_id
+			,@RequestParam(defaultValue = "0") Integer user_id
 			,@RequestParam(defaultValue = "1") Integer page
 			) throws Exception {
 		Map<String, Object> searchinfo = new HashMap<>();
@@ -57,7 +57,7 @@ public class SearchControllerImpl implements SearchController{
 	@RequestMapping(value = "/search_content" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	public ResponseEntity<List<BoardForm>> searchboardcontent(
 			@RequestParam String search_content
-			,@RequestParam Integer user_id
+			,@RequestParam(defaultValue = "0") Integer user_id
 			,@RequestParam(defaultValue = "1") Integer page
 			) throws Exception {
 		Map<String, Object> searchinfo = new HashMap<>();
