@@ -3,6 +3,8 @@ package com.api.api.admin.controller;
 import java.io.File;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,20 +80,19 @@ public class AdminControllerImpl implements AdminController{
 	public ResponseEntity<String> adminforumedit(
 			@RequestPart(name = "forum") ForumAdmin forum
 			,@RequestPart(required = false ,name = "file") MultipartFile file
+			,HttpServletRequest request
 			) throws Exception {
 		
-		String filepath = "c:\\imgs\\admin\\forum_logo"+File.separator+forum.getForum_name();
+		String filepath = request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum.getForum_name());
 		if (file != null) {
 			String filename = file.getOriginalFilename();
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
 			forum.setLogo_path(filepath+"/"+ filename);
 		}
 		
-		System.out.println("이상 무");
 		ForumAdmin vo = adminservice.adminforumcheck(forum);
 		String logo = vo.getLogo_path();
-		System.out.println("ddddd " + logo);
-		if (forum.getLogo_path() != null) {
+		if (forum.getLogo_path() != null && logo != null) {
 			if (logo != forum.getLogo_path()) {
 				//현재 게시판에 존재하는 파일객체를 만듬
 				File file2 = new File(logo);
