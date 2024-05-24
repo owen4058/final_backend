@@ -83,7 +83,7 @@ public class BoardControllerImpl implements BoardController{
 			@RequestParam(defaultValue = "1") Integer page, 
 			@RequestParam Integer forum_id, 
 			@RequestParam Integer section_id,
-			@RequestParam Integer user_id) throws Exception {
+			@RequestParam(defaultValue = "0") Integer user_id) throws Exception {
 		
 		Map<String, Object> mapvo = new HashMap<String, Object>();
 		mapvo.put("page",page);
@@ -139,7 +139,7 @@ public class BoardControllerImpl implements BoardController{
 	@RequestMapping(value = "/board_detail" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	public ResponseEntity<List<BoardDetailForm>> boarddetail(
 			@RequestParam Integer board_id
-			, @RequestParam Integer user_id) throws Exception {
+			, @RequestParam(defaultValue = "0") Integer user_id) throws Exception {
 		Map<String, Object> board_info = new HashMap<String, Object>();
 		board_info.put("board_id", board_id);
 		board_info.put("user_id", user_id);
