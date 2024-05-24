@@ -46,8 +46,7 @@
 			d.*
       FROM 
 			(
-			SELECT 
-				ROWNUM AS RNUM, 
+			SELECT  
 				A.*
 			FROM 
 				(
@@ -57,10 +56,8 @@
 					FORUMS s
                  order by (SELECT COUNT(*) FROM user_forums WHERE forum_id = s.forum_id) desc
 				) A 
-				WHERE ROWNUM <= #{page} * 5
 			) c 
-			LEFT OUTER JOIN forum_section d on c.forum_id = d.forum_id
-			WHERE RNUM > (#{page}-1) * 5;	 	
+			LEFT OUTER JOIN forum_section d on c.forum_id = d.forum_id	 	
       ]]>
 	</select>
 	

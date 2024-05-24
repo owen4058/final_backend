@@ -25,5 +25,6 @@ public interface CommentRepository {
 	public int commentlikedelete(CommentLike commentLike);
 	public int commentlikesetpl(CommentLike commentLike);
 	public int commentlikesetmi(CommentLike commentLike);
+	public List<CommentForm> comment(Map<String, Object> commentinfo);
 
 }

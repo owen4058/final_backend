@@ -25,6 +25,22 @@
 	order by comment_id
 	]]>
   </select> 
+  <select id="comment"  resultType="commentform" parameterType="Map">
+	<![CDATA[
+	select a.*
+		,b.* 
+		,CASE 
+		WHEN j.cmt_like_ud  IS NOT NULL THEN j.cmt_like_ud
+		ELSE 0
+		END AS comment_like_state
+	from COMMENTS a
+	left outer join users b	on a.user_id = b.user_id
+	left outer join	comment_like j ON a.comment_id = j.comment_id and j.user_id = #{user_id}
+	where a.pa_comment_id = 0 and a.board_id = #{board_id}
+	order by a.create_date
+	]]>
+  </select> 
+  
 	
 	<select id="recomment"  resultType="commentform" parameterType="Map">
 	<![CDATA[
@@ -59,7 +75,7 @@
 	, create_date	
 	) values
 	(
-	AAA.NEXTVAL
+	#{comment_id}
 	,#{pa_comment_id}
 	,#{board_id}
 	,#{user_id}

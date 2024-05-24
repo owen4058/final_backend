@@ -31,6 +31,7 @@ public class CommentControllerImpl implements CommentController{
 	public ResponseEntity<List<CommentForm>> commentinsert(
 			@RequestBody CommentForm commentform
 			) throws Exception {
+		
 //		Integer Pa_comment_id = commentform.getPa_comment_id();
 //		if (Pa_comment_id == null) {
 //			return new ResponseEntity<List<?>>(commentService.commentinsert(commentform), HttpStatus.OK);
@@ -59,6 +60,18 @@ public class CommentControllerImpl implements CommentController{
 		commentinfo.put("user_id", user_id);
 		
 		return new ResponseEntity<List<CommentForm>>(commentService.recomment(commentinfo), HttpStatus.OK);
+	}
+	@Override
+	@RequestMapping(value = "/comment" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	public ResponseEntity<List<CommentForm>> comment(
+			@RequestParam int board_id
+			,@RequestParam int user_id
+			) throws Exception {
+		Map<String, Object> commentinfo = new HashMap<>();
+		commentinfo.put("board_id", board_id);
+		commentinfo.put("user_id", user_id);
+		
+		return new ResponseEntity<List<CommentForm>>(commentService.comment(commentinfo), HttpStatus.OK);
 	}
 	
 	@Override

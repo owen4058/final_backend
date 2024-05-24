@@ -188,13 +188,14 @@ public class BoardControllerImpl implements BoardController{
 			@RequestParam int my_id, 
 			@RequestPart(required = false, name = "hashtag") List<Hashtag> hashtag, 
 			@RequestPart(required = false, name = "img") List<BoardImg> img, 
-			@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
+			@RequestPart(required = false, name = "files") MultipartFile[] files
+			,HttpServletRequest request) throws Exception {
 		
 		if (board.getUser_id() != my_id) {
 			return new ResponseEntity<String>("게시글 작성자가 아닙니다.", HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
 		}
 		
-		String filepath = "c:\\imgs\\board\\upload";
+		String filepath = request.getSession().getServletContext().getRealPath("imgs\\board\\upload");
 		List<Hashtag> tag  = new ArrayList<>();
 		List<BoardImg> imgs  = new ArrayList<>();
 	

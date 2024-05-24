@@ -35,7 +35,8 @@ public interface BoardController {
 			int my_id,
 			List<Hashtag> hashtag,
 			List<BoardImg> boardImgs,
-			MultipartFile[] boFiles) throws Exception;
+			MultipartFile[] boFiles
+			,HttpServletRequest request) throws Exception;
 
 	public ResponseEntity<?> boarddelete(Integer board_id) throws Exception;
 

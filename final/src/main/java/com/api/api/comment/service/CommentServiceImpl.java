@@ -38,6 +38,10 @@ public class CommentServiceImpl implements CommentService{
 	public List<CommentForm> recomment(Map<String, Object> commentinfo) {
 		return commentRepository.recomment(commentinfo);
 	}
+	@Override
+	public List<CommentForm> comment(Map<String, Object> commentinfo) {
+		return commentRepository.comment(commentinfo);
+	}
 
 	@Override
 	public int commentupdate(CommentUpdateForm commentUpdateForm) {

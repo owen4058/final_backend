@@ -30,9 +30,14 @@ public class CommentRepositoryImpl implements CommentRepository{
 
 	@Override
 	public int commentinsert(CommentForm commentform) {
+		System.out.println(commentform.getUser_id());
 		sqlSession.insert("mapper.comment.commentinsert", commentform);
 		sqlSession.insert("mapper.comment.pacommentcount", commentform);
 		return sqlSession.update("mapper.comment.commentcount", commentform.getBoard_id());
+	}
+	@Override
+	public List<CommentForm> comment(Map<String, Object> commentinfo) {
+		return sqlSession.selectList("mapper.comment.comment", commentinfo);
 	}
 	@Override
 	public List<CommentForm> recomment(Map<String, Object> commentinfo) {

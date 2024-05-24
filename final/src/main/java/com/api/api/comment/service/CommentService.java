@@ -15,4 +15,5 @@ public interface CommentService {
 	public int commentupdate(CommentUpdateForm commentUpdateForm);
 	public int commentdelete(int comment_id, int board_id , int pa_comment_id);
 	public int commentlike(CommentLike commentLike);
+	public List<CommentForm> comment(Map<String, Object> commentinfo);
 }
