@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.profile.Profile;
 import com.api.api.profile.UserFollow;
@@ -36,7 +38,10 @@ public class ProfileControllerImpl implements ProfileController{
 	
 	@RequestMapping(value = "/profile", produces = "application/json; charset=utf8", method = RequestMethod.PUT)
 	@Override
-	public ResponseEntity<Integer> updateProfile(@RequestBody Profile profile, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+	public ResponseEntity<Integer> updateProfile(@RequestBody Profile profile,
+			@RequestPart(required = false, name = "files") MultipartFile file,
+			HttpServletRequest httpServletRequest, 
+			HttpServletResponse httpServletResponse){
 		System.out.println("updateProfile controller");
 		int updated = profileService.updateProfile(profile);
         if (updated > 0) {
