@@ -1,6 +1,7 @@
 package com.api.api.admin.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
@@ -82,27 +83,41 @@ public class AdminControllerImpl implements AdminController{
 			,@RequestPart(required = false ,name = "file") MultipartFile file
 			,HttpServletRequest request
 			) throws Exception {
+	
 		
-		String filepath = request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo");
+//		String logo  = adminservice.adminforumcheck(forum).getLogo_path();
+//		if (forum.getLogo_path() != null && logo != null) {
+//			if (logo != forum.getLogo_path()) {
+//				//현재 게시판에 존재하는 파일객체를 만듬
+//				File file2 = new File(logo);
+//						
+//				if(file2.exists()) { // 파일이 존재하면
+//					file2.delete(); // 파일 삭제	
+//				}
+//			}
+//		}
+//	    
+	    
+		String filepath = request.getSession().getServletContext().getRealPath("imgs/admin/forum_logo/");
+		System.out.println(request.getSession().getServletContext().getRealPath("imgs/admin/forum_logo")+"\\"+file.getOriginalFilename());
 		if (file != null) {
-			String filename = file.getOriginalFilename();
-			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
-			forum.setLogo_path(filepath+"/"+ filename);
+			  try {
+
+			String filename = System.currentTimeMillis()+"_"+file.getOriginalFilename();
+			 File destFile = new File(filepath, filename);
+			FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);
+			forum.setLogo_path(filepath+"\\"+ filename);
 			forum.setLogo_name(filename);
+			 System.out.println("파일 저장 경로: " + destFile.getAbsolutePath());
+
+			  } catch (IOException e) {
+		            e.printStackTrace();
+		            return new ResponseEntity<String>("파일 저장에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		        }
+
 		}
 		
-		ForumAdmin vo = adminservice.adminforumcheck(forum);
-		String logo = vo.getLogo_path();
-		if (forum.getLogo_path() != null && logo != null) {
-			if (logo != forum.getLogo_path()) {
-				//현재 게시판에 존재하는 파일객체를 만듬
-				File file2 = new File(logo);
-						
-				if(file2.exists()) { // 파일이 존재하면
-					file2.delete(); // 파일 삭제	
-				}
-			}
-		}
+		
 		
 		if (adminservice.adminforumedit(forum) == 1) {
 			return  new ResponseEntity<String>(forum.getLogo_name(),HttpStatus.OK);

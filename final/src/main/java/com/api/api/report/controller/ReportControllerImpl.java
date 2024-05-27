@@ -15,12 +15,10 @@ import com.api.api.report.service.ReportService;
 
 
 @Controller("reportController")
-@RequestMapping("/report")
 public class ReportControllerImpl implements ReportController {
 
 	@Autowired
 	private ReportService reportService;
-	//1. 신고내용 db에 저장할 것 
 	@PostMapping("")
     @Override
     public ResponseEntity<Report> saveReport(@RequestBody Report report) {
@@ -31,8 +29,7 @@ public class ReportControllerImpl implements ReportController {
             return ResponseEntity.badRequest().build();
         }
     }
-	//2. 관리자 페이지에 리스트 띄어주기
-	@GetMapping("/admin")
+	@GetMapping("/admin/")
 	@Override
 	public ResponseEntity<List<Report>> getListReport() {
 		List<Report> reportList = reportService.getListReport();
@@ -42,7 +39,6 @@ public class ReportControllerImpl implements ReportController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	//3. 신고 제목+본문
 	@GetMapping("/admin/Report/{id}")
 	@Override
 	public ResponseEntity<Report> getDetail(@RequestParam int report_id) {
