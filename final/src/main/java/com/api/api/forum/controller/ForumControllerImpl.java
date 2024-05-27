@@ -78,7 +78,7 @@ public class ForumControllerImpl implements ForumController{
 		ForumForm forum_name = forumService.forumselect(data).get(0);
 		
 		
-		
+		System.out.println(request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum_name.getForum_name()+File.separator+ forum_name.getLogo_name()));
 		File file = new File(request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum_name.getForum_name()+File.separator+ forum_name.getLogo_name()));
 		
 		ResponseEntity<byte[]> result = null;

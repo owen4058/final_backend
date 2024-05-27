@@ -88,6 +88,7 @@ public class AdminControllerImpl implements AdminController{
 			String filename = file.getOriginalFilename();
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
 			forum.setLogo_path(filepath+"/"+ filename);
+			forum.setLogo_name(filename);
 		}
 		
 		ForumAdmin vo = adminservice.adminforumcheck(forum);
@@ -104,7 +105,7 @@ public class AdminControllerImpl implements AdminController{
 		}
 		
 		if (adminservice.adminforumedit(forum) == 1) {
-			return  new ResponseEntity<String>("포럼 수정이 완료되었습니다.",HttpStatus.OK);
+			return  new ResponseEntity<String>(forum.getLogo_name(),HttpStatus.OK);
 		}else {
 			return  new ResponseEntity<String>("포럼 수정에 실패 했습니다.",HttpStatus.OK);
 		}		
