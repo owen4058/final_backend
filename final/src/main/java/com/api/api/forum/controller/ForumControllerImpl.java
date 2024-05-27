@@ -49,7 +49,7 @@ public class ForumControllerImpl implements ForumController{
 			) throws Exception {
 		forum.setLogo_path("null");
 		System.out.println(request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum.getForum_name()));
-		String filepath = request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum.getForum_name()) ;
+		String filepath = request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo") ;
 		
 		try {
 			if (!file.isEmpty()) {

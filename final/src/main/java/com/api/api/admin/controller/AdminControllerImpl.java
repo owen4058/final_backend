@@ -83,7 +83,7 @@ public class AdminControllerImpl implements AdminController{
 			,HttpServletRequest request
 			) throws Exception {
 		
-		String filepath = request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum.getForum_name());
+		String filepath = request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo");
 		if (file != null) {
 			String filename = file.getOriginalFilename();
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
