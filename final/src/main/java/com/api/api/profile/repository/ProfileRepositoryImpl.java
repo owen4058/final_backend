@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.api.api.board.BoardForm;
 import com.api.api.profile.Profile;
+import com.api.api.profile.ProfileImg;
 import com.api.api.profile.UserFollow;
 
 @Repository("profileRepository")
@@ -80,6 +81,17 @@ public class ProfileRepositoryImpl implements ProfileRepository {
         } catch (Exception e) {
             throw new DataAccessException("user unfollow repo error", e) {};
         }
+	}
+	
+	@Override
+	public int insertImg(ProfileImg profileImg) throws DataAccessException {
+		try {
+			System.out.println("insertProfileImg " + profileImg.getUser_id());
+			int result = sqlSession.insert("mapper.profile.insertProfileImg", profileImg);
+			return result;
+		} catch(Exception e) {
+			throw new DataAccessException("insertProfileImg repo error", e) {};
+		}
 	}
 	
 

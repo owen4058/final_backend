@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.api.api.board.BoardForm;
 import com.api.api.profile.Profile;
+import com.api.api.profile.ProfileImg;
 import com.api.api.profile.UserFollow;
 
 public interface ProfileRepository {
@@ -15,4 +16,5 @@ public interface ProfileRepository {
 	public String findByNickname(String nickname) throws DataAccessException;
 	public int insertUserFollow(UserFollow userFollow) throws DataAccessException;
 	public int deleteUserUnFollow(UserFollow userFollow) throws DataAccessException;
+	public int insertImg(ProfileImg profileImg) throws DataAccessException;
 }

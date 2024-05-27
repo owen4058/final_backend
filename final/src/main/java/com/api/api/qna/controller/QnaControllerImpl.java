@@ -42,7 +42,7 @@ public class QnaControllerImpl implements QnaController {
 		if (!qnaList.isEmpty()) {
 			return ResponseEntity.ok(qnaList);
 		} else {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.badRequest().build();
 		}
 	}
 	

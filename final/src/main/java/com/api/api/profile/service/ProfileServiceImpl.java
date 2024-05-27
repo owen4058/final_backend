@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.api.api.board.repository.BoardRepository;
 import com.api.api.profile.Profile;
+import com.api.api.profile.ProfileImg;
 import com.api.api.profile.UserFollow;
 import com.api.api.profile.repository.ProfileRepository;
 
@@ -24,10 +25,11 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public int updateProfile(Profile profile) throws DataAccessException {
-        int updatedRows = profileRepository.updateProfile(profile);
-        if (updatedRows > 0) {
-            return updatedRows;
+    public int updateProfile(Profile profile, ProfileImg profileImg) throws DataAccessException {
+        int updatedRows_profile = profileRepository.updateProfile(profile);
+        int updatedRows_profileImg = profileRepository.insertImg(profileImg);
+        if (updatedRows_profile > 0) {
+            return updatedRows_profile;
         } else {
             throw new DataAccessException("�봽濡쒗븘 �뾽�뜲�씠�듃�뿉 �떎�뙣�뻽�뒿�땲�떎.") {};
         }
