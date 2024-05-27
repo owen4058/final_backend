@@ -8,7 +8,6 @@ import lombok.Setter;
 @Component("profile")
 @Getter
 @Setter
-
 public class Profile {
 	int user_id;
 	String nickname;
@@ -20,4 +19,5 @@ public class Profile {
 	int board_count;
 	int comment_count;
 	int likes_count;
+	boolean isFollowing;
 }

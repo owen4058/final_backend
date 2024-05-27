@@ -83,7 +83,7 @@
 	<insert id="insertIntoUserFollow" parameterType="userfollow">
 		<![CDATA[
        	INSERT INTO USER_FOLLOW (USER_ID, OPPONENT_ID)
-		VALUES (#{user_id}, #{oppoenent_id})
+		VALUES (#{user_id}, #{opponent_id})
         ]]>
 	</insert>
 	<delete id="deleteFromUserFollow" parameterType="userfollow">
@@ -105,6 +105,21 @@
 		VALUES (#{IMG_ID}, #{IMG_NAME}, #{IMG_PATH}, #{USER_ID})
         ]]>
 	</insert>
+	<select id="selectFromUserFollow" parameterType="userfollow" resultType="int">
+		<![CDATA[
+	 	SELECT 
+		    CASE 
+		        WHEN EXISTS (
+		            SELECT 1 
+		            FROM user_follow 
+		            WHERE user_id = #{user_id}
+		              AND opponent_id = #{opponent_id}
+		        ) THEN 1
+		        ELSE 0 
+		    END AS is_following
+		FROM dual
+	    ]]>
+	</select>
   
   </mapper>
   
