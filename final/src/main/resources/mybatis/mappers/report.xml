@@ -11,6 +11,8 @@
 		<result property="report_reason" column="REPORT_REASON" />
 		<result property="create_date" column="CREATE_DATE" />
 		<result property="board_id" column="BOARD_ID" />
+		<result property="reporter_email" column="REPORTER_EMAIL" />
+		<result property="reported_email" column="REPORTED_EMAIL" />
 	</resultMap>
 
 	<insert id="insertReport" parameterType="report">
@@ -28,14 +30,15 @@
     r.report_reason,
     reporter.user_email AS reporter_email,
     reported.user_email AS reported_email,
-    b.title AS board_title
+    b.title AS board_title,
+    r.board_id
     FROM
     REPORT r
-    LEFT OUTER JOIN
+    INNER JOIN
     USERS reporter ON r.user_id = reporter.user_id
-    LEFT OUTER JOIN
+    INNER JOIN
     BOARD b ON r.board_id = b.board_id
-    LEFT OUTER JOIN
+    INNER JOIN
     USERS reported ON b.user_id = reported.user_id
      ]]>
 	</select>
