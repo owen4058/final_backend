@@ -19,4 +19,5 @@ public class Report {
 	String report_reason;
 	String content;
 	Date create_date;
+	int board_id;
 }
