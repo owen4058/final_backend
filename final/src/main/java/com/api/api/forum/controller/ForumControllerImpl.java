@@ -48,12 +48,12 @@ public class ForumControllerImpl implements ForumController{
 			HttpServletRequest request
 			) throws Exception {
 		forum.setLogo_path("null");
-		System.out.println(request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum.getForum_name()));
-		String filepath = request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo") ;
+		System.out.println(request.getSession().getServletContext().getRealPath("imgs/admin/forum_logo"));
+		String filepath = request.getSession().getServletContext().getRealPath("imgs/admin/forum_logo") ;
 		
 		try {
 			if (!file.isEmpty()) {
-				String filename = file.getOriginalFilename();
+				String filename = System.currentTimeMillis()+"_"+file.getOriginalFilename();
 				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
 				forum.setLogo_path(filepath+"/"+ filename);
 				forum.setLogo_name(filename);
@@ -76,10 +76,11 @@ public class ForumControllerImpl implements ForumController{
 		data.put("forum_id", forum_id);
 		data.put("user_id", 0);
 		ForumForm forum_name = forumService.forumselect(data).get(0);
+		System.out.println(forum_name);
 		
 		
-		System.out.println(request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum_name.getForum_name()+File.separator+ forum_name.getLogo_name()));
-		File file = new File(request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+forum_name.getForum_name()+File.separator+ forum_name.getLogo_name()));
+		System.out.println(request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+ forum_name.getLogo_name()));
+		File file = new File(request.getSession().getServletContext().getRealPath("imgs\\admin\\forum_logo"+File.separator+ forum_name.getLogo_name()));
 		
 		ResponseEntity<byte[]> result = null;
 		

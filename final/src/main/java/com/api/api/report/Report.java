@@ -20,4 +20,6 @@ public class Report {
 	String content;
 	Date create_date;
 	int board_id;
+	String reporter_email;
+	String reported_email;
 }
