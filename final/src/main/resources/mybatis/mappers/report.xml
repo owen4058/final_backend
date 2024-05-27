@@ -2,49 +2,54 @@
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
-   <mapper namespace="mapper.report">
-	  <resultMap id="report" type="com.api.api.report.Report">
-	        <id property="report_id" column="REPORT_ID"/>
-	        <result property="content" column="CONTENT"/>
-	        <result property="user_id" column="USER_ID"/>
-	        <result property="report_reason" column="REPORT_REASON"/>
-	        <result property="create_date" column="CREATE_DATE"/>
-    </resultMap>
-    
-   <insert id="insertReport" parameterType="report">
+
+<mapper namespace="mapper.report">
+	<resultMap id="report" type="com.api.api.report.Report">
+		<id property="report_id" column="REPORT_ID" />
+		<result property="content" column="CONTENT" />
+		<result property="user_id" column="USER_ID" />
+		<result property="report_reason" column="REPORT_REASON" />
+		<result property="create_date" column="CREATE_DATE" />
+		<result property="board_id" column="BOARD_ID" />
+	</resultMap>
+
+	<insert id="insertReport" parameterType="report">
     <![CDATA[
-        INSERT INTO REPORT (CONTENT, REPORT_REASON, USER_ID, CREATE_DATE) 
-        VALUES (#{content}, #{report_reason}, #{user_id}, SYSDATE())
+        INSERT INTO REPORT (REPORT_ID, CONTENT, REPORT_REASON, USER_ID, BOARD_ID, CREATE_DATE ) 
+        VALUES (report_seq.NEXTVAL, #{content}, #{report_reason}, #{user_id}, #{board_id}, SYSDATE)
     ]]>
-    </insert>
-  
-    <select id="selectReportListByAdmin" resultMap="report">
+	</insert>
+
+	<select id="selectReportListByAdmin" resultMap="report">
     <![CDATA[
-      SELECT
-            R.report_id,
-            R.user_id,
-            U.user_id,
-            U.user_name,
-            U.user_nickname,
-            U.email,
-            U.create_date
-        FROM
-            REPORT R
-            JOIN USERS U ON R.user_id = U.user_id;
+     SELECT
+    r.report_id,
+    r.create_date,
+    r.report_reason,
+    reporter.user_email AS reporter_email,
+    reported.user_email AS reported_email,
+    b.title AS board_title
+    FROM
+    REPORT r
+    JOIN
+    USERS reporter ON r.user_id = reporter.user_id
+    JOIN
+    BOARD b ON r.board_id = b.board_id
+    JOIN
+    USERS reported ON b.user_id = reported.user_id;
      ]]>
-    </select>
-    
-    <select id="selectReport" resultMap="report" parameterType="int">
+	</select>
+
+	<select id="selectReport" resultMap="report" parameterType="int">
     <![CDATA[
         SELECT content, report_reason
         FROM REPORT
         WHERE id = #{report_id}
      ]]>
-    </select>
-    
-    
-    
-    
-    
-  </mapper>
+	</select>
+
+
+
+
+
+</mapper>

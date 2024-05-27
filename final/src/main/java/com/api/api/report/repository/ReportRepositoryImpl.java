@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.api.api.qna.Qna;
 import com.api.api.report.Report;
 
 @Repository("reportRepository")
