@@ -22,7 +22,7 @@
 
 	<select id="selectReportListByAdmin" resultMap="report">
     <![CDATA[
-     SELECT
+    SELECT
     r.report_id,
     r.create_date,
     r.report_reason,
@@ -31,12 +31,12 @@
     b.title AS board_title
     FROM
     REPORT r
-    JOIN
+    LEFT OUTER JOIN
     USERS reporter ON r.user_id = reporter.user_id
-    JOIN
+    LEFT OUTER JOIN
     BOARD b ON r.board_id = b.board_id
-    JOIN
-    USERS reported ON b.user_id = reported.user_id;
+    LEFT OUTER JOIN
+    USERS reported ON b.user_id = reported.user_id
      ]]>
 	</select>
 

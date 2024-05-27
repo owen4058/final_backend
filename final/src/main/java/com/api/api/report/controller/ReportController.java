@@ -8,7 +8,7 @@ import com.api.api.report.Report;
 
 public interface ReportController {
 
-	public ResponseEntity<Report> saveReport(Report report);
-	public ResponseEntity<List<Report>> getListReport();
-	public ResponseEntity<Report> getDetail(int report_id);
+	public ResponseEntity<Report> saveReport(Report report) throws Exception;
+	public ResponseEntity<List<Report>> getListReport() throws Exception;
+	public ResponseEntity<Report> getDetail(int report_id) throws Exception;
 }

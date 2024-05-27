@@ -17,8 +17,8 @@ public class ReportServiceImpl implements ReportService{
     public int saveReport(Report report) {
         return reportRepository.saveReport(report);
     }
- //2, //2. 관리자 페이지에 리스트 띄어주기
-    @Override
+ //2. 관리자 페이지에 리스트 띄어주기
+  @Override
   public List<Report> getListReport() {
       return reportRepository.findListByAdmin();
   }
