@@ -92,7 +92,19 @@
         WHERE USER_ID = #{user_id}
         AND OPPONENT_ID = #{opponent_id}
         ]]>
-	</delete> 
+	</delete>
+	<insert id="insertProfileImg" parameterType="userfollow">
+		<selectKey keyProperty="board_id" resultType="int" order="BEFORE">
+	        <![CDATA[
+	        SELECT MAX(IMG_ID) + 1 from IMG_PROFILE
+	        ]]>
+    	</selectKey>
+    	
+		<![CDATA[
+       	INSERT INTO IMG_PROFILE (IMG_ID, IMG_NAME, IMG_PATH, USER_ID)
+		VALUES (#{IMG_ID}, #{IMG_NAME}, #{IMG_PATH}, #{USER_ID})
+        ]]>
+	</insert>
   
   </mapper>
   

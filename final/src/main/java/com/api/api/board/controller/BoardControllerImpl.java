@@ -12,17 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.board.BoardCreateForm;
@@ -62,7 +67,7 @@ public class BoardControllerImpl implements BoardController{
 		
 		ResponseEntity<byte[]> result = null;
 		
-		try {
+		try {	
 			
 			HttpHeaders header = new HttpHeaders();
 			
@@ -76,6 +81,67 @@ public class BoardControllerImpl implements BoardController{
 		
 		return result;
 	}
+	
+//	@Override
+//	@RequestMapping(value = "/good" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+//	public ResponseEntity<String> good(@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
+//		
+//		System.out.println("good");
+//		String filepath = "C:\\imgs\\board\\upload";
+//		List<Hashtag> tag  = new ArrayList<>();
+//		List<BoardImg>  boardImgs = new ArrayList<BoardImg>();
+//		
+//		try {
+//			if (files != null) {
+//				for (MultipartFile multipart : files) {
+//					System.out.println(multipart.getOriginalFilename());
+//					if (!multipart.isEmpty()) {
+//						String filename = System.currentTimeMillis()+"_"+multipart.getOriginalFilename();
+//						FileUtils.copyInputStreamToFile(multipart.getInputStream(), new File(filepath, filename));
+//						BoardImg boardImg = new BoardImg();
+//						boardImg.setImg_name(filename);
+//						boardImg.setImg_path(filepath+"/"+ filename);
+//						
+//						boardImgs.add(boardImg);
+//					}	
+//				}	
+//			}
+//		
+//			return new ResponseEntity<String>("", HttpStatus.OK);
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return new ResponseEntity<String>("파일등록에 실패했습니다.", HttpStatus.EXPECTATION_FAILED);
+//		}
+//		
+//		
+//	}
+//	
+//	
+//	
+//	public void info(MultipartFile[] files) throws IOException{
+//		
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+//			
+//			
+//			MultiValueMap<String, Object> body
+//			  = new LinkedMultiValueMap<>();
+////			body.add("board",board);
+//			for (MultipartFile multipartFile : files) {
+//				System.out.println(multipartFile.getOriginalFilename());
+//				body.add("files", new HttpEntity<>(multipartFile.getResource(), headers));
+//			}
+//			
+//			HttpEntity<MultiValueMap<String, Object>> requestEntity
+//			  = new HttpEntity<>(body, headers);
+//			String serverUrl = "http://localhost:8080/api/good";
+//			RestTemplate restTemplate = new RestTemplate();
+//			ResponseEntity<String> response = restTemplate
+//			  .postForEntity(serverUrl, requestEntity, String.class);
+//	}
+//	
+	
 	
 	@Override
 	@RequestMapping(value = "/board" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
@@ -104,9 +170,10 @@ public class BoardControllerImpl implements BoardController{
 			@RequestPart(required = false, name = "files") MultipartFile[] files,
 			HttpServletRequest request) throws Exception {
 		
+		
 		System.out.println("board_detail : ");
 		
-		String filepath = request.getSession().getServletContext().getRealPath("imgs\\board\\upload");
+		String filepath = "resources/imgs/board/upload";
 		List<Hashtag> tag  = new ArrayList<>();
 		List<BoardImg>  boardImgs = new ArrayList<BoardImg>();
 		try {

@@ -43,6 +43,9 @@ public interface BoardController {
 	public ResponseEntity<?> boardlike(BoardLike board) throws Exception;
 
 	public ResponseEntity<?> boardsave(BoardSave board) throws Exception;
-	
-	
+
+//	public ResponseEntity<String> good(MultipartFile[] files) throws Exception;
+
+//	public void info(MultipartFile[] files)
+//			throws Exception;
 }

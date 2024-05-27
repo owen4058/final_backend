@@ -53,7 +53,7 @@
    <update id="form_admin_edit"  parameterType="forumadmin" >
 	<![CDATA[
 	update forums 
-	set forum_name = #{forum_name}, forum_info = #{forum_info}, logo_path = #{logo_path}
+	set forum_name = #{forum_name}, forum_info = #{forum_info}, logo_path = #{logo_path}, logo_name = #{logo_name}
 	where forum_id = #{forum_id}
 	]]>
   </update>
