@@ -1,6 +1,8 @@
 package com.api.api.profile.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,5 +22,6 @@ public interface ProfileController {
 	public ResponseEntity<Boolean> unfollowUser(@RequestBody UserFollow userFollow, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 	public ResponseEntity<Boolean> isFollowing(@RequestParam int user_id,
 			@RequestParam int opponent_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
-	
+//	public ResponseEntity<List<Profile>> getFollower(@RequestParam int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
+//	public ResponseEntity<List<Profile>> getFollowing(@RequestParam int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 }

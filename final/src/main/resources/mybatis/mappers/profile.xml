@@ -120,6 +120,30 @@
 		FROM dual
 	    ]]>
 	</select>
+	<delete id="deleteProfileImg" parameterType="int">
+		<![CDATA[
+       	DELETE FROM IMG_PROFILE
+        WHERE USER_ID = #{user_id}
+        ]]>
+	</delete>
+	<select id="selectFollower" parameterType="int" resultType="int">
+		<![CDATA[
+	 	SELECT 
+            u.USER_ID,
+            u.NICKNAME,
+            img.IMG_ID,
+            img.IMG_NAME,
+            img.IMG_PATH
+        FROM 
+            USER_FOLLOW uf
+        JOIN 
+            USERS u ON uf.OPPONENT_ID = u.USER_ID
+        LEFT JOIN 
+            IMG_PROFILE img ON u.USER_ID = img.USER_ID
+        WHERE 
+            uf.USER_ID = #{userId}
+	    ]]>
+	</select>
   
   </mapper>
   

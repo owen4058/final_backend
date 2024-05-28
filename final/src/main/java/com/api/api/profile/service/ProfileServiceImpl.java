@@ -27,6 +27,10 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public int updateProfile(Profile profile, ProfileImg profileImg) throws DataAccessException {
         int updatedRows_profile = profileRepository.updateProfile(profile);
+        int updatedRows_hasImg = profileRepository.hasImg(profile.getUser_id());
+        if(updatedRows_hasImg >= 1) {
+        	profileRepository.deleteImg(profile.getUser_id());
+        }
         int updatedRows_profileImg = profileRepository.insertImg(profileImg);
         if (updatedRows_profile > 0) {
             return updatedRows_profile;

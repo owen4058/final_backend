@@ -39,7 +39,7 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 
         } catch (Exception e) {
             throw new DataAccessException("프로필 정보 조회 중 오류가 발생했습니다.", e) {};
-        }
+        } 
     }
 	
 	@Override
@@ -95,6 +95,13 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 	}
 	
 	@Override
+	public int deleteImg(int user_id) throws DataAccessException{
+		System.out.println("delete Img repo");
+		int result = sqlSession.delete("mapper.profile.deleteProfileImg", user_id);
+		return result;
+	}
+	
+	@Override
 	public int isFollowing(UserFollow userFollow) throws DataAccessException{
 		try {
 			System.out.println("userFollow repo " + userFollow.getUser_id() + userFollow.getOpponent_id());
@@ -103,6 +110,13 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 		} catch(Exception e) {
 			throw new DataAccessException("userFollow repo error", e) {};
 		}
+	}
+	
+	@Override
+	public int hasImg(int user_id) throws DataAccessException {
+		System.out.println("has image repo " + user_id);
+		int result = sqlSession.selectOne("mapper.profile.hasImg", user_id);
+		return result;
 	}
 
 	

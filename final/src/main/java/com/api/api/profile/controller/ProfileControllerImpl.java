@@ -41,27 +41,29 @@ public class ProfileControllerImpl implements ProfileController{
         }
 	}
 	
-	@RequestMapping(value = "/profile", produces = "application/json; charset=utf8", method = RequestMethod.PUT)
+	@RequestMapping(value = "/profile", produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	@Override
-	public ResponseEntity<?> updateProfile(@RequestBody Profile profile,
-			@RequestPart(required = false, name = "files") MultipartFile file,
+	public ResponseEntity<?> updateProfile(@RequestPart(name = "profile") Profile profile,
+			@RequestPart(required = false, name = "file") MultipartFile file,
 			HttpServletRequest httpServletRequest, 
 			HttpServletResponse httpServletResponse) throws Exception {
 		System.out.println("updateProfile controller");
 		
-		String filepath = httpServletRequest.getSession().getServletContext().getRealPath("imgs\\profile\\upload");
+		String filepath = httpServletRequest.getSession().getServletContext().getRealPath("imgs\\profile");
 		
 		try {
 			ProfileImg profileImg = new ProfileImg();
 			
 			if (!file.isEmpty()) {
 				String filename = System.currentTimeMillis()+"_"+file.getOriginalFilename();
-//				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
-				File filePath = new File(filepath + filename);
-				file.transferTo(filePath);
+				File destination = new File(filepath + filename);
+				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
+//				file.transferTo(filePath);
 				profileImg.setImg_name(filename);
-				profileImg.setImg_path(filepath+"/"+ filename);
-			}	
+				profileImg.setImg_path(filepath+"\\"+ filename);
+				System.out.println("파일 저장 경로: " + destination.getAbsolutePath());
+
+			}
 			int updated = profileService.updateProfile(profile, profileImg);
 			
 			if (updated > 0) {
@@ -123,6 +125,17 @@ public class ProfileControllerImpl implements ProfileController{
 		System.out.println("return isFollowing : " + is_following);
             return ResponseEntity.ok().body(is_following);
 	}
+	
+//	@RequestMapping(value = "/profile/follower", produces = "application/json; charset=utf8", method = RequestMethod.GET)
+//	@Override
+//	public ResponseEntity<List<Profile>> getFollower(@RequestParam int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+//		
+//	}
+//	@RequestMapping(value = "/profile/following", produces = "application/json; charset=utf8", method = RequestMethod.GET)
+//	@Override
+//	public ResponseEntity<List<Profile>> getFollowing(@RequestParam int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+//		
+//	}
 
 	
 }
