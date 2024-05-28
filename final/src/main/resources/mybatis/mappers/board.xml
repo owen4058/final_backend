@@ -163,7 +163,15 @@
 			d.pro_path,
 			d.nickname,
 			e.*,
-			f.* 
+			f.*,
+			CASE 
+               WHEN g.LIKE_UD  IS NOT NULL THEN g.LIKE_UD
+               ELSE 0
+            END AS board_like_state,
+            CASE 
+               WHEN h.user_id  IS NOT NULL THEN 1
+               ELSE 0
+            END AS board_save_state 
 		FROM 
 			(
 			SELECT 
@@ -182,7 +190,9 @@
 			) c 
 			LEFT OUTER JOIN users d	ON c.user_id = d.user_id
 			LEFT OUTER JOIN img e ON c.board_id = e.board_id 
-			LEFT OUTER JOIN hashtag f ON c.board_id = f.board_id 
+			LEFT OUTER JOIN hashtag f ON c.board_id = f.board_id
+			LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
+            LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id} 
 			WHERE RNUM > (#{page}-1) * 5
         ORDER BY c.create_date desc
 	]]>

@@ -12,7 +12,7 @@ import com.api.api.board.BoardSave;
 import com.api.api.board.Hashtag;
 
 public interface BoardRepository {
-	public List<BoardForm> homelist(int page);
+	public List<BoardForm> homelist(Map<String, Object> mapvo);
 
 	public List<BoardForm> boardlist(Map<String, Object> mapvo);
 	

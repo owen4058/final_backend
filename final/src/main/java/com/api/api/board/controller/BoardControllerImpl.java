@@ -51,9 +51,14 @@ public class BoardControllerImpl implements BoardController{
 	@RequestMapping(value = "/home" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	public ResponseEntity<List<BoardForm>> homelist(
 			@RequestParam(defaultValue = "1") Integer page
-			) throws Exception {
+			,@RequestParam(defaultValue = "0") Integer user_id) throws Exception {
+		
+		
+		Map<String, Object> mapvo = new HashMap<String, Object>();
+		mapvo.put("page",page);
+		mapvo.put("user_id",user_id);
 
-		List<BoardForm> vo = boardService.homelist(page);
+		List<BoardForm> vo = boardService.homelist(mapvo);
 		
 		return new ResponseEntity<List<BoardForm>>(vo, HttpStatus.OK);
 	}
