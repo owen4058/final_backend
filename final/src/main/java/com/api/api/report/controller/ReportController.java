@@ -10,5 +10,7 @@ public interface ReportController {
 
 	public ResponseEntity<Report> saveReport(Report report) throws Exception;
 	public ResponseEntity<List<Report>> getListReport() throws Exception;
+	public ResponseEntity<Report> processReport(Report report) throws Exception;
+	
 	public ResponseEntity<Report> getDetail(int report_id) throws Exception;
 }

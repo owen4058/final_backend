@@ -7,8 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.api.api.qna.Qna;
 import com.api.api.report.Report;
 import com.api.api.report.service.ReportService;
 
@@ -19,7 +22,7 @@ public class ReportControllerImpl implements ReportController {
 	@Autowired
 	private ReportService reportService;
 
-	//1. 신고내용 db에 저장할 것 
+	//1. 신고내용 저장할 것 
 	@PostMapping("/report")
     @Override
     public ResponseEntity<Report> saveReport(@RequestBody Report report) {
@@ -42,6 +45,23 @@ public class ReportControllerImpl implements ReportController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+	//3. 신고 처리 여부
+	@PutMapping("/admin/report")
+    @Override
+    public ResponseEntity<Report> processReport(@RequestBody Report report) {
+        int result = reportService.processReport(report);
+        if (result > 0) {
+            return ResponseEntity.ok(report);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+	
+	
+	
+	
+	
 	@GetMapping("/admin/Report/{id}")
 	@Override
 	public ResponseEntity<Report> getDetail(@RequestParam int report_id) {

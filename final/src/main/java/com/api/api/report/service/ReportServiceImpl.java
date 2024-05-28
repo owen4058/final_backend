@@ -22,7 +22,17 @@ public class ReportServiceImpl implements ReportService{
   public List<Report> getListReport() {
       return reportRepository.findListByAdmin();
   }
-  //3. 신고된 내용 불러오기
+  //3. 신고 처리 여부
+  @Override
+  public int processReport(Report report) {
+	  return  reportRepository.processReport(report);
+  }
+  
+  
+  
+  
+  
+  
     @Override
     public Report getDetail(int report_id) {
         return reportRepository.findById(report_id);

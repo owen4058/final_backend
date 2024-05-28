@@ -7,6 +7,8 @@ import com.api.api.report.Report;
 public interface ReportService {
 	public int saveReport(Report report);
 	public List<Report> getListReport();
+	public int processReport(Report report);
+	
 	public Report getDetail(int report_id);
 
 }

@@ -13,6 +13,7 @@
 		<result property="board_id" column="BOARD_ID" />
 		<result property="reporter_email" column="REPORTER_EMAIL" />
 		<result property="reported_email" column="REPORTED_EMAIL" />
+		<result property="processed" column="PROCESSED" />
 	</resultMap>
 
 	<insert id="insertReport" parameterType="report">
@@ -26,12 +27,15 @@
     <![CDATA[
     SELECT
     r.report_id,
-    r.create_date,
+    TO_CHAR(r.create_date, 'YYYY-MM-DD HH24:MI:SS') AS CREATE_DATE,
     r.report_reason,
     reporter.user_email AS reporter_email,
     reported.user_email AS reported_email,
     b.title AS board_title,
-    r.board_id
+    r.board_id,
+    r.user_id,
+    r.content,
+    r.processed
     FROM
     REPORT r
     INNER JOIN
@@ -42,6 +46,17 @@
     USERS reported ON b.user_id = reported.user_id
      ]]>
 	</select>
+	
+	<update id="updateReport" parameterType="report">
+    <![CDATA[
+	    UPDATE REPORT
+	    SET 
+	       PROCESSED = 'TRUE'
+	    WHERE REPORT_ID = #{report_id}
+   	]]>
+	</update>
+	
+	
 
 	<select id="selectReport" resultMap="report" parameterType="int">
     <![CDATA[

@@ -22,4 +22,6 @@ public class Report {
 	int board_id;
 	String reporter_email;
 	String reported_email;
+	String board_title;
+	String processed;
 }
