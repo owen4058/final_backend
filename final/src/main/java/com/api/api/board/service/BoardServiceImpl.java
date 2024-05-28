@@ -23,8 +23,8 @@ public class BoardServiceImpl implements BoardService{
 	private BoardRepository boardRepository;
 
 	@Override
-	public List<BoardForm> homelist(int page) {
-		return boardRepository.homelist(page);
+	public List<BoardForm> homelist(Map<String, Object> mapvo) {
+		return boardRepository.homelist(mapvo);
 	}
 	
 	@Override

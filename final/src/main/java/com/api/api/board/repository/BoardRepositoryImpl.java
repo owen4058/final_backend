@@ -22,8 +22,8 @@ public class BoardRepositoryImpl implements BoardRepository{
 	private SqlSession sqlSession;
 
 	@Override
-	public List<BoardForm> homelist(int page) {
-		return sqlSession.selectList("mapper.board.homelist", page);
+	public List<BoardForm> homelist(Map<String, Object> mapvo) {
+		return sqlSession.selectList("mapper.board.homelist", mapvo);
 	}
 	@Override
 	public List<BoardForm> boardlist(Map<String, Object> mapvo) {
