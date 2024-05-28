@@ -112,4 +112,17 @@ public class ProfileControllerImpl implements ProfileController{
         }
 	}
 	
+	@RequestMapping(value = "/profile/isfollow", produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	@Override
+	public ResponseEntity<Boolean> isFollowing(@RequestParam int user_id,
+			@RequestParam int opponent_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+		System.out.println("isFollowing Controller " + user_id + " " + opponent_id);
+		UserFollow userFollow = new UserFollow();
+		userFollow.setUser_id(user_id); userFollow.setOpponent_id(opponent_id);
+		boolean is_following = profileService.checkUserFollow(userFollow);
+		System.out.println("return isFollowing : " + is_following);
+            return ResponseEntity.ok().body(is_following);
+	}
+
+	
 }

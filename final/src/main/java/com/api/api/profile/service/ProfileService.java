@@ -13,4 +13,5 @@ public interface ProfileService {
 	public boolean isNicknameAvailable(String nickname) throws DataAccessException;
 	public boolean followUser(UserFollow userFollow) throws DataAccessException;
 	public boolean unfollowUser(UserFollow userFollow) throws DataAccessException;
+	public boolean checkUserFollow(UserFollow userFollow) throws DataAccessException;
 }

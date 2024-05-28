@@ -33,6 +33,7 @@
         <typeAlias type="com.api.api.qna.Qna"  alias="qna"/>
         <typeAlias type="com.api.api.save.Save"  alias="save"/>
         <typeAlias type="com.api.api.report.Report"  alias="report"/>
+        <typeAlias type="com.api.api.profile.UserFollow"  alias="UserFollow"/>
         
         
 	</typeAliases>

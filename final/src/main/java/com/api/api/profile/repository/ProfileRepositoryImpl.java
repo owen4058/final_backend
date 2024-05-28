@@ -65,8 +65,8 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 	@Override
 	public int insertUserFollow(UserFollow userFollow) throws DataAccessException {
 		try {
-			int result = sqlSession.insert("mapper.profile.insertIntoUserFollow", userFollow);
 			System.out.println("insertIntoUserFollow " + userFollow.getUser_id());
+			int result = sqlSession.insert("mapper.profile.insertIntoUserFollow", userFollow);
 			return result;
         } catch (Exception e) {
             throw new DataAccessException("user follow repo error", e) {};
@@ -93,6 +93,18 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 			throw new DataAccessException("insertProfileImg repo error", e) {};
 		}
 	}
+	
+	@Override
+	public int isFollowing(UserFollow userFollow) throws DataAccessException{
+		try {
+			System.out.println("userFollow repo " + userFollow.getUser_id() + userFollow.getOpponent_id());
+			int result = sqlSession.selectOne("mapper.profile.selectFromUserFollow", userFollow);
+			return result;
+		} catch(Exception e) {
+			throw new DataAccessException("userFollow repo error", e) {};
+		}
+	}
+
 	
 
 }

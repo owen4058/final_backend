@@ -44,6 +44,7 @@ public class ProfileServiceImpl implements ProfileService {
     	return false;
     }
     
+    @Override
     public boolean followUser(UserFollow userFollow) throws DataAccessException {
     	int result = profileRepository.insertUserFollow(userFollow);
     	if (result >= 1) {
@@ -51,6 +52,8 @@ public class ProfileServiceImpl implements ProfileService {
         }
     	return false;
     }
+    
+    @Override
 	public boolean unfollowUser(UserFollow userFollow) throws DataAccessException {
 		int result = profileRepository.deleteUserUnFollow(userFollow);
     	if (result >= 1) {
@@ -58,5 +61,14 @@ public class ProfileServiceImpl implements ProfileService {
         }
     	return false;
 	}
+    
+    @Override
+    public boolean checkUserFollow(UserFollow userFollow) throws DataAccessException {
+    	int result = profileRepository.isFollowing(userFollow);
+    	if (result >= 1) {
+            return true;
+        }
+    	return false;
+    }
 
 }
