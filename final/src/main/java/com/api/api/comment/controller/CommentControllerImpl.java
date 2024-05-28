@@ -50,7 +50,7 @@ public class CommentControllerImpl implements CommentController{
 	@RequestMapping(value = "/recomment" ,produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	public ResponseEntity<List<CommentForm>> recomment(
 			@RequestParam int comment_id
-			,@RequestParam int user_id
+			,@RequestParam(defaultValue = "0") int user_id
 			) throws Exception {
 		if (comment_id == 0) {
 			comment_id = -1;
