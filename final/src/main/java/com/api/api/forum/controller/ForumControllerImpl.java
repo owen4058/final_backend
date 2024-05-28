@@ -2,7 +2,6 @@ package com.api.api.forum.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +29,7 @@ import com.api.api.admin.ForumAdmin;
 import com.api.api.admin.SectionAdmin;
 import com.api.api.forum.ForumForm;
 import com.api.api.forum.service.ForumService;
+import com.api.api.member.Member;
 
 @Controller("forumController")
 public class ForumControllerImpl implements ForumController{
@@ -69,7 +69,6 @@ public class ForumControllerImpl implements ForumController{
 	public ResponseEntity<byte[]> getImage(@RequestParam Integer forum_id, HttpServletRequest request) {
 		
 		System.out.println("getImage()........." + forum_id);
-		URL r = this.getClass().getResource("");
 		System.out.println(request.getSession().getServletContext().getRealPath("/"));
 		
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -105,8 +104,20 @@ public class ForumControllerImpl implements ForumController{
 	@RequestMapping(value = "/section" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	public ResponseEntity<?> sectioncreate(
 			@RequestBody SectionAdmin sectionAdmin
+			, HttpServletRequest request
 			) throws Exception {
-		return new ResponseEntity<>(forumService.sectioncreate(sectionAdmin),HttpStatus.OK);
+		Member member = (Member) request.getSession().getAttribute("loginMember");
+		if (member.getRole().equals("admin") ) {
+			return new ResponseEntity<>(forumService.sectioncreate(sectionAdmin),HttpStatus.OK);
+		}else {
+			int vo = forumService.forumcheck(sectionAdmin.getForum_id()).getCreate_user_id();
+			if (vo == member.getUser_id()) {
+				return new ResponseEntity<>(forumService.sectioncreate(sectionAdmin),HttpStatus.OK);
+			}else {
+				return ResponseEntity.notFound().build();
+			}
+		}
+		
 	}
 	
 	

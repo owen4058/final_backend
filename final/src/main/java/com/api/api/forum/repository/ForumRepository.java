@@ -18,5 +18,7 @@ public interface ForumRepository {
 	public int sectioncreate(List<SectionAdmin> section);
 	
 	public List<ForumForm> forumlist();
+	
+	public ForumForm forumcheck(int forum_id);
 
 }

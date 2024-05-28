@@ -49,5 +49,10 @@ public class ForumServiceImpl implements ForumService{
 	public List<ForumForm> forumlist() {
 		return forumRepository.forumlist();
 	}
+	
+	@Override
+	public ForumForm forumcheck(int forum_id) {
+		return forumRepository.forumcheck(forum_id);
+	}
 
 }

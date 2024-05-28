@@ -42,6 +42,10 @@ public class ForumRepositoryImpl implements ForumRepository{
 	public List<ForumForm> forumlist() {
 		return sqlSession.selectList("mapper.forum.formlist");
 	}
+	@Override
+	public ForumForm forumcheck(int forum_id) {
+		return sqlSession.selectOne("mapper.forum.forumcheck",forum_id);
+	}
 
 
 }

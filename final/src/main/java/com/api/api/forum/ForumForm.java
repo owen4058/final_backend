@@ -16,6 +16,7 @@ public class ForumForm {
 	int forum_id;
 	int people;
 	int forum_following_state;
+	int create_user_id;
 	String logo_path;
 	String logo_name;
 	String forum_name;

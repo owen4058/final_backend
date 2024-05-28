@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.admin.ForumAdmin;
@@ -24,6 +25,7 @@ public interface ForumController {
 	
 	public ResponseEntity<?> sectioncreate(
 			SectionAdmin sectionAdmin
+			,HttpServletRequest request
 			)
 					throws Exception;
 	

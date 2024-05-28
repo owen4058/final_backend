@@ -11,6 +11,8 @@
         	<result property="logo_path" column="logo_path" />
         	<result property="forum_name" column="forum_name" />
         	<result property="forum_info" column="forum_info" />
+        	<result property="create_user_id" column="create_user_id" />
+        	<result property="forum_info" column="forum_info" />
         	<result property="forum_following_state" column="forum_following_state" />
         	<result property="people" column="people" />
    		<collection  property="section" ofType="sectionform" javaType="List">
@@ -20,6 +22,19 @@
 	</resultMap>  
 
 <!--  섹션 관련  -->
+
+	<select id="forumcheck"  resultMap="forumform" parameterType="int" >
+	<![CDATA[
+			SELECT *
+			FROM forums  
+			where forum_id = #{forum_id}
+	]]>
+	
+  </select> 
+
+
+
+
 <insert id="section_create"  parameterType="sectionadmin" >
 	<![CDATA[
 	insert into forum_section(
