@@ -2,15 +2,20 @@ package com.api.api.profile.controller;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -145,12 +150,28 @@ public class ProfileControllerImpl implements ProfileController{
 	public ResponseEntity<?> Following(@RequestParam int user_id) {
 		return ResponseEntity.ok(profileService.Following(user_id));
 	}
-	@RequestMapping(value = "/profile/img", produces = "application/json; charset=utf8", method = RequestMethod.GET)
-	@Override
-	public ResponseEntity<ProfileImg> getProfileImg(int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception{
-		return ResponseEntity.ok(profileService.getProfileImg(user_id)); 
-	}
-		
-
 	
+	@GetMapping("/profile/img")
+	@Override
+	public ResponseEntity<byte[]> getProfileImg(@RequestParam String fileName, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception{
+		System.out.println("get profile image()........." + fileName);
+		
+		File file = new File(httpServletRequest.getSession().getServletContext().getRealPath("imgs\\profile" +File.separator+fileName));
+		
+		ResponseEntity<byte[]> result = null;
+		
+		try {	
+			
+			HttpHeaders header = new HttpHeaders();
+			
+			header.add("Content-type", Files.probeContentType(file.toPath()));
+			
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
