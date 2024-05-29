@@ -44,154 +44,7 @@
 	</resultMap>
 	
 	<select id="myBoardList" resultMap = "boardform" parameterType= "int">
-       	 <![CDATA[
-	    SELECT
-	        b.board_id,
-	        b.section_id,
-	        b.forum_id,
-	        b.user_id,
-	        u.pro_path,
-	        u.nickname,
-	        b.title,
-	        b.content,
-	        b.hits,
-	        b.like_count,
-	        b.comment_count,
-	        b.create_date,
-	        i.img_id,
-	        i.img_name,
-	        i.img_path,
-	        h.hastag_id,
-	        h.hashtag_name,
-	        CASE
-	            WHEN bl.like_ud = 1 THEN 1
-	            WHEN bl.like_ud = -1 THEN -1
-	            ELSE 0
-	        END AS board_like_state,
-	        CASE
-	            WHEN bs.user_id IS NOT NULL THEN 1
-	            ELSE 0
-	        END AS board_save_state
-	    FROM
-	        board b
-	        LEFT JOIN users u ON b.user_id = u.user_id
-	        LEFT JOIN img i ON b.board_id = i.board_id
-	        LEFT JOIN hashtag h ON b.board_id = h.board_id
-	        LEFT JOIN board_like bl ON b.board_id = bl.board_id AND bl.user_id = #{user_id}
-	        LEFT JOIN board_save bs ON b.board_id = bs.board_id AND bs.user_id = #{user_id}
-	    WHERE
-	        b.user_id = #{user_id}
-	    ORDER BY
-	        b.board_id DESC
-	    ]]>
-	</select>
-
-	  <select id="myCommentBoardList" resultMap="boardform" parameterType="int">
-	    <![CDATA[  
-	    SELECT
-	        b.board_id,
-	        b.section_id,
-	        b.forum_id,
-	        b.user_id,
-	        u.pro_path,
-	        u.nickname,
-	        b.title,
-	        b.content,
-	        b.hits,
-	        b.like_count,
-	        b.comment_count,
-	        b.create_date,
-	        img.img_id,
-	        img.img_name,
-	        img.img_path,
-	        tag.hastag_id,
-	        tag.hashtag_name,
-	        CASE
-	            WHEN bl.like_ud = 1 THEN 1
-	            WHEN bl.like_ud = -1 THEN -1
-	            ELSE 0
-	        END AS board_like_state,
-	        CASE
-	            WHEN bs.user_id IS NOT NULL THEN 1
-	            ELSE 0
-	        END AS board_save_state
-	    FROM
-	        board b
-	    LEFT JOIN users u ON b.user_id = u.user_id
-	    LEFT JOIN (
-	        SELECT
-	            img_id,
-	            board_id,
-	            img_name,
-	            img_path
-	        FROM
-	            img
-	    ) img ON b.board_id = img.board_id
-	    LEFT JOIN (
-	        SELECT
-	            hastag_id,
-	            board_id,
-	            hashtag_name
-	        FROM
-	            hashtag
-	    ) tag ON b.board_id = tag.board_id
-	    LEFT JOIN board_like bl ON b.board_id = bl.board_id AND bl.user_id = #{user_id}
-	    LEFT JOIN board_save bs ON b.board_id = bs.board_id AND bs.user_id = #{user_id}
-	    WHERE
-	        b.user_id = #{user_id}
-	    ORDER BY
-	        b.board_id DESC
-	    ]]>
-	</select>
-	<select id="myLikedBoardList" resultMap="boardform" parameterType="int">
-    <![CDATA[ 
-        SELECT
-            b.board_id,
-            b.section_id,
-            b.forum_id,
-            b.user_id,
-            u.pro_path,
-            u.nickname,
-            b.title,
-            b.content,
-            b.hits,
-            b.like_count,
-            b.comment_count,
-            b.create_date,
-            i.img_id,
-            i.img_name,
-            i.img_path,
-            h.hastag_id,
-            h.hashtag_name,
-            CASE 
-                WHEN bl.like_ud = 1 THEN 1
-                WHEN bl.like_ud = -1 THEN -1
-                ELSE 0
-            END AS board_like_state,
-            CASE 
-                WHEN bs.board_id IS NOT NULL THEN 1
-                ELSE 0
-            END AS board_save_state
-        FROM
-            board b
-            LEFT JOIN users u ON b.user_id = u.user_id
-            LEFT JOIN img i ON b.board_id = i.board_id
-            LEFT JOIN hashtag h ON b.board_id = h.board_id
-            LEFT JOIN board_like bl ON b.board_id = bl.board_id AND bl.user_id = #{user_id}
-            LEFT JOIN board_save bs ON b.board_id = bs.board_id AND bs.user_id = #{user_id}
-        WHERE
-            EXISTS (
-                SELECT 1
-                FROM board_like bl2
-                WHERE bl2.user_id = #{user_id}
-                AND bl2.board_id = b.board_id
-            )
-        ORDER BY
-            b.board_id DESC
-    ]]>
-	</select>
-	<select id="mySavedBoardList" resultMap="boardform" parameterType="int">
-	<![CDATA[ 
+       	<![CDATA[
 		SELECT
 		    b.board_id,
 		    b.section_id,
@@ -208,22 +61,177 @@
 		    i.img_id,
 		    i.img_name,
 		    i.img_path,
-		    h.hastag_id,
-		    h.hashtag_name
+		    ht.hastag_id,
+		    ht.hashtag_name,
+		    CASE 
+               WHEN g.LIKE_UD  IS NOT NULL THEN g.LIKE_UD
+               ELSE 0
+            END AS board_like_state,
+            CASE 
+               WHEN h.user_id  IS NOT NULL THEN 1
+               ELSE 0
+            END AS board_save_state 
 		FROM
 		    board b
 		    LEFT JOIN users u ON b.user_id = u.user_id
 		    LEFT JOIN img i ON b.board_id = i.board_id
-		    LEFT JOIN hashtag h ON b.board_id = h.board_id
+		    LEFT JOIN hashtag ht ON b.board_id = ht.board_id
+  			LEFT OUTER JOIN	board_like g ON b.board_id = g.board_id and g.user_id = #{user_id}
+  			LEFT OUTER JOIN	BOARD_SAVE h ON b.board_id = h.board_id and h.user_id = #{user_id} 
 		WHERE
-		    EXISTS (
-		        SELECT 1
-		        FROM board_save bs
-		        WHERE bs.user_id = #{user_id}
-		        AND bs.board_id = b.board_id
-		    )
+		    b.user_id = #{user_id}
+		ORDER BY
+		    b.create_date DESC
+        ]]>
+	</select>
+
+  <select id="myCommentBoardList" resultMap="boardform" parameterType="int">
+	  <![CDATA[  
+	    SELECT
+		    b.board_id,
+		    b.section_id,
+		    b.forum_id,
+		    b.user_id,
+		    u.pro_path,
+		    u.nickname,
+		    b.title,
+		    b.content,
+		    b.hits,
+		    b.like_count,
+		    b.comment_count,
+		    b.create_date,
+		    img.img_id,
+		    img.img_name,
+		    img.img_path,
+		    tag.hastag_id,
+		    tag.hashtag_name,
+		    CASE 
+               WHEN g.LIKE_UD  IS NOT NULL THEN g.LIKE_UD
+               ELSE 0
+            END AS board_like_state,
+            CASE 
+               WHEN h.user_id  IS NOT NULL THEN 1
+               ELSE 0
+            END AS board_save_state 
+		FROM
+		    board b
+		LEFT JOIN users u ON b.user_id = u.user_id
+		LEFT JOIN (
+		    SELECT
+		        img_id,
+		        board_id,
+		        img_name,
+		        img_path
+		    FROM
+		        img
+		) img ON b.board_id = img.board_id
+		LEFT JOIN (
+		    SELECT
+		        hastag_id,
+		        board_id,
+		        hashtag_name
+		    FROM
+		        hashtag
+		) tag ON b.board_id = tag.board_id
+		LEFT OUTER JOIN	board_like g ON b.board_id = g.board_id and g.user_id = #{user_id}
+		LEFT OUTER JOIN	BOARD_SAVE h ON b.board_id = h.board_id and h.user_id = #{user_id} 
+		WHERE
+		    b.user_id = #{user_id}
 		ORDER BY
 		    b.board_id DESC
+	  ]]>
+
+	</select>
+	<select id="myLikedBoardList" resultMap="boardform" parameterType="int">
+		<![CDATA[ 
+			SELECT
+			    b.board_id,
+			    b.section_id,
+			    b.forum_id,
+			    b.user_id,
+			    u.pro_path,
+			    u.nickname,
+			    b.title,
+			    b.content,
+			    b.hits,
+			    b.like_count,
+			    b.comment_count,
+			    b.create_date,
+			    i.img_id,
+			    i.img_name,
+			    i.img_path,
+			    ht.hastag_id,
+			    ht.hashtag_name,
+			    CASE 
+	               WHEN g.LIKE_UD  IS NOT NULL THEN g.LIKE_UD
+	               ELSE 0
+	            END AS board_like_state,
+	            CASE 
+	               WHEN h.user_id  IS NOT NULL THEN 1
+	               ELSE 0
+	            END AS board_save_state 
+			FROM
+			    board b
+			    LEFT JOIN users u ON b.user_id = u.user_id
+			    LEFT JOIN img i ON b.board_id = i.board_id
+			    LEFT JOIN hashtag ht ON b.board_id = ht.board_id
+			    LEFT OUTER JOIN	board_like g ON b.board_id = g.board_id and g.user_id = #{user_id}
+				LEFT OUTER JOIN	BOARD_SAVE h ON b.board_id = h.board_id and h.user_id = #{user_id} 
+			WHERE
+			    EXISTS (
+			        SELECT 1
+			        FROM board_like bl
+			        WHERE bl.user_id = #{user_id}
+			        AND bl.board_id = b.board_id
+			    )
+			ORDER BY
+			    b.board_id DESC
+		]]>
+	</select>
+	<select id="mySavedBoardList" resultMap="boardform" parameterType="int">
+	<![CDATA[ 
+		SELECT
+			    b.board_id,
+			    b.section_id,
+			    b.forum_id,
+			    b.user_id,
+			    u.pro_path,
+			    u.nickname,
+			    b.title,
+			    b.content,
+			    b.hits,
+			    b.like_count,
+			    b.comment_count,
+			    b.create_date,
+			    i.img_id,
+			    i.img_name,
+			    i.img_path,
+			    ht.hastag_id,
+			    ht.hashtag_name,
+			    CASE 
+	               WHEN g.LIKE_UD  IS NOT NULL THEN g.LIKE_UD
+	               ELSE 0
+	            END AS board_like_state,
+	            CASE 
+	               WHEN h.user_id  IS NOT NULL THEN 1
+	               ELSE 0
+	            END AS board_save_state 
+			FROM
+			    board b
+			    LEFT JOIN users u ON b.user_id = u.user_id
+			    LEFT JOIN img i ON b.board_id = i.board_id
+			    LEFT JOIN hashtag ht ON b.board_id = ht.board_id
+			    LEFT OUTER JOIN	board_like g ON b.board_id = g.board_id and g.user_id = #{user_id}
+				LEFT OUTER JOIN	BOARD_SAVE h ON b.board_id = h.board_id and h.user_id = #{user_id}
+			WHERE
+			    EXISTS (
+			        SELECT 1
+			        FROM board_save bs
+			        WHERE bs.user_id = #{user_id}
+			        AND bs.board_id = b.board_id
+			    )
+			ORDER BY
+			    b.board_id DESC
 	]]>
 	</select>
 
