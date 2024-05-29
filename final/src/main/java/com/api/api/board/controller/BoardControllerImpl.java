@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ import com.api.api.board.BoardLike;
 import com.api.api.board.BoardSave;
 import com.api.api.board.Hashtag;
 import com.api.api.board.service.BoardService;
+import com.api.api.member.Member;
 
 
 @Controller("boardController")
@@ -250,6 +252,21 @@ public class BoardControllerImpl implements BoardController{
 			@RequestBody BoardSave board
 			) throws Exception {
 		return new ResponseEntity<Integer>(boardService.boardsave(board), HttpStatus.OK);
+	}
+	
+	@Override
+	@RequestMapping(value = "/board_save" ,produces = "application/json; charset=utf8", method = RequestMethod.DELETE)
+	public ResponseEntity<Integer> boardsavedelete(
+			@RequestParam int board_id
+			, HttpServletRequest request
+			) throws Exception {
+		Member member = (Member) request.getSession().getAttribute("loginMember");
+		
+		System.out.println(board_id+"  "+ member.getUser_id());
+		Map<String, Object> vo = new HashMap<String, Object>();
+		vo.put("board_id", board_id);
+		vo.put("user_id", member.getUser_id());
+		return new ResponseEntity<Integer>(boardService.boardsavedelete(vo), HttpStatus.OK);
 	}
 	
 	

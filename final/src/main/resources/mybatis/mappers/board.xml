@@ -409,6 +409,14 @@
 		 
 	</insert>
 	
+	<delete id="boardsavedelete2"  parameterType="Map">
+	<![CDATA[
+	delete 
+	from board_save		
+	WHERE board_id = #{board_id} and user_id = #{user_id}
+	]]>
+	</delete>
+	
 	<delete id="tagdelete"  parameterType="int">
 	<![CDATA[
 	delete 

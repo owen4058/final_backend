@@ -31,4 +31,6 @@ public interface BoardService {
 	public int boardlike(BoardLike boardLike);
 
 	public int boardsave(BoardSave boardSave);
+	
+	public int boardsavedelete(Map<String, Object> vo); 
 }

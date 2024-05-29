@@ -44,6 +44,7 @@
     BOARD b ON r.board_id = b.board_id
     INNER JOIN
     USERS reported ON b.user_id = reported.user_id
+    order by create_date
      ]]>
 	</select>
 	

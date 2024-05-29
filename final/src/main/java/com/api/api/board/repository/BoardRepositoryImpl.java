@@ -118,6 +118,10 @@ public class BoardRepositoryImpl implements BoardRepository{
 	public int boardlikesetmi(BoardLike boardLike) {
 		return sqlSession.update("mapper.board.boardlikesetmi",boardLike);
 	}
+	@Override
+	public int boardsavedelete(Map<String, Object> vo) {
+		return sqlSession.delete("mapper.board.boardsavedelete2",vo);
+	}
 	
 	
 

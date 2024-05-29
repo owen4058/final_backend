@@ -184,5 +184,10 @@ public class BoardServiceImpl implements BoardService{
 	public int boardsave(BoardSave boardSave) {
 		return boardRepository.boardsave(boardSave);
 	}
+	
+	@Override
+	public int boardsavedelete(Map<String, Object> vo) {
+		return boardRepository.boardsavedelete(vo);
+	}
 
 }

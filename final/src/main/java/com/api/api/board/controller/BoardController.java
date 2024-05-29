@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.board.BoardCreateForm;
@@ -43,6 +44,11 @@ public interface BoardController {
 	public ResponseEntity<?> boardlike(BoardLike board) throws Exception;
 
 	public ResponseEntity<?> boardsave(BoardSave board) throws Exception;
+	
+	public ResponseEntity<Integer> boardsavedelete(
+			@RequestBody int board_id
+			,HttpServletRequest request
+			) throws Exception;
 
 //	public ResponseEntity<String> good(MultipartFile[] files) throws Exception;
 

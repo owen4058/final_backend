@@ -54,6 +54,8 @@ public interface BoardRepository {
 	
 	public int boardlikesetmi(BoardLike boardLike);
 	
+	public int boardsavedelete(Map<String, Object> vo);
+	
 	
 
 }
