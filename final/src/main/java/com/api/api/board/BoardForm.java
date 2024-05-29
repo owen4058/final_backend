@@ -22,7 +22,8 @@ public class BoardForm{
 	int board_like_state;
 	int board_save_state;
 	String forum_name; 
-	String pro_path; 
+	String pro_path;
+	String pro_img;
 	String nickname; 
 	String title; 
 	String content; 
