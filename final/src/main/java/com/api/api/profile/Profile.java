@@ -14,6 +14,7 @@ public class Profile {
 	String user_email;
 	String password;
 	String pro_path; // profile image
+	String img_path;
 	int following_count;
 	int follower_count;
 	int board_count;

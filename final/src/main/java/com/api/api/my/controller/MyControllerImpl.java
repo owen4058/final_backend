@@ -37,11 +37,11 @@ public class MyControllerImpl implements MyController {
 	public ResponseEntity<List<BoardForm>> getCommentMyBoardlist(@RequestParam int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
 		System.out.println("getCommenMyBoardList controller");
 		List<BoardForm> boardList = myService.getCommentMyBoardList(user_id);
-        if (boardList != null && !boardList.isEmpty()) {
+//        if (boardList != null && !boardList.isEmpty()) {
             return ResponseEntity.ok(boardList);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
 	}
 	@RequestMapping(value = "/profile/liked_board", produces = "application/json; charset=utf8", method = RequestMethod.GET)
 	@Override
