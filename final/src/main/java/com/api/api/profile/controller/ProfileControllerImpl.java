@@ -50,18 +50,26 @@ public class ProfileControllerImpl implements ProfileController{
 		System.out.println("updateProfile controller");
 		
 		String filepath = httpServletRequest.getSession().getServletContext().getRealPath("imgs\\profile");
+		System.out.println("filepath: " + filepath);
+		System.out.println("update profile user_id: " + profile.getUser_id());
+		System.out.println("isFile : " + (file != null));
 		
 		try {
 			ProfileImg profileImg = new ProfileImg();
 			
-			if (!file.isEmpty()) {
+			if (file != null) {			
 				String filename = System.currentTimeMillis()+"_"+file.getOriginalFilename();
 				File destination = new File(filepath + filename);
 				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(filepath, filename));
+				System.out.println("filename: " + filename);
 //				file.transferTo(filePath);
 				profileImg.setImg_name(filename);
 				profileImg.setImg_path(filepath+"\\"+ filename);
+				profileImg.setUser_id(profile.getUser_id());
 				System.out.println("파일 저장 경로: " + destination.getAbsolutePath());
+				System.out.println("profileImg.user_id : " + profileImg.getUser_id());
+				System.out.println("profileImg.Img_path : " + profileImg.getImg_path());
+				System.out.println("profileImg.img_name : " + profileImg.getImg_name());
 
 			}
 			int updated = profileService.updateProfile(profile, profileImg);

@@ -43,6 +43,8 @@
 			<result property="hashtag_name" column="hashtag_name"/>
 		</collection>
 	</resultMap>
+	
+	
     
     
     <select id="getProfile" resultMap="profile" parameterType="int">
@@ -93,16 +95,10 @@
         AND OPPONENT_ID = #{opponent_id}
         ]]>
 	</delete>
-	<insert id="insertProfileImg" parameterType="userfollow">
-		<selectKey keyProperty="board_id" resultType="int" order="BEFORE">
-	        <![CDATA[
-	        SELECT MAX(IMG_ID) + 1 from IMG_PROFILE
-	        ]]>
-    	</selectKey>
-    	
+	<insert id="insertProfileImg" parameterType="profileImg">
 		<![CDATA[
        	INSERT INTO IMG_PROFILE (IMG_ID, IMG_NAME, IMG_PATH, USER_ID)
-		VALUES (#{IMG_ID}, #{IMG_NAME}, #{IMG_PATH}, #{USER_ID})
+		VALUES (img_profile_seq.NEXTVAL, #{img_name}, #{img_path}, #{user_id})
         ]]>
 	</insert>
 	<select id="selectFromUserFollow" parameterType="userfollow" resultType="int">
@@ -143,6 +139,13 @@
         WHERE 
             uf.USER_ID = #{userId}
 	    ]]>
+	</select>
+	<select id="hasImg" parameterType="int" resultType="int">
+		<![CDATA[
+       	SELECT COUNT(*) 
+        FROM IMG_PROFILE 
+        WHERE USER_ID = #{userId}
+        ]]>
 	</select>
   
   </mapper>
