@@ -134,16 +134,17 @@ public class ProfileControllerImpl implements ProfileController{
             return ResponseEntity.ok().body(is_following);
 	}
 	
-//	@RequestMapping(value = "/profile/follower", produces = "application/json; charset=utf8", method = RequestMethod.GET)
-//	@Override
-//	public ResponseEntity<List<Profile>> getFollower(@RequestParam int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-//		
-//	}
-//	@RequestMapping(value = "/profile/following", produces = "application/json; charset=utf8", method = RequestMethod.GET)
-//	@Override
-//	public ResponseEntity<List<Profile>> getFollowing(@RequestParam int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-//		
-//	}
+	@RequestMapping(value = "/follower", produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	@Override
+	public ResponseEntity<?> Follower(@RequestParam int user_id) {
+		
+		return ResponseEntity.ok(profileService.Follower(user_id));
+	}
+	@RequestMapping(value = "/following", produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	@Override
+	public ResponseEntity<?> Following(@RequestParam int user_id) {
+		return ResponseEntity.ok(profileService.Following(user_id));
+	}
 
 	
 }

@@ -1,6 +1,8 @@
 package com.api.api.profile.service;
 
 
+import java.util.List;
+
 import org.springframework.dao.DataAccessException;
 
 import com.api.api.profile.Profile;
@@ -14,4 +16,6 @@ public interface ProfileService {
 	public boolean followUser(UserFollow userFollow) throws DataAccessException;
 	public boolean unfollowUser(UserFollow userFollow) throws DataAccessException;
 	public boolean checkUserFollow(UserFollow userFollow) throws DataAccessException;
+	public List<UserFollow> Follower(int user_id) ;
+	public List<UserFollow> Following(int user_id) ;
 }

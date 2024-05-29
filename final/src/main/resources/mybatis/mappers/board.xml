@@ -174,26 +174,17 @@
             END AS board_save_state 
 		FROM 
 			(
-			SELECT 
-				ROWNUM AS RNUM, 
-				A.* 
-			FROM 
-				(
 				SELECT 
 					* 
 				FROM 
 					board
 					where forum_id = 1 
-					
-				) A 
-				WHERE ROWNUM <= #{page} * 5
-			) c 
+				) c 	
 			LEFT OUTER JOIN users d	ON c.user_id = d.user_id
 			LEFT OUTER JOIN img e ON c.board_id = e.board_id 
 			LEFT OUTER JOIN hashtag f ON c.board_id = f.board_id
 			LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id} 
-			WHERE RNUM > (#{page}-1) * 5
         ORDER BY c.create_date desc
 	]]>
   </select> 
@@ -216,11 +207,6 @@
             END AS board_save_state
 		FROM 
 			(
-			SELECT 
-				ROWNUM AS RNUM, 
-				A.* 
-			FROM 
-				(
 				SELECT 
 					* 
 				FROM 
@@ -228,15 +214,12 @@
 					where forum_id =  #{forum_id}
 					AND
 					section_id =  #{section_id}					
-				) A 
-				WHERE ROWNUM <= #{page} * 5
-			) c 
+				) c
 			LEFT OUTER JOIN	USERS d	ON	c.user_id = d.user_id
 			LEFT OUTER JOIN img e ON c.board_id = e.board_id
         	LEFT OUTER JOIN	hashtag f ON c.board_id = f.board_id
         	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
-        WHERE RNUM > (#{page}-1) * 5
         ORDER BY c.create_date desc
 	]]>
   </select>

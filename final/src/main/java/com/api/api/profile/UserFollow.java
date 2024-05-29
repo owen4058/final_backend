@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class UserFollow {
+	
 	int user_id;
     int opponent_id;
 

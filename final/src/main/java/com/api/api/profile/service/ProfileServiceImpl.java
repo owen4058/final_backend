@@ -1,6 +1,8 @@
 package com.api.api.profile.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -74,5 +76,18 @@ public class ProfileServiceImpl implements ProfileService {
         }
     	return false;
     }
+    
+    @Override
+	public List<UserFollow> Follower(int user_id)  {
+		System.out.println("userFollower " + user_id);
+		return profileRepository.Follower(user_id);
+	}
+	
+	
+	@Override
+	public List<UserFollow> Following(int user_id)  {
+		System.out.println("userFollowing " + user_id);
+		return profileRepository.Following(user_id);
+	}
 
 }

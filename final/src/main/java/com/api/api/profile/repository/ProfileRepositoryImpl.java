@@ -118,6 +118,19 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 		int result = sqlSession.selectOne("mapper.profile.hasImg", user_id);
 		return result;
 	}
+	
+	@Override
+	public List<UserFollow> Follower(int user_id){
+		System.out.println("userFollower " + user_id);
+		return sqlSession.selectList("mapper.profile.Follower", user_id);
+	}
+	
+	
+	@Override
+	public List<UserFollow> Following(int user_id) {
+		System.out.println("userFollowing " + user_id);
+		return sqlSession.selectList("mapper.profile.Following", user_id);
+	}
 
 	
 

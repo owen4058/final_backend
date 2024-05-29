@@ -20,4 +20,6 @@ public interface ProfileRepository {
 	public int deleteImg(int user_id) throws DataAccessException;
 	public int isFollowing(UserFollow userFollow) throws DataAccessException;
 	public int hasImg(int user_id) throws DataAccessException;
+	public List<UserFollow> Follower(int user_id) ;
+	public List<UserFollow> Following(int user_id) ;
 }

@@ -147,6 +147,22 @@
         WHERE USER_ID = #{userId}
         ]]>
 	</select>
+	
+	<select id="Follower" parameterType="int" resultType="UserFollow">
+		<![CDATA[
+       	SELECT * 
+        FROM USER_FOLLOW 
+        WHERE opponent_id = #{user_id}
+        ]]>
+	</select>
+	
+	<select id="Following" parameterType="int" resultType="UserFollow">
+		<![CDATA[
+       	SELECT * 
+        FROM USER_FOLLOW 
+        WHERE user_id = #{user_id}
+        ]]>
+	</select>
   
   </mapper>
   
