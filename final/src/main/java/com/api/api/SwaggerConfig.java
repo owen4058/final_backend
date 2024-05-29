@@ -20,9 +20,9 @@ public class SwaggerConfig {
 	
 	private static final String API_NAME = "API";
     private static final String API_VERSION = "0.0.1";
-    private static final String API_DESCRIPTION = "API �����Դϴ�.";
+    private static final String API_DESCRIPTION = "API 문서입니다.";
     
-	@Bean // �ʼ��׸�
+	@Bean 
 	public Docket customImplementation() {
 		return new Docket(DocumentationType.SWAGGER_2)
 	                .apiInfo(apiInfo())
