@@ -91,5 +91,10 @@ public class ProfileServiceImpl implements ProfileService {
 		System.out.println("userFollowing " + user_id);
 		return profileRepository.Following(user_id);
 	}
+	
+	@Override
+	public ProfileImg getProfileImg(int user_id) {
+		return profileRepository.selectProfileImg(user_id);
+	}
 
 }

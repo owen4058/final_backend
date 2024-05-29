@@ -145,6 +145,12 @@ public class ProfileControllerImpl implements ProfileController{
 	public ResponseEntity<?> Following(@RequestParam int user_id) {
 		return ResponseEntity.ok(profileService.Following(user_id));
 	}
+	@RequestMapping(value = "/profile/img", produces = "application/json; charset=utf8", method = RequestMethod.GET)
+	@Override
+	public ResponseEntity<ProfileImg> getProfileImg(int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception{
+		return ResponseEntity.ok(profileService.getProfileImg(user_id)); 
+	}
+		
 
 	
 }

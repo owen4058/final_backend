@@ -179,6 +179,14 @@
          WHERE a.user_id = #{user_id}
         ]]>
 	</select>
+	
+	<select id="selectProfileImg" parameterType="int" resultType="profileImg">
+		<![CDATA[
+			SELECT IMG_ID, IMG_NAME, IMG_PATH, USER_ID
+			FROM IMG_PROFILE
+			WHERE user_id = #{user_id} 
+        ]]>
+	</select>
   
   </mapper>
   

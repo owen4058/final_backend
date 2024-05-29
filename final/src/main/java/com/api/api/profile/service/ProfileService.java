@@ -20,4 +20,5 @@ public interface ProfileService {
 	public boolean checkUserFollow(UserFollow userFollow) throws DataAccessException;
 	public List<FollowerForm> Follower(int user_id) ;
 	public List<FollowingForm> Following(int user_id) ;
+	public ProfileImg getProfileImg(int user_id);
 }

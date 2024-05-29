@@ -1,8 +1,6 @@
 package com.api.api.profile.controller;
 
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.api.profile.Profile;
+import com.api.api.profile.ProfileImg;
 import com.api.api.profile.UserFollow;
 
 public interface ProfileController {
@@ -24,4 +23,5 @@ public interface ProfileController {
 			@RequestParam int opponent_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 	public ResponseEntity<?> Follower(@RequestParam int user_id) throws Exception;
 	public ResponseEntity<?> Following(@RequestParam int user_id) throws Exception;
+	public ResponseEntity<ProfileImg> getProfileImg(int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 }
