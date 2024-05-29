@@ -35,6 +35,8 @@
         <typeAlias type="com.api.api.report.Report"  alias="report"/>
         <typeAlias type="com.api.api.profile.UserFollow"  alias="UserFollow"/>
         <typeAlias type="com.api.api.profile.ProfileImg"  alias="profileImg"/>        
+        <typeAlias type="com.api.api.profile.FollowerForm"  alias="followerform"/>        
+        <typeAlias type="com.api.api.profile.FollowingForm"  alias="followingform"/>        
         
 	</typeAliases>
 </configuration>

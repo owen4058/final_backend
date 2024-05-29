@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.api.api.board.BoardForm;
+import com.api.api.profile.FollowerForm;
+import com.api.api.profile.FollowingForm;
 import com.api.api.profile.Profile;
 import com.api.api.profile.ProfileImg;
 import com.api.api.profile.UserFollow;
@@ -20,6 +22,6 @@ public interface ProfileRepository {
 	public int deleteImg(int user_id) throws DataAccessException;
 	public int isFollowing(UserFollow userFollow) throws DataAccessException;
 	public int hasImg(int user_id) throws DataAccessException;
-	public List<UserFollow> Follower(int user_id) ;
-	public List<UserFollow> Following(int user_id) ;
+	public List<FollowerForm> Follower(int user_id) ;
+	public List<FollowingForm> Following(int user_id) ;
 }

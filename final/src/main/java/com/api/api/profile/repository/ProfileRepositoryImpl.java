@@ -10,6 +10,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.api.api.board.BoardForm;
+import com.api.api.profile.FollowerForm;
+import com.api.api.profile.FollowingForm;
 import com.api.api.profile.Profile;
 import com.api.api.profile.ProfileImg;
 import com.api.api.profile.UserFollow;
@@ -120,14 +122,14 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 	}
 	
 	@Override
-	public List<UserFollow> Follower(int user_id){
+	public List<FollowerForm> Follower(int user_id){
 		System.out.println("userFollower " + user_id);
 		return sqlSession.selectList("mapper.profile.Follower", user_id);
 	}
 	
 	
 	@Override
-	public List<UserFollow> Following(int user_id) {
+	public List<FollowingForm> Following(int user_id) {
 		System.out.println("userFollowing " + user_id);
 		return sqlSession.selectList("mapper.profile.Following", user_id);
 	}

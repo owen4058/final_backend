@@ -148,19 +148,32 @@
         ]]>
 	</select>
 	
-	<select id="Follower" parameterType="int" resultType="UserFollow">
+	<select id="Follower" parameterType="int" resultType="followerform">
 		<![CDATA[
-       	SELECT * 
-        FROM USER_FOLLOW 
-        WHERE opponent_id = #{user_id}
+       	SELECT 
+       		a.user_id as follower_user_id
+       		,b.NICKNAME as follower_user_nickName
+       		,CASE 
+               WHEN #{user_id} IS NOT NULL THEN 1
+               ELSE 0
+            END AS following_state
+        FROM USER_FOLLOW a
+        left outer join users b on a.opponent_id = b.user_id
+        WHERE a.opponent_id = #{user_id}
         ]]>
 	</select>
 	
-	<select id="Following" parameterType="int" resultType="UserFollow">
+	<select id="Following" parameterType="int" resultType="followingform">
 		<![CDATA[
-       	SELECT * 
-        FROM USER_FOLLOW 
-        WHERE user_id = #{user_id}
+       	SELECT a.opponent_id as following_user_id
+       	,b.NICKNAME as follower_user_nickName
+       		,CASE 
+               WHEN #{user_id} IS NOT NULL THEN 1
+               ELSE 0
+            END AS following_state 
+        FROM USER_FOLLOW a
+        left outer join users b on a.user_id = b.user_id
+         WHERE a.user_id = #{user_id}
         ]]>
 	</select>
   
