@@ -26,7 +26,6 @@
       FROM 
 			(
 			SELECT 
-				ROWNUM AS RNUM, 
 				A.* 
 			FROM 
 				(
@@ -37,9 +36,7 @@
 				where active_state = 1  
 				order by create_date desc
 				) A 
-				WHERE ROWNUM <= #{page} * 5
 			) c 
-			WHERE RNUM > (#{page}-1) * 5	 	
       ]]>
 	</select>
 	
