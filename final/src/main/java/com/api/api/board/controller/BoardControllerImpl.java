@@ -89,65 +89,7 @@ public class BoardControllerImpl implements BoardController{
 		return result;
 	}
 	
-//	@Override
-//	@RequestMapping(value = "/good" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
-//	public ResponseEntity<String> good(@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
-//		
-//		System.out.println("good");
-//		String filepath = "C:\\imgs\\board\\upload";
-//		List<Hashtag> tag  = new ArrayList<>();
-//		List<BoardImg>  boardImgs = new ArrayList<BoardImg>();
-//		
-//		try {
-//			if (files != null) {
-//				for (MultipartFile multipart : files) {
-//					System.out.println(multipart.getOriginalFilename());
-//					if (!multipart.isEmpty()) {
-//						String filename = System.currentTimeMillis()+"_"+multipart.getOriginalFilename();
-//						FileUtils.copyInputStreamToFile(multipart.getInputStream(), new File(filepath, filename));
-//						BoardImg boardImg = new BoardImg();
-//						boardImg.setImg_name(filename);
-//						boardImg.setImg_path(filepath+"/"+ filename);
-//						
-//						boardImgs.add(boardImg);
-//					}	
-//				}	
-//			}
-//		
-//			return new ResponseEntity<String>("", HttpStatus.OK);
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return new ResponseEntity<String>("파일등록에 실패했습니다.", HttpStatus.EXPECTATION_FAILED);
-//		}
-//		
-//		
-//	}
-//	
-//	
-//	
-//	public void info(MultipartFile[] files) throws IOException{
-//		
-//			HttpHeaders headers = new HttpHeaders();
-//			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-//			
-//			
-//			MultiValueMap<String, Object> body
-//			  = new LinkedMultiValueMap<>();
-////			body.add("board",board);
-//			for (MultipartFile multipartFile : files) {
-//				System.out.println(multipartFile.getOriginalFilename());
-//				body.add("files", new HttpEntity<>(multipartFile.getResource(), headers));
-//			}
-//			
-//			HttpEntity<MultiValueMap<String, Object>> requestEntity
-//			  = new HttpEntity<>(body, headers);
-//			String serverUrl = "http://localhost:8080/api/good";
-//			RestTemplate restTemplate = new RestTemplate();
-//			ResponseEntity<String> response = restTemplate
-//			  .postForEntity(serverUrl, requestEntity, String.class);
-//	}
-//	
+
 	
 	
 	@Override
@@ -348,6 +290,67 @@ public class BoardControllerImpl implements BoardController{
 		}
 		
 	}
+	
+	
+//	@Override
+//	@RequestMapping(value = "/good" ,produces = "application/json; charset=utf8", method = RequestMethod.POST)
+//	public ResponseEntity<String> good(@RequestPart(required = false, name = "files") MultipartFile[] files) throws Exception {
+//		
+//		System.out.println("good");
+//		String filepath = "C:\\imgs\\board\\upload";
+//		List<Hashtag> tag  = new ArrayList<>();
+//		List<BoardImg>  boardImgs = new ArrayList<BoardImg>();
+//		
+//		try {
+//			if (files != null) {
+//				for (MultipartFile multipart : files) {
+//					System.out.println(multipart.getOriginalFilename());
+//					if (!multipart.isEmpty()) {
+//						String filename = System.currentTimeMillis()+"_"+multipart.getOriginalFilename();
+//						FileUtils.copyInputStreamToFile(multipart.getInputStream(), new File(filepath, filename));
+//						BoardImg boardImg = new BoardImg();
+//						boardImg.setImg_name(filename);
+//						boardImg.setImg_path(filepath+"/"+ filename);
+//						
+//						boardImgs.add(boardImg);
+//					}	
+//				}	
+//			}
+//		
+//			return new ResponseEntity<String>("", HttpStatus.OK);
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return new ResponseEntity<String>("파일등록에 실패했습니다.", HttpStatus.EXPECTATION_FAILED);
+//		}
+//		
+//		
+//	}
+//	
+//	
+//	
+//	public void info(MultipartFile[] files) throws IOException{
+//		
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+//			
+//			
+//			MultiValueMap<String, Object> body
+//			  = new LinkedMultiValueMap<>();
+////			body.add("board",board);
+//			for (MultipartFile multipartFile : files) {
+//				System.out.println(multipartFile.getOriginalFilename());
+//				body.add("files", new HttpEntity<>(multipartFile.getResource(), headers));
+//			}
+//			
+//			HttpEntity<MultiValueMap<String, Object>> requestEntity
+//			  = new HttpEntity<>(body, headers);
+//			String serverUrl = "http://localhost:8080/api/good";
+//			RestTemplate restTemplate = new RestTemplate();
+//			ResponseEntity<String> response = restTemplate
+//			  .postForEntity(serverUrl, requestEntity, String.class);
+//	}
+//	
 	
 
 

@@ -24,6 +24,7 @@ public class BoardDetailForm {
 	int user_id; 
 	int board_like_state;
 	int board_save_state;
+	String pro_img;
 	String pro_path; 
 	String nickname; 
 	String title; 
@@ -35,5 +36,6 @@ public class BoardDetailForm {
 	List<BoardImg> img; 
 	List<Hashtag> tag;
 	List<CommentForm> comment;
+	
 	
 }
