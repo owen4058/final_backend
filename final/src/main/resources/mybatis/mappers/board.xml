@@ -192,7 +192,6 @@
 			LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
             LEFT JOIN img_profile ip ON c.user_id = ip.user_id 
-            where d.ACTIVE_STATE = 1
         ORDER BY c.create_date desc
 	]]>
   </select> 
@@ -230,7 +229,6 @@
         	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
             LEFT JOIN img_profile ip ON c.user_id = ip.user_id
-            where d.ACTIVE_STATE = 1
         ORDER BY c.create_date desc
 	]]>
   </select>
