@@ -24,7 +24,6 @@
 	from COMMENTS a
 	left outer join users b	on a.user_id = b.user_id
 	LEFT JOIN img_profile ip ON a.user_id = ip.user_id
-	where b.ACTIVE_STATE = 1
 	order by comment_id
 	]]>
   </select> 
