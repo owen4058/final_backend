@@ -45,10 +45,10 @@ public class MemberControllerImpl implements MemberController{
 		
 		Member loginmember = memberService.login(loginform);
 		if (loginmember.getActive_state() == 0) {
-			return ResponseEntity.badRequest().body("정지된 회원입니다");
+			return ResponseEntity.badRequest().body("정지된 회원입니다.");
 		}
 		if (loginmember == null) {
-			return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
+			return ResponseEntity.badRequest().body("없는 회원입니다.");
 		}
 		
 		HttpSession session = httpServletRequest.getSession();
