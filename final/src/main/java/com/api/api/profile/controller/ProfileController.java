@@ -23,5 +23,5 @@ public interface ProfileController {
 			@RequestParam int opponent_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 	public ResponseEntity<?> Follower(@RequestParam int user_id) throws Exception;
 	public ResponseEntity<?> Following(@RequestParam int user_id) throws Exception;
-	public ResponseEntity<ProfileImg> getProfileImg(int user_id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
+	public ResponseEntity<byte[]> getProfileImg(String fileName, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception;
 }
