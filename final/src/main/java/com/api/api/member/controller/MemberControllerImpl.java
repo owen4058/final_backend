@@ -42,8 +42,11 @@ public class MemberControllerImpl implements MemberController{
 	@Override
 	public ResponseEntity<?> login(@RequestBody LoginForm loginform, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws Exception {
-		Member loginmember = memberService.login(loginform);
 		
+		Member loginmember = memberService.login(loginform);
+		if (loginmember.getActive_state() == 0) {
+			return ResponseEntity.badRequest().body("정지된 회원입니다");
+		}
 		if (loginmember == null) {
 			return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
 		}
