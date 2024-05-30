@@ -58,7 +58,6 @@
             END AS forum_following_state 
 			from (
 			SELECT 
-				ROWNUM AS RNUM, 
 				d.* 
 			FROM 
 				(
@@ -69,11 +68,9 @@
 					where lower(forum_name) like '%'||#{search}||'%'					
 					ORDER BY forum_id DESC
 				) d 
-				WHERE ROWNUM <= #{page} * 5
 				) a 
 				left outer join user_forums b ON a.forum_id = b.forum_id and b.user_id = #{user_id}
 				LEFT OUTER JOIN forum_section c ON a.forum_id = c.forum_id
-			WHERE RNUM > (#{page}-1) * 5
 			
 	]]>
   </select> 
@@ -97,7 +94,6 @@
 		FROM 
 			(
 			SELECT 
-				ROWNUM AS RNUM, 
 				A.* 
 			FROM 
 				(
@@ -108,14 +104,12 @@
 					where lower(title) like '%'||#{search}||'%'					
 					ORDER BY board_id DESC
 				) A 
-				WHERE ROWNUM <= #{page} * 5
 			) c 
 			LEFT OUTER JOIN	USERS d	ON	c.user_id = d.user_id
 			LEFT OUTER JOIN img e ON c.board_id = e.board_id
         	LEFT OUTER JOIN	hashtag f ON c.board_id = f.board_id
         	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
-        WHERE RNUM > (#{page}-1) * 5
 	]]>
   </select>
   
@@ -152,7 +146,6 @@
 					where lower(i.content) like '%'||#{search}||'%' or lower(u.hashtag_name) like '%'||#{search}||'%'
 					ORDER BY i.board_id DESC
 				) A 
-				WHERE ROWNUM <= #{page} * 5
 			) c 
 			LEFT OUTER JOIN	USERS d	ON	c.user_id = d.user_id
 			LEFT OUTER JOIN img e ON c.board_id = e.board_id
@@ -160,7 +153,6 @@
         	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
             LEFT OUTER JOIN	forums i ON c.forum_id = i.forum_id 
-        WHERE RNUM > (#{page}-1) * 5
 	]]>
   </select>
 	
