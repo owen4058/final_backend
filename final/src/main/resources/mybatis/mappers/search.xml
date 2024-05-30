@@ -35,6 +35,7 @@
         <result property="like_count" column="like_count" />
         <result property="comment_count" column="comment_count" />
         <result property="create_date" column="create_date" />
+        <result property="pro_img" column="pro_img" />
          <collection  property="img" ofType="boardimg" javaType="List">
 			<result property="img_id" column="img_id"/>
 			<result property="board_id" column="board_id"/>
@@ -91,6 +92,7 @@
                WHEN h.user_id  IS NOT NULL THEN 1
                ELSE 0
             END AS board_save_state
+            ,NVL(ip.img_name, NULL) AS pro_img
 		FROM 
 			(
 			SELECT 
@@ -110,6 +112,7 @@
         	LEFT OUTER JOIN	hashtag f ON c.board_id = f.board_id
         	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
+            LEFT JOIN img_profile ip ON c.user_id = ip.user_id
 	]]>
   </select>
   
@@ -130,6 +133,7 @@
                WHEN h.user_id  IS NOT NULL THEN 1
                ELSE 0
             END AS board_save_state
+            ,NVL(ip.img_name, NULL) AS pro_img
 		FROM 
 			(
 			SELECT 
@@ -153,6 +157,7 @@
         	LEFT OUTER JOIN	board_like g ON c.board_id = g.board_id and g.user_id = #{user_id}
             LEFT OUTER JOIN	BOARD_SAVE h ON c.board_id = h.board_id and h.user_id = #{user_id}
             LEFT OUTER JOIN	forums i ON c.forum_id = i.forum_id 
+            LEFT JOIN img_profile ip ON c.user_id = ip.user_id
 	]]>
   </select>
 	

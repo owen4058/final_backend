@@ -19,7 +19,7 @@
         <result property="like_count" column="like_count" />
         <result property="comment_count" column="comment_count" />
         <result property="create_date" column="create_date" />
-         <result property="pro_img" column="pro_img" />
+        <result property="pro_img" column="pro_img" />
          <collection  property="img" ofType="boardimg" javaType="List">
 			<result property="img_id" column="img_id"/>
 			<result property="board_id" column="board_id"/>
