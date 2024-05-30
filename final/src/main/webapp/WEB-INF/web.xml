@@ -49,7 +49,7 @@
 	<session-config>
         <!-- 세션 쿠키의 최대 수명을 1800초(30분)로 설정 -->
         <cookie-config>
-            <max-age>7200</max-age>
+            <max-age>10000</max-age>
         </cookie-config>
     </session-config>
 
