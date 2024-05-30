@@ -122,7 +122,7 @@ public class BoardControllerImpl implements BoardController{
 		
 		System.out.println("board_detail : ");
 		
-		String filepath = "resources/imgs/board/upload";
+		String filepath = request.getSession().getServletContext().getRealPath("imgs\\board\\upload");
 		List<Hashtag> tag  = new ArrayList<>();
 		List<BoardImg>  boardImgs = new ArrayList<BoardImg>();
 		try {
