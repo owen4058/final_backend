@@ -25,5 +25,6 @@ public class CommentForm {
 	int comment_like_state;
 	int comment_state;
 	Date create_date;
+	String pro_img;
 
 }
