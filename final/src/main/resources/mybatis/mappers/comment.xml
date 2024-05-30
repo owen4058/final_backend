@@ -20,9 +20,10 @@
  	
 	<select id="commentlist"  resultType="commentform" parameterType="commentform">
 	<![CDATA[
-	select a.* ,b.nickname ,b.pro_path
+	select a.* ,b.nickname ,b.pro_path, ,NVL(ip.img_name, NULL) AS pro_img
 	from COMMENTS a
 	left outer join users b	on a.user_id = b.user_id
+	LEFT JOIN img_profile ip ON a.user_id = ip.user_id
 	order by comment_id
 	]]>
   </select> 
